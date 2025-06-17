@@ -682,4 +682,38 @@ class Order extends Model
     {
         return $this->hasMany('OrderAction', 'order_sn', 'order_sn');
     }
+
+    /**
+     * Get User's Today and Current Month Expenses
+     *
+     * @param int $userId
+     * @return array
+     */
+    public static function getUserExpenses($userId)
+    {
+        $today_start = strtotime('today');
+        $today_end = strtotime('today +1 day') - 1;
+
+        $month_start = strtotime(date('Y-m-01'));
+        $month_end = strtotime(date('Y-m-01', strtotime('+1 month'))) - 1;
+
+        $today_expense = Db::name('shop_order')
+            ->where('user_id', $userId)
+            ->where('paystate', 1) // Paid
+            ->where('createtime', '>=', $today_start)
+            ->where('createtime', '<=', $today_end)
+            ->sum('payamount');
+
+        $month_expense = Db::name('shop_order')
+            ->where('user_id', $userId)
+            ->where('paystate', 1) // Paid
+            ->where('createtime', '>=', $month_start)
+            ->where('createtime', '<=', $month_end)
+            ->sum('payamount');
+
+        return [
+            'today_expense' => $today_expense ? floatval($today_expense) : 0.00,
+            'month_expense' => $month_expense ? floatval($month_expense) : 0.00,
+        ];
+    }
 }

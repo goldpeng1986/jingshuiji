@@ -136,14 +136,15 @@ class Coupon extends Base
     {
         $param = $this->request->param();
         $param['user_id'] = $this->auth->id;
-        $list = UserCoupon::tableList($param);
+        $status = $this->request->param('status', 'all'); // 'available', 'used', 'expired'
+        $list = UserCoupon::getCategorizedUserCoupons($param, $status);
         foreach ($list as $item) {
             if ($item->coupon) {
                 $item->coupon->id = is_numeric($item->coupon->id) ? IntCode::encode($item->coupon->id) : $item->coupon->id;
                 $item->coupon_id = $item->coupon->id;
+                // The 'expired' and 'begin' flags might be redundant if status filtering is comprehensive
+                // Or can be re-evaluated based on how getCategorizedUserCoupons structures data for 'available'
             }
-            $item->expired = $item->expire_time < time();
-            $item->begin = $item->begin_time < time();
         }
         $this->success('获取成功！', $list);
     }

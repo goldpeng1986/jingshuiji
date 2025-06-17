@@ -38,8 +38,23 @@ class User extends Base
         $info['avatar'] = cdnurl($info['avatar'], true);
         $signin = get_addon_info('signin');
         $info['is_install_signin'] = ($signin && $signin['state']);
+
+        // Get user expenses
+        $expenses = \addons\shop\model\Order::getUserExpenses($this->auth->id);
+        $info['today_expense'] = $expenses['today_expense'];
+        $info['month_expense'] = $expenses['month_expense'];
+
+        // Clarification on money fields based on typical use:
+        // $info['money'] is often 'balance' in FastAdmin user model.
+        // $info['score'] is 'points'.
+        // Assuming $info['money'] maps to general balance for the user.
+        // If there's a separate dealer/commission balance, it might be from a different model or field.
+        // For now, we'll use 'money' as the main balance and 'score' as points.
+        // The frontend Vue files might need to adjust how they map these if 'dealer_price' is distinct.
+
         $this->success('', [
             'userInfo' => $info
+            // accountInfo seems to be a computed property on the frontend based on userInfo
         ]);
     }
 
