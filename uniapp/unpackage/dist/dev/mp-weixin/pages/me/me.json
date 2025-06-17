@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "个人中心",
+  "usingComponents": {
+    "u-avatar": "/uni_modules/uview-ui/components/u-avatar/u-avatar",
+    "u-icon": "/uni_modules/uview-ui/components/u-icon/u-icon",
+    "u-tag": "/uni_modules/uview-ui/components/u-tag/u-tag",
+    "u-tabbar": "/uni_modules/uview-ui/components/u-tabbar/u-tabbar",
+    "u-tabbar-item": "/uni_modules/uview-ui/components/u-tabbar-item/u-tabbar-item"
+  }
+}

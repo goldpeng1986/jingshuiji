@@ -1,0 +1,1059 @@
+---------------------------------------------------------------
+[ 2024-03-28T01:28:34+08:00 ] 23.251.41.71 GET cuijingshui.zwzdoac.cn/
+[运行时间：0.056848s] [吞吐率：17.59req/s] [内存消耗：3,077.58kb] [文件加载：79]
+[ info ] [ BEHAVIOR ] Run Closure @app_init [ RunTime:0.000033s ]
+[ info ] [ CACHE ] INIT File
+[ info ] [ BEHAVIOR ] Run \addons\shop\Shop @app_init [ RunTime:0.003722s ]
+[ info ] [ BEHAVIOR ] Run Closure @app_init [ RunTime:0.003782s ]
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @app_init [ RunTime:0.000571s ]
+[ info ] [ LANG ] /www/wwwroot/cuijingshui.zwzdoac.cn/thinkphp/lang/zh-cn.php
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @app_dispatch [ RunTime:0.000030s ]
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => '',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'accept-encoding' => 'gzip',
+  'accept' => '*/*',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 12_1_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/16D57 MicroMessenger/7.0.3(0x17000321) NetType/WIFI Language/zh_CN',
+  'host' => 'cuijingshui.zwzdoac.cn',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ LANG ] /www/wwwroot/cuijingshui.zwzdoac.cn/public/../application/index/lang/zh-cn.php
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @module_init [ RunTime:0.003209s ]
+[ info ] [ BEHAVIOR ] Run \addons\third\Third @module_init [ RunTime:0.000759s ]
+[ info ] [ BEHAVIOR ] Run \addons\third\Third @config_init [ RunTime:0.000087s ]
+[ info ] [ LANG ] /www/wwwroot/cuijingshui.zwzdoac.cn/public/../application/index/lang/zh-cn/index.php
+[ info ] [ BEHAVIOR ] Run \addons\epay\Epay @action_begin [ RunTime:0.002112s ]
+[ info ] [ BEHAVIOR ] Run \addons\third\Third @action_begin [ RunTime:0.000051s ]
+[ info ] [ RUN ] app\index\controller\Index->index[ /www/wwwroot/cuijingshui.zwzdoac.cn/application/index/controller/Index.php ]
+[ info ] [ VIEW ] /www/wwwroot/cuijingshui.zwzdoac.cn/public/../application/index/view/index/index.html [ array (
+  0 => 'user',
+  1 => 'site',
+  2 => 'config',
+) ]
+[ info ] [ BEHAVIOR ] Run \addons\shop\Shop @view_filter [ RunTime:0.000050s ]
+[ info ] [ BEHAVIOR ] Run \addons\third\Third @view_filter [ RunTime:0.000038s ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2024-03-28T03:25:46+08:00 ] 180.163.30.76 GET cuijingshui.zwzdoac.cn/
+[运行时间：0.046696s] [吞吐率：21.42req/s] [内存消耗：3,077.70kb] [文件加载：79]
+[ info ] [ BEHAVIOR ] Run Closure @app_init [ RunTime:0.000028s ]
+[ info ] [ CACHE ] INIT File
+[ info ] [ BEHAVIOR ] Run \addons\shop\Shop @app_init [ RunTime:0.003830s ]
+[ info ] [ BEHAVIOR ] Run Closure @app_init [ RunTime:0.003878s ]
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @app_init [ RunTime:0.000604s ]
+[ info ] [ LANG ] /www/wwwroot/cuijingshui.zwzdoac.cn/thinkphp/lang/zh-cn.php
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @app_dispatch [ RunTime:0.000028s ]
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => '',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.8,en-US;q=0.6,en;q=0.4',
+  'referer' => 'http://cuijingshui.zwzdoac.cn/',
+  'accept' => '*/*',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.101 Safari/537.36',
+  'host' => 'cuijingshui.zwzdoac.cn',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ LANG ] /www/wwwroot/cuijingshui.zwzdoac.cn/public/../application/index/lang/zh-cn.php
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @module_init [ RunTime:0.002318s ]
+[ info ] [ BEHAVIOR ] Run \addons\third\Third @module_init [ RunTime:0.000229s ]
+[ info ] [ BEHAVIOR ] Run \addons\third\Third @config_init [ RunTime:0.000081s ]
+[ info ] [ LANG ] /www/wwwroot/cuijingshui.zwzdoac.cn/public/../application/index/lang/zh-cn/index.php
+[ info ] [ BEHAVIOR ] Run \addons\epay\Epay @action_begin [ RunTime:0.003154s ]
+[ info ] [ BEHAVIOR ] Run \addons\third\Third @action_begin [ RunTime:0.000072s ]
+[ info ] [ RUN ] app\index\controller\Index->index[ /www/wwwroot/cuijingshui.zwzdoac.cn/application/index/controller/Index.php ]
+[ info ] [ VIEW ] /www/wwwroot/cuijingshui.zwzdoac.cn/public/../application/index/view/index/index.html [ array (
+  0 => 'user',
+  1 => 'site',
+  2 => 'config',
+) ]
+[ info ] [ BEHAVIOR ] Run \addons\shop\Shop @view_filter [ RunTime:0.000050s ]
+[ info ] [ BEHAVIOR ] Run \addons\third\Third @view_filter [ RunTime:0.000037s ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2024-03-28T05:34:57+08:00 ] 106.55.202.193 GET cuijingshui.zwzdoac.cn/
+[运行时间：0.072409s] [吞吐率：13.81req/s] [内存消耗：3,078.31kb] [文件加载：79]
+[ info ] [ BEHAVIOR ] Run Closure @app_init [ RunTime:0.000031s ]
+[ info ] [ CACHE ] INIT File
+[ info ] [ BEHAVIOR ] Run \addons\shop\Shop @app_init [ RunTime:0.003729s ]
+[ info ] [ BEHAVIOR ] Run Closure @app_init [ RunTime:0.003772s ]
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @app_init [ RunTime:0.000597s ]
+[ info ] [ LANG ] /www/wwwroot/cuijingshui.zwzdoac.cn/thinkphp/lang/zh-cn.php
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @app_dispatch [ RunTime:0.000028s ]
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => '',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => 'cuijingshui.zwzdoac.cn',
+  'accept-encoding' => 'gzip, deflate, br, zstd',
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+  'user-agent' => 'Mozilla/5.0 (iPhone; U; CPU iPhone OS 4_3_3 like Mac OS X; en-us) AppleWebKit/533.17.9 (KHTML, like Gecko) Version/5.0.2 Mobile/8J2 Safari/6533.18.5',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ LANG ] /www/wwwroot/cuijingshui.zwzdoac.cn/public/../application/index/lang/zh-cn.php
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @module_init [ RunTime:0.002791s ]
+[ info ] [ BEHAVIOR ] Run \addons\third\Third @module_init [ RunTime:0.000793s ]
+[ info ] [ BEHAVIOR ] Run \addons\third\Third @config_init [ RunTime:0.000121s ]
+[ info ] [ LANG ] /www/wwwroot/cuijingshui.zwzdoac.cn/public/../application/index/lang/zh-cn/index.php
+[ info ] [ BEHAVIOR ] Run \addons\epay\Epay @action_begin [ RunTime:0.015710s ]
+[ info ] [ BEHAVIOR ] Run \addons\third\Third @action_begin [ RunTime:0.000213s ]
+[ info ] [ RUN ] app\index\controller\Index->index[ /www/wwwroot/cuijingshui.zwzdoac.cn/application/index/controller/Index.php ]
+[ info ] [ VIEW ] /www/wwwroot/cuijingshui.zwzdoac.cn/public/../application/index/view/index/index.html [ array (
+  0 => 'user',
+  1 => 'site',
+  2 => 'config',
+) ]
+[ info ] [ BEHAVIOR ] Run \addons\shop\Shop @view_filter [ RunTime:0.000059s ]
+[ info ] [ BEHAVIOR ] Run \addons\third\Third @view_filter [ RunTime:0.000040s ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2024-03-28T06:14:53+08:00 ] 106.55.201.50 GET cuijingshui.zwzdoac.cn/
+[运行时间：0.041373s] [吞吐率：24.17req/s] [内存消耗：3,076.60kb] [文件加载：79]
+[ info ] [ BEHAVIOR ] Run Closure @app_init [ RunTime:0.000031s ]
+[ info ] [ CACHE ] INIT File
+[ info ] [ BEHAVIOR ] Run \addons\shop\Shop @app_init [ RunTime:0.003783s ]
+[ info ] [ BEHAVIOR ] Run Closure @app_init [ RunTime:0.003830s ]
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @app_init [ RunTime:0.000572s ]
+[ info ] [ LANG ] /www/wwwroot/cuijingshui.zwzdoac.cn/thinkphp/lang/zh-cn.php
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @app_dispatch [ RunTime:0.000025s ]
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => '',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'user-agent' => 'python-httpx/0.24.1',
+  'connection' => 'keep-alive',
+  'accept-encoding' => 'gzip, deflate',
+  'accept' => '*/*',
+  'host' => 'cuijingshui.zwzdoac.cn',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ LANG ] /www/wwwroot/cuijingshui.zwzdoac.cn/public/../application/index/lang/zh-cn.php
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @module_init [ RunTime:0.001748s ]
+[ info ] [ BEHAVIOR ] Run \addons\third\Third @module_init [ RunTime:0.000219s ]
+[ info ] [ BEHAVIOR ] Run \addons\third\Third @config_init [ RunTime:0.000078s ]
+[ info ] [ LANG ] /www/wwwroot/cuijingshui.zwzdoac.cn/public/../application/index/lang/zh-cn/index.php
+[ info ] [ BEHAVIOR ] Run \addons\epay\Epay @action_begin [ RunTime:0.001365s ]
+[ info ] [ BEHAVIOR ] Run \addons\third\Third @action_begin [ RunTime:0.000052s ]
+[ info ] [ RUN ] app\index\controller\Index->index[ /www/wwwroot/cuijingshui.zwzdoac.cn/application/index/controller/Index.php ]
+[ info ] [ VIEW ] /www/wwwroot/cuijingshui.zwzdoac.cn/public/../application/index/view/index/index.html [ array (
+  0 => 'user',
+  1 => 'site',
+  2 => 'config',
+) ]
+[ info ] [ BEHAVIOR ] Run \addons\shop\Shop @view_filter [ RunTime:0.000056s ]
+[ info ] [ BEHAVIOR ] Run \addons\third\Third @view_filter [ RunTime:0.000035s ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2024-03-28T11:44:39+08:00 ] 199.45.154.18 GET cuijingshui.zwzdoac.cn/
+[运行时间：0.065694s] [吞吐率：15.22req/s] [内存消耗：3,076.52kb] [文件加载：79]
+[ info ] [ BEHAVIOR ] Run Closure @app_init [ RunTime:0.000029s ]
+[ info ] [ CACHE ] INIT File
+[ info ] [ BEHAVIOR ] Run \addons\shop\Shop @app_init [ RunTime:0.003767s ]
+[ info ] [ BEHAVIOR ] Run Closure @app_init [ RunTime:0.003817s ]
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @app_init [ RunTime:0.000595s ]
+[ info ] [ LANG ] /www/wwwroot/cuijingshui.zwzdoac.cn/thinkphp/lang/zh-cn.php
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @app_dispatch [ RunTime:0.000030s ]
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => '',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'accept-encoding' => 'gzip',
+  'accept' => '*/*',
+  'user-agent' => 'Mozilla/5.0 (compatible; CensysInspect/1.1; +https://about.censys.io/)',
+  'host' => 'cuijingshui.zwzdoac.cn',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ LANG ] /www/wwwroot/cuijingshui.zwzdoac.cn/public/../application/index/lang/zh-cn.php
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @module_init [ RunTime:0.003041s ]
+[ info ] [ BEHAVIOR ] Run \addons\third\Third @module_init [ RunTime:0.003065s ]
+[ info ] [ BEHAVIOR ] Run \addons\third\Third @config_init [ RunTime:0.000124s ]
+[ info ] [ LANG ] /www/wwwroot/cuijingshui.zwzdoac.cn/public/../application/index/lang/zh-cn/index.php
+[ info ] [ BEHAVIOR ] Run \addons\epay\Epay @action_begin [ RunTime:0.004800s ]
+[ info ] [ BEHAVIOR ] Run \addons\third\Third @action_begin [ RunTime:0.000067s ]
+[ info ] [ RUN ] app\index\controller\Index->index[ /www/wwwroot/cuijingshui.zwzdoac.cn/application/index/controller/Index.php ]
+[ info ] [ VIEW ] /www/wwwroot/cuijingshui.zwzdoac.cn/public/../application/index/view/index/index.html [ array (
+  0 => 'user',
+  1 => 'site',
+  2 => 'config',
+) ]
+[ info ] [ BEHAVIOR ] Run \addons\shop\Shop @view_filter [ RunTime:0.000051s ]
+[ info ] [ BEHAVIOR ] Run \addons\third\Third @view_filter [ RunTime:0.000050s ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2024-03-28T11:44:55+08:00 ] 199.45.154.18 GET cuijingshui.zwzdoac.cn/favicon.ico
+[运行时间：0.037584s] [吞吐率：26.61req/s] [内存消耗：2,320.25kb] [文件加载：66]
+[ info ] [ BEHAVIOR ] Run Closure @app_init [ RunTime:0.000030s ]
+[ info ] [ CACHE ] INIT File
+[ info ] [ BEHAVIOR ] Run \addons\shop\Shop @app_init [ RunTime:0.003768s ]
+[ info ] [ BEHAVIOR ] Run Closure @app_init [ RunTime:0.003816s ]
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @app_init [ RunTime:0.000639s ]
+[ info ] [ LANG ] /www/wwwroot/cuijingshui.zwzdoac.cn/thinkphp/lang/zh-cn.php
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @app_dispatch [ RunTime:0.000032s ]
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'favicon.ico',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'connection' => 'close',
+  'accept-encoding' => 'gzip',
+  'user-agent' => 'Mozilla/5.0 (compatible; CensysInspect/1.1; +https://about.censys.io/)',
+  'host' => 'cuijingshui.zwzdoac.cn',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2024-03-28T12:03:07+08:00 ] 220.196.160.144 GET cuijingshui.zwzdoac.cn/
+[运行时间：0.050248s] [吞吐率：19.90req/s] [内存消耗：3,082.24kb] [文件加载：79]
+[ info ] [ BEHAVIOR ] Run Closure @app_init [ RunTime:0.000046s ]
+[ info ] [ CACHE ] INIT File
+[ info ] [ BEHAVIOR ] Run \addons\shop\Shop @app_init [ RunTime:0.005419s ]
+[ info ] [ BEHAVIOR ] Run Closure @app_init [ RunTime:0.005501s ]
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @app_init [ RunTime:0.000725s ]
+[ info ] [ LANG ] /www/wwwroot/cuijingshui.zwzdoac.cn/thinkphp/lang/zh-cn.php
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @app_dispatch [ RunTime:0.000027s ]
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => '',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'x-forwarded-for' => '1.15.173.107',
+  'upgrade-insecure-requests' => '1',
+  'referer' => 'http://cuijingshui.zwzdoac.cn:443/',
+  'connection' => 'keep-alive',
+  'cache-control' => 'max-age=0',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+  'user-agent' => 'Mozilla/5.0 (compatible; CensysInspect/1.1; +https://about.censys.io/)',
+  'host' => 'cuijingshui.zwzdoac.cn',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ LANG ] /www/wwwroot/cuijingshui.zwzdoac.cn/public/../application/index/lang/zh-cn.php
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @module_init [ RunTime:0.002034s ]
+[ info ] [ BEHAVIOR ] Run \addons\third\Third @module_init [ RunTime:0.000239s ]
+[ info ] [ BEHAVIOR ] Run \addons\third\Third @config_init [ RunTime:0.000076s ]
+[ info ] [ LANG ] /www/wwwroot/cuijingshui.zwzdoac.cn/public/../application/index/lang/zh-cn/index.php
+[ info ] [ BEHAVIOR ] Run \addons\epay\Epay @action_begin [ RunTime:0.001283s ]
+[ info ] [ BEHAVIOR ] Run \addons\third\Third @action_begin [ RunTime:0.000073s ]
+[ info ] [ RUN ] app\index\controller\Index->index[ /www/wwwroot/cuijingshui.zwzdoac.cn/application/index/controller/Index.php ]
+[ info ] [ VIEW ] /www/wwwroot/cuijingshui.zwzdoac.cn/public/../application/index/view/index/index.html [ array (
+  0 => 'user',
+  1 => 'site',
+  2 => 'config',
+) ]
+[ info ] [ BEHAVIOR ] Run \addons\shop\Shop @view_filter [ RunTime:0.000046s ]
+[ info ] [ BEHAVIOR ] Run \addons\third\Third @view_filter [ RunTime:0.000035s ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2024-03-28T12:03:08+08:00 ] 220.196.160.84 GET cuijingshui.zwzdoac.cn/
+[运行时间：0.041387s] [吞吐率：24.16req/s] [内存消耗：3,082.24kb] [文件加载：79]
+[ info ] [ BEHAVIOR ] Run Closure @app_init [ RunTime:0.000039s ]
+[ info ] [ CACHE ] INIT File
+[ info ] [ BEHAVIOR ] Run \addons\shop\Shop @app_init [ RunTime:0.003838s ]
+[ info ] [ BEHAVIOR ] Run Closure @app_init [ RunTime:0.003886s ]
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @app_init [ RunTime:0.000610s ]
+[ info ] [ LANG ] /www/wwwroot/cuijingshui.zwzdoac.cn/thinkphp/lang/zh-cn.php
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @app_dispatch [ RunTime:0.000024s ]
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => '',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'x-forwarded-for' => '1.15.173.107',
+  'upgrade-insecure-requests' => '1',
+  'referer' => 'http://cuijingshui.zwzdoac.cn:443',
+  'connection' => 'keep-alive',
+  'cache-control' => 'max-age=0',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+  'user-agent' => 'Mozilla/5.0 (compatible; CensysInspect/1.1; +https://about.censys.io/)',
+  'host' => 'cuijingshui.zwzdoac.cn',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ LANG ] /www/wwwroot/cuijingshui.zwzdoac.cn/public/../application/index/lang/zh-cn.php
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @module_init [ RunTime:0.001759s ]
+[ info ] [ BEHAVIOR ] Run \addons\third\Third @module_init [ RunTime:0.000210s ]
+[ info ] [ BEHAVIOR ] Run \addons\third\Third @config_init [ RunTime:0.000073s ]
+[ info ] [ LANG ] /www/wwwroot/cuijingshui.zwzdoac.cn/public/../application/index/lang/zh-cn/index.php
+[ info ] [ BEHAVIOR ] Run \addons\epay\Epay @action_begin [ RunTime:0.001321s ]
+[ info ] [ BEHAVIOR ] Run \addons\third\Third @action_begin [ RunTime:0.000070s ]
+[ info ] [ RUN ] app\index\controller\Index->index[ /www/wwwroot/cuijingshui.zwzdoac.cn/application/index/controller/Index.php ]
+[ info ] [ VIEW ] /www/wwwroot/cuijingshui.zwzdoac.cn/public/../application/index/view/index/index.html [ array (
+  0 => 'user',
+  1 => 'site',
+  2 => 'config',
+) ]
+[ info ] [ BEHAVIOR ] Run \addons\shop\Shop @view_filter [ RunTime:0.000046s ]
+[ info ] [ BEHAVIOR ] Run \addons\third\Third @view_filter [ RunTime:0.000035s ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2024-03-28T12:03:09+08:00 ] 180.101.245.247 GET cuijingshui.zwzdoac.cn/
+[运行时间：0.041599s] [吞吐率：24.04req/s] [内存消耗：3,082.01kb] [文件加载：79]
+[ info ] [ BEHAVIOR ] Run Closure @app_init [ RunTime:0.000030s ]
+[ info ] [ CACHE ] INIT File
+[ info ] [ BEHAVIOR ] Run \addons\shop\Shop @app_init [ RunTime:0.003820s ]
+[ info ] [ BEHAVIOR ] Run Closure @app_init [ RunTime:0.003869s ]
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @app_init [ RunTime:0.000597s ]
+[ info ] [ LANG ] /www/wwwroot/cuijingshui.zwzdoac.cn/thinkphp/lang/zh-cn.php
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @app_dispatch [ RunTime:0.000023s ]
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => '',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'accept-encoding' => 'gzip, deflate, br',
+  'sec-fetch-dest' => 'document',
+  'sec-fetch-user' => '?1',
+  'sec-fetch-mode' => 'navigate',
+  'sec-fetch-site' => 'none',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'user-agent' => 'Mozilla/5.0 (compatible; CensysInspect/1.1; +https://about.censys.io/)',
+  'upgrade-insecure-requests' => '1',
+  'host' => 'cuijingshui.zwzdoac.cn',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ LANG ] /www/wwwroot/cuijingshui.zwzdoac.cn/public/../application/index/lang/zh-cn.php
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @module_init [ RunTime:0.001804s ]
+[ info ] [ BEHAVIOR ] Run \addons\third\Third @module_init [ RunTime:0.000225s ]
+[ info ] [ BEHAVIOR ] Run \addons\third\Third @config_init [ RunTime:0.000076s ]
+[ info ] [ LANG ] /www/wwwroot/cuijingshui.zwzdoac.cn/public/../application/index/lang/zh-cn/index.php
+[ info ] [ BEHAVIOR ] Run \addons\epay\Epay @action_begin [ RunTime:0.001323s ]
+[ info ] [ BEHAVIOR ] Run \addons\third\Third @action_begin [ RunTime:0.000049s ]
+[ info ] [ RUN ] app\index\controller\Index->index[ /www/wwwroot/cuijingshui.zwzdoac.cn/application/index/controller/Index.php ]
+[ info ] [ VIEW ] /www/wwwroot/cuijingshui.zwzdoac.cn/public/../application/index/view/index/index.html [ array (
+  0 => 'user',
+  1 => 'site',
+  2 => 'config',
+) ]
+[ info ] [ BEHAVIOR ] Run \addons\shop\Shop @view_filter [ RunTime:0.000046s ]
+[ info ] [ BEHAVIOR ] Run \addons\third\Third @view_filter [ RunTime:0.000035s ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2024-03-28T13:38:54+08:00 ] 180.163.28.114 GET cuijingshui.zwzdoac.cn/
+[运行时间：0.062140s] [吞吐率：16.09req/s] [内存消耗：3,077.70kb] [文件加载：79]
+[ info ] [ BEHAVIOR ] Run Closure @app_init [ RunTime:0.000033s ]
+[ info ] [ CACHE ] INIT File
+[ info ] [ BEHAVIOR ] Run \addons\shop\Shop @app_init [ RunTime:0.003761s ]
+[ info ] [ BEHAVIOR ] Run Closure @app_init [ RunTime:0.003807s ]
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @app_init [ RunTime:0.000623s ]
+[ info ] [ LANG ] /www/wwwroot/cuijingshui.zwzdoac.cn/thinkphp/lang/zh-cn.php
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @app_dispatch [ RunTime:0.000028s ]
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => '',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.8,en-US;q=0.6,en;q=0.4',
+  'referer' => 'http://cuijingshui.zwzdoac.cn/',
+  'accept' => '*/*',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36',
+  'host' => 'cuijingshui.zwzdoac.cn',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ LANG ] /www/wwwroot/cuijingshui.zwzdoac.cn/public/../application/index/lang/zh-cn.php
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @module_init [ RunTime:0.002675s ]
+[ info ] [ BEHAVIOR ] Run \addons\third\Third @module_init [ RunTime:0.000915s ]
+[ info ] [ BEHAVIOR ] Run \addons\third\Third @config_init [ RunTime:0.000091s ]
+[ info ] [ LANG ] /www/wwwroot/cuijingshui.zwzdoac.cn/public/../application/index/lang/zh-cn/index.php
+[ info ] [ BEHAVIOR ] Run \addons\epay\Epay @action_begin [ RunTime:0.002763s ]
+[ info ] [ BEHAVIOR ] Run \addons\third\Third @action_begin [ RunTime:0.000069s ]
+[ info ] [ RUN ] app\index\controller\Index->index[ /www/wwwroot/cuijingshui.zwzdoac.cn/application/index/controller/Index.php ]
+[ info ] [ VIEW ] /www/wwwroot/cuijingshui.zwzdoac.cn/public/../application/index/view/index/index.html [ array (
+  0 => 'user',
+  1 => 'site',
+  2 => 'config',
+) ]
+[ info ] [ BEHAVIOR ] Run \addons\shop\Shop @view_filter [ RunTime:0.000087s ]
+[ info ] [ BEHAVIOR ] Run \addons\third\Third @view_filter [ RunTime:0.000043s ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2024-03-28T14:59:28+08:00 ] 199.45.154.17 GET cuijingshui.zwzdoac.cn/
+[运行时间：0.067920s] [吞吐率：14.72req/s] [内存消耗：3,076.52kb] [文件加载：79]
+[ info ] [ BEHAVIOR ] Run Closure @app_init [ RunTime:0.000033s ]
+[ info ] [ CACHE ] INIT File
+[ info ] [ BEHAVIOR ] Run \addons\shop\Shop @app_init [ RunTime:0.007696s ]
+[ info ] [ BEHAVIOR ] Run Closure @app_init [ RunTime:0.007750s ]
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @app_init [ RunTime:0.000617s ]
+[ info ] [ LANG ] /www/wwwroot/cuijingshui.zwzdoac.cn/thinkphp/lang/zh-cn.php
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @app_dispatch [ RunTime:0.000034s ]
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => '',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'accept-encoding' => 'gzip',
+  'accept' => '*/*',
+  'user-agent' => 'Mozilla/5.0 (compatible; CensysInspect/1.1; +https://about.censys.io/)',
+  'host' => 'cuijingshui.zwzdoac.cn',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ LANG ] /www/wwwroot/cuijingshui.zwzdoac.cn/public/../application/index/lang/zh-cn.php
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @module_init [ RunTime:0.003595s ]
+[ info ] [ BEHAVIOR ] Run \addons\third\Third @module_init [ RunTime:0.001403s ]
+[ info ] [ BEHAVIOR ] Run \addons\third\Third @config_init [ RunTime:0.000091s ]
+[ info ] [ LANG ] /www/wwwroot/cuijingshui.zwzdoac.cn/public/../application/index/lang/zh-cn/index.php
+[ info ] [ BEHAVIOR ] Run \addons\epay\Epay @action_begin [ RunTime:0.002851s ]
+[ info ] [ BEHAVIOR ] Run \addons\third\Third @action_begin [ RunTime:0.000063s ]
+[ info ] [ RUN ] app\index\controller\Index->index[ /www/wwwroot/cuijingshui.zwzdoac.cn/application/index/controller/Index.php ]
+[ info ] [ VIEW ] /www/wwwroot/cuijingshui.zwzdoac.cn/public/../application/index/view/index/index.html [ array (
+  0 => 'user',
+  1 => 'site',
+  2 => 'config',
+) ]
+[ info ] [ BEHAVIOR ] Run \addons\shop\Shop @view_filter [ RunTime:0.000050s ]
+[ info ] [ BEHAVIOR ] Run \addons\third\Third @view_filter [ RunTime:0.000036s ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2024-03-28T14:59:47+08:00 ] 199.45.154.17 GET cuijingshui.zwzdoac.cn/favicon.ico
+[运行时间：0.063296s] [吞吐率：15.80req/s] [内存消耗：2,320.25kb] [文件加载：66]
+[ info ] [ BEHAVIOR ] Run Closure @app_init [ RunTime:0.000042s ]
+[ info ] [ CACHE ] INIT File
+[ info ] [ BEHAVIOR ] Run \addons\shop\Shop @app_init [ RunTime:0.003736s ]
+[ info ] [ BEHAVIOR ] Run Closure @app_init [ RunTime:0.003784s ]
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @app_init [ RunTime:0.000597s ]
+[ info ] [ LANG ] /www/wwwroot/cuijingshui.zwzdoac.cn/thinkphp/lang/zh-cn.php
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @app_dispatch [ RunTime:0.000032s ]
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'favicon.ico',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'connection' => 'close',
+  'accept-encoding' => 'gzip',
+  'user-agent' => 'Mozilla/5.0 (compatible; CensysInspect/1.1; +https://about.censys.io/)',
+  'host' => 'cuijingshui.zwzdoac.cn',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2024-03-28T17:39:14+08:00 ] 111.227.124.238 GET cuijingshui.zwzdoac.cn/addons/shop/api.common/init
+[运行时间：0.170258s] [吞吐率：5.87req/s] [内存消耗：4,268.87kb] [文件加载：95]
+[ info ] [ BEHAVIOR ] Run Closure @app_init [ RunTime:0.000029s ]
+[ info ] [ CACHE ] INIT File
+[ info ] [ BEHAVIOR ] Run \addons\shop\Shop @app_init [ RunTime:0.003776s ]
+[ info ] [ BEHAVIOR ] Run Closure @app_init [ RunTime:0.003824s ]
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @app_init [ RunTime:0.000565s ]
+[ info ] [ LANG ] /www/wwwroot/cuijingshui.zwzdoac.cn/thinkphp/lang/zh-cn.php
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @app_dispatch [ RunTime:0.000047s ]
+[ info ] [ ROUTE ] array (
+  'type' => 'method',
+  'method' => 
+  array (
+    0 => '\\think\\addons\\Route',
+    1 => 'execute',
+  ),
+  'var' => 
+  array (
+  ),
+)
+[ info ] [ HEADER ] array (
+  'referer' => 'https://servicewechat.com/wxc89eceb102bebc8d/0/page-frame.html',
+  'sid' => 'uyQnZU0t0rIVrDbWwTVxaoFrPRRcuXnY',
+  'token' => '4ef80b99-af26-45c2-b173-e7cf857586ea',
+  'platform' => 'android',
+  'brand' => 'HONOR',
+  'accept-encoding' => 'gzip,compress,br,deflate',
+  'model' => 'TEL-AN00a',
+  'content-type' => 'application/json',
+  'user-agent' => 'Mozilla/5.0 (Linux; Android 10; TEL-AN00a Build/HONORTEL-AN00a; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/116.0.0.0 Mobile Safari/537.36 XWEB/1160083 MMWEBSDK/20240301 MMWEBID/9713 MicroMessenger/8.0.48.2580(0x28003038) WeChat/arm64 Weixin NetType/WIFI Language/zh_CN ABI/arm64 MiniProgramEnv/android',
+  'x-requested-with' => 'xmlhttprequest',
+  'charset' => 'utf-8',
+  'uid' => '1',
+  'connection' => 'keep-alive',
+  'host' => 'cuijingshui.zwzdoac.cn',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+  'addon' => 'shop',
+  'controller' => 'api.common',
+  'action' => 'init',
+)
+[ info ] [ RUN ] think\addons\Route->execute[ /www/wwwroot/cuijingshui.zwzdoac.cn/vendor/karsonzhang/fastadmin-addons/src/addons/Route.php ]
+[ info ] [ LANG ] /www/wwwroot/cuijingshui.zwzdoac.cn/public/../application/common/lang/zh-cn/addon.php
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @addon_begin [ RunTime:0.007827s ]
+[ info ] [ TOKEN ] INIT Mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LANG ] /www/wwwroot/cuijingshui.zwzdoac.cn//addons/shop/lang/zh-cn.php
+[ info ] [ LANG ] /www/wwwroot/cuijingshui.zwzdoac.cn/public/../application//index/lang/zh-cn/user.php
+[ info ] [ BEHAVIOR ] Run \addons\epay\Epay @addon_action_begin [ RunTime:0.003115s ]
+[ info ] [ SESSION ] INIT array (
+  'id' => 'uyQnZU0t0rIVrDbWwTVxaoFrPRRcuXnY',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2024-03-28T17:39:14+08:00 ] 111.227.124.238 GET cuijingshui.zwzdoac.cn/addons/shop/api.goods/index
+[运行时间：0.122932s] [吞吐率：8.13req/s] [内存消耗：4,345.78kb] [文件加载：95]
+[ info ] [ BEHAVIOR ] Run Closure @app_init [ RunTime:0.000030s ]
+[ info ] [ CACHE ] INIT File
+[ info ] [ BEHAVIOR ] Run \addons\shop\Shop @app_init [ RunTime:0.003798s ]
+[ info ] [ BEHAVIOR ] Run Closure @app_init [ RunTime:0.003846s ]
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @app_init [ RunTime:0.000612s ]
+[ info ] [ LANG ] /www/wwwroot/cuijingshui.zwzdoac.cn/thinkphp/lang/zh-cn.php
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @app_dispatch [ RunTime:0.000032s ]
+[ info ] [ ROUTE ] array (
+  'type' => 'method',
+  'method' => 
+  array (
+    0 => '\\think\\addons\\Route',
+    1 => 'execute',
+  ),
+  'var' => 
+  array (
+  ),
+)
+[ info ] [ HEADER ] array (
+  'referer' => 'https://servicewechat.com/wxc89eceb102bebc8d/0/page-frame.html',
+  'sid' => 'uyQnZU0t0rIVrDbWwTVxaoFrPRRcuXnY',
+  'token' => '4ef80b99-af26-45c2-b173-e7cf857586ea',
+  'platform' => 'android',
+  'brand' => 'HONOR',
+  'accept-encoding' => 'gzip,compress,br,deflate',
+  'model' => 'TEL-AN00a',
+  'content-type' => 'application/json',
+  'user-agent' => 'Mozilla/5.0 (Linux; Android 10; TEL-AN00a Build/HONORTEL-AN00a; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/116.0.0.0 Mobile Safari/537.36 XWEB/1160083 MMWEBSDK/20240301 MMWEBID/9713 MicroMessenger/8.0.48.2580(0x28003038) WeChat/arm64 Weixin NetType/WIFI Language/zh_CN ABI/arm64 MiniProgramEnv/android',
+  'x-requested-with' => 'xmlhttprequest',
+  'charset' => 'utf-8',
+  'uid' => '1',
+  'connection' => 'keep-alive',
+  'host' => 'cuijingshui.zwzdoac.cn',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+  'addon' => 'shop',
+  'controller' => 'api.goods',
+  'action' => 'index',
+)
+[ info ] [ RUN ] think\addons\Route->execute[ /www/wwwroot/cuijingshui.zwzdoac.cn/vendor/karsonzhang/fastadmin-addons/src/addons/Route.php ]
+[ info ] [ LANG ] /www/wwwroot/cuijingshui.zwzdoac.cn/public/../application/common/lang/zh-cn/addon.php
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @addon_begin [ RunTime:0.001965s ]
+[ info ] [ TOKEN ] INIT Mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LANG ] /www/wwwroot/cuijingshui.zwzdoac.cn//addons/shop/lang/zh-cn.php
+[ info ] [ LANG ] /www/wwwroot/cuijingshui.zwzdoac.cn/public/../application//index/lang/zh-cn/user.php
+[ info ] [ BEHAVIOR ] Run \addons\epay\Epay @addon_action_begin [ RunTime:0.001462s ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2024-03-28T17:39:16+08:00 ] 111.227.124.238 GET cuijingshui.zwzdoac.cn/addons/shop/api.user/index
+[运行时间：0.070451s] [吞吐率：14.19req/s] [内存消耗：4,244.91kb] [文件加载：91]
+[ info ] [ BEHAVIOR ] Run Closure @app_init [ RunTime:0.000029s ]
+[ info ] [ CACHE ] INIT File
+[ info ] [ BEHAVIOR ] Run \addons\shop\Shop @app_init [ RunTime:0.003707s ]
+[ info ] [ BEHAVIOR ] Run Closure @app_init [ RunTime:0.003754s ]
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @app_init [ RunTime:0.000637s ]
+[ info ] [ LANG ] /www/wwwroot/cuijingshui.zwzdoac.cn/thinkphp/lang/zh-cn.php
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @app_dispatch [ RunTime:0.000033s ]
+[ info ] [ ROUTE ] array (
+  'type' => 'method',
+  'method' => 
+  array (
+    0 => '\\think\\addons\\Route',
+    1 => 'execute',
+  ),
+  'var' => 
+  array (
+  ),
+)
+[ info ] [ HEADER ] array (
+  'referer' => 'https://servicewechat.com/wxc89eceb102bebc8d/0/page-frame.html',
+  'sid' => 'uyQnZU0t0rIVrDbWwTVxaoFrPRRcuXnY',
+  'token' => '4ef80b99-af26-45c2-b173-e7cf857586ea',
+  'platform' => 'android',
+  'brand' => 'HONOR',
+  'accept-encoding' => 'gzip,compress,br,deflate',
+  'model' => 'TEL-AN00a',
+  'content-type' => 'application/json',
+  'user-agent' => 'Mozilla/5.0 (Linux; Android 10; TEL-AN00a Build/HONORTEL-AN00a; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/116.0.0.0 Mobile Safari/537.36 XWEB/1160083 MMWEBSDK/20240301 MMWEBID/9713 MicroMessenger/8.0.48.2580(0x28003038) WeChat/arm64 Weixin NetType/WIFI Language/zh_CN ABI/arm64 MiniProgramEnv/android',
+  'x-requested-with' => 'xmlhttprequest',
+  'charset' => 'utf-8',
+  'uid' => '1',
+  'connection' => 'keep-alive',
+  'host' => 'cuijingshui.zwzdoac.cn',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+  'addon' => 'shop',
+  'controller' => 'api.user',
+  'action' => 'index',
+)
+[ info ] [ RUN ] think\addons\Route->execute[ /www/wwwroot/cuijingshui.zwzdoac.cn/vendor/karsonzhang/fastadmin-addons/src/addons/Route.php ]
+[ info ] [ LANG ] /www/wwwroot/cuijingshui.zwzdoac.cn/public/../application/common/lang/zh-cn/addon.php
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @addon_begin [ RunTime:0.001958s ]
+[ info ] [ TOKEN ] INIT Mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LANG ] /www/wwwroot/cuijingshui.zwzdoac.cn//addons/shop/lang/zh-cn.php
+[ info ] [ LANG ] /www/wwwroot/cuijingshui.zwzdoac.cn/public/../application//index/lang/zh-cn/user.php
+[ info ] [ BEHAVIOR ] Run \addons\epay\Epay @addon_action_begin [ RunTime:0.001479s ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2024-03-28T17:39:18+08:00 ] 111.227.124.238 GET cuijingshui.zwzdoac.cn/addons/shop/api.dealer.dealer/spead_user
+[运行时间：0.094598s] [吞吐率：10.57req/s] [内存消耗：4,163.91kb] [文件加载：93]
+[ info ] [ BEHAVIOR ] Run Closure @app_init [ RunTime:0.000029s ]
+[ info ] [ CACHE ] INIT File
+[ info ] [ BEHAVIOR ] Run \addons\shop\Shop @app_init [ RunTime:0.003688s ]
+[ info ] [ BEHAVIOR ] Run Closure @app_init [ RunTime:0.003737s ]
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @app_init [ RunTime:0.000754s ]
+[ info ] [ LANG ] /www/wwwroot/cuijingshui.zwzdoac.cn/thinkphp/lang/zh-cn.php
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @app_dispatch [ RunTime:0.000037s ]
+[ info ] [ ROUTE ] array (
+  'type' => 'method',
+  'method' => 
+  array (
+    0 => '\\think\\addons\\Route',
+    1 => 'execute',
+  ),
+  'var' => 
+  array (
+  ),
+)
+[ info ] [ HEADER ] array (
+  'referer' => 'https://servicewechat.com/wxc89eceb102bebc8d/0/page-frame.html',
+  'sid' => 'uyQnZU0t0rIVrDbWwTVxaoFrPRRcuXnY',
+  'token' => '4ef80b99-af26-45c2-b173-e7cf857586ea',
+  'platform' => 'android',
+  'brand' => 'HONOR',
+  'accept-encoding' => 'gzip,compress,br,deflate',
+  'model' => 'TEL-AN00a',
+  'content-type' => 'application/json',
+  'user-agent' => 'Mozilla/5.0 (Linux; Android 10; TEL-AN00a Build/HONORTEL-AN00a; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/116.0.0.0 Mobile Safari/537.36 XWEB/1160083 MMWEBSDK/20240301 MMWEBID/9713 MicroMessenger/8.0.48.2580(0x28003038) WeChat/arm64 Weixin NetType/WIFI Language/zh_CN ABI/arm64 MiniProgramEnv/android',
+  'x-requested-with' => 'xmlhttprequest',
+  'charset' => 'utf-8',
+  'uid' => '1',
+  'connection' => 'keep-alive',
+  'host' => 'cuijingshui.zwzdoac.cn',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+  'addon' => 'shop',
+  'controller' => 'api.dealer.dealer',
+  'action' => 'spead_user',
+)
+[ info ] [ RUN ] think\addons\Route->execute[ /www/wwwroot/cuijingshui.zwzdoac.cn/vendor/karsonzhang/fastadmin-addons/src/addons/Route.php ]
+[ info ] [ LANG ] /www/wwwroot/cuijingshui.zwzdoac.cn/public/../application/common/lang/zh-cn/addon.php
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @addon_begin [ RunTime:0.001999s ]
+[ info ] [ TOKEN ] INIT Mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LANG ] /www/wwwroot/cuijingshui.zwzdoac.cn//addons/shop/lang/zh-cn.php
+[ info ] [ LANG ] /www/wwwroot/cuijingshui.zwzdoac.cn/public/../application//index/lang/zh-cn/user.php
+[ info ] [ BEHAVIOR ] Run \addons\epay\Epay @addon_action_begin [ RunTime:0.001494s ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2024-03-28T17:39:22+08:00 ] 111.227.124.238 GET cuijingshui.zwzdoac.cn/addons/shop/api.dealer.dealer/getQrcode
+[运行时间：0.947013s] [吞吐率：1.06req/s] [内存消耗：4,466.27kb] [文件加载：100]
+[ info ] [ BEHAVIOR ] Run Closure @app_init [ RunTime:0.000030s ]
+[ info ] [ CACHE ] INIT File
+[ info ] [ BEHAVIOR ] Run \addons\shop\Shop @app_init [ RunTime:0.003944s ]
+[ info ] [ BEHAVIOR ] Run Closure @app_init [ RunTime:0.003992s ]
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @app_init [ RunTime:0.000611s ]
+[ info ] [ LANG ] /www/wwwroot/cuijingshui.zwzdoac.cn/thinkphp/lang/zh-cn.php
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @app_dispatch [ RunTime:0.000032s ]
+[ info ] [ ROUTE ] array (
+  'type' => 'method',
+  'method' => 
+  array (
+    0 => '\\think\\addons\\Route',
+    1 => 'execute',
+  ),
+  'var' => 
+  array (
+  ),
+)
+[ info ] [ HEADER ] array (
+  'referer' => 'https://servicewechat.com/wxc89eceb102bebc8d/0/page-frame.html',
+  'sid' => 'uyQnZU0t0rIVrDbWwTVxaoFrPRRcuXnY',
+  'token' => '4ef80b99-af26-45c2-b173-e7cf857586ea',
+  'platform' => 'android',
+  'brand' => 'HONOR',
+  'accept-encoding' => 'gzip,compress,br,deflate',
+  'model' => 'TEL-AN00a',
+  'content-type' => 'application/json',
+  'user-agent' => 'Mozilla/5.0 (Linux; Android 10; TEL-AN00a Build/HONORTEL-AN00a; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/116.0.0.0 Mobile Safari/537.36 XWEB/1160083 MMWEBSDK/20240301 MMWEBID/9713 MicroMessenger/8.0.48.2580(0x28003038) WeChat/arm64 Weixin NetType/WIFI Language/zh_CN ABI/arm64 MiniProgramEnv/android',
+  'x-requested-with' => 'xmlhttprequest',
+  'charset' => 'utf-8',
+  'uid' => '1',
+  'connection' => 'keep-alive',
+  'host' => 'cuijingshui.zwzdoac.cn',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+  'addon' => 'shop',
+  'controller' => 'api.dealer.dealer',
+  'action' => 'getQrcode',
+)
+[ info ] [ RUN ] think\addons\Route->execute[ /www/wwwroot/cuijingshui.zwzdoac.cn/vendor/karsonzhang/fastadmin-addons/src/addons/Route.php ]
+[ info ] [ LANG ] /www/wwwroot/cuijingshui.zwzdoac.cn/public/../application/common/lang/zh-cn/addon.php
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @addon_begin [ RunTime:0.001988s ]
+[ info ] [ TOKEN ] INIT Mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LANG ] /www/wwwroot/cuijingshui.zwzdoac.cn//addons/shop/lang/zh-cn.php
+[ info ] [ LANG ] /www/wwwroot/cuijingshui.zwzdoac.cn/public/../application//index/lang/zh-cn/user.php
+[ info ] [ BEHAVIOR ] Run \addons\epay\Epay @addon_action_begin [ RunTime:0.001442s ]
+[ info ] [ LOG ] INIT File
+[ error ] [0]Invalid blending. Image 2 is outside the canvas.[/www/wwwroot/cuijingshui.zwzdoac.cn/vendor/kosinix/grafika/src/Grafika/Gd/Editor.php:71]
+---------------------------------------------------------------
+[ 2024-03-28T17:39:27+08:00 ] 111.227.124.238 GET cuijingshui.zwzdoac.cn/addons/shop/api.dealer.dealer/spead_user
+[运行时间：0.062610s] [吞吐率：15.97req/s] [内存消耗：4,163.91kb] [文件加载：93]
+[ info ] [ BEHAVIOR ] Run Closure @app_init [ RunTime:0.000028s ]
+[ info ] [ CACHE ] INIT File
+[ info ] [ BEHAVIOR ] Run \addons\shop\Shop @app_init [ RunTime:0.003744s ]
+[ info ] [ BEHAVIOR ] Run Closure @app_init [ RunTime:0.003800s ]
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @app_init [ RunTime:0.000574s ]
+[ info ] [ LANG ] /www/wwwroot/cuijingshui.zwzdoac.cn/thinkphp/lang/zh-cn.php
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @app_dispatch [ RunTime:0.000031s ]
+[ info ] [ ROUTE ] array (
+  'type' => 'method',
+  'method' => 
+  array (
+    0 => '\\think\\addons\\Route',
+    1 => 'execute',
+  ),
+  'var' => 
+  array (
+  ),
+)
+[ info ] [ HEADER ] array (
+  'referer' => 'https://servicewechat.com/wxc89eceb102bebc8d/0/page-frame.html',
+  'sid' => 'uyQnZU0t0rIVrDbWwTVxaoFrPRRcuXnY',
+  'token' => '4ef80b99-af26-45c2-b173-e7cf857586ea',
+  'platform' => 'android',
+  'brand' => 'HONOR',
+  'accept-encoding' => 'gzip,compress,br,deflate',
+  'model' => 'TEL-AN00a',
+  'content-type' => 'application/json',
+  'user-agent' => 'Mozilla/5.0 (Linux; Android 10; TEL-AN00a Build/HONORTEL-AN00a; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/116.0.0.0 Mobile Safari/537.36 XWEB/1160083 MMWEBSDK/20240301 MMWEBID/9713 MicroMessenger/8.0.48.2580(0x28003038) WeChat/arm64 Weixin NetType/WIFI Language/zh_CN ABI/arm64 MiniProgramEnv/android',
+  'x-requested-with' => 'xmlhttprequest',
+  'charset' => 'utf-8',
+  'uid' => '1',
+  'connection' => 'keep-alive',
+  'host' => 'cuijingshui.zwzdoac.cn',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+  'addon' => 'shop',
+  'controller' => 'api.dealer.dealer',
+  'action' => 'spead_user',
+)
+[ info ] [ RUN ] think\addons\Route->execute[ /www/wwwroot/cuijingshui.zwzdoac.cn/vendor/karsonzhang/fastadmin-addons/src/addons/Route.php ]
+[ info ] [ LANG ] /www/wwwroot/cuijingshui.zwzdoac.cn/public/../application/common/lang/zh-cn/addon.php
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @addon_begin [ RunTime:0.002018s ]
+[ info ] [ TOKEN ] INIT Mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LANG ] /www/wwwroot/cuijingshui.zwzdoac.cn//addons/shop/lang/zh-cn.php
+[ info ] [ LANG ] /www/wwwroot/cuijingshui.zwzdoac.cn/public/../application//index/lang/zh-cn/user.php
+[ info ] [ BEHAVIOR ] Run \addons\epay\Epay @addon_action_begin [ RunTime:0.001407s ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2024-03-28T17:39:29+08:00 ] 111.227.124.238 GET cuijingshui.zwzdoac.cn/addons/shop/api.dealer.dealer/getQrcode
+[运行时间：0.089263s] [吞吐率：11.20req/s] [内存消耗：4,435.25kb] [文件加载：98]
+[ info ] [ BEHAVIOR ] Run Closure @app_init [ RunTime:0.000031s ]
+[ info ] [ CACHE ] INIT File
+[ info ] [ BEHAVIOR ] Run \addons\shop\Shop @app_init [ RunTime:0.003931s ]
+[ info ] [ BEHAVIOR ] Run Closure @app_init [ RunTime:0.003983s ]
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @app_init [ RunTime:0.000581s ]
+[ info ] [ LANG ] /www/wwwroot/cuijingshui.zwzdoac.cn/thinkphp/lang/zh-cn.php
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @app_dispatch [ RunTime:0.000032s ]
+[ info ] [ ROUTE ] array (
+  'type' => 'method',
+  'method' => 
+  array (
+    0 => '\\think\\addons\\Route',
+    1 => 'execute',
+  ),
+  'var' => 
+  array (
+  ),
+)
+[ info ] [ HEADER ] array (
+  'referer' => 'https://servicewechat.com/wxc89eceb102bebc8d/0/page-frame.html',
+  'sid' => 'uyQnZU0t0rIVrDbWwTVxaoFrPRRcuXnY',
+  'token' => '4ef80b99-af26-45c2-b173-e7cf857586ea',
+  'platform' => 'android',
+  'brand' => 'HONOR',
+  'accept-encoding' => 'gzip,compress,br,deflate',
+  'model' => 'TEL-AN00a',
+  'content-type' => 'application/json',
+  'user-agent' => 'Mozilla/5.0 (Linux; Android 10; TEL-AN00a Build/HONORTEL-AN00a; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/116.0.0.0 Mobile Safari/537.36 XWEB/1160083 MMWEBSDK/20240301 MMWEBID/9713 MicroMessenger/8.0.48.2580(0x28003038) WeChat/arm64 Weixin NetType/WIFI Language/zh_CN ABI/arm64 MiniProgramEnv/android',
+  'x-requested-with' => 'xmlhttprequest',
+  'charset' => 'utf-8',
+  'uid' => '1',
+  'connection' => 'keep-alive',
+  'host' => 'cuijingshui.zwzdoac.cn',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+  'addon' => 'shop',
+  'controller' => 'api.dealer.dealer',
+  'action' => 'getQrcode',
+)
+[ info ] [ RUN ] think\addons\Route->execute[ /www/wwwroot/cuijingshui.zwzdoac.cn/vendor/karsonzhang/fastadmin-addons/src/addons/Route.php ]
+[ info ] [ LANG ] /www/wwwroot/cuijingshui.zwzdoac.cn/public/../application/common/lang/zh-cn/addon.php
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @addon_begin [ RunTime:0.001940s ]
+[ info ] [ TOKEN ] INIT Mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LANG ] /www/wwwroot/cuijingshui.zwzdoac.cn//addons/shop/lang/zh-cn.php
+[ info ] [ LANG ] /www/wwwroot/cuijingshui.zwzdoac.cn/public/../application//index/lang/zh-cn/user.php
+[ info ] [ BEHAVIOR ] Run \addons\epay\Epay @addon_action_begin [ RunTime:0.001411s ]
+[ info ] [ LOG ] INIT File
+[ error ] [0]Invalid blending. Image 2 is outside the canvas.[/www/wwwroot/cuijingshui.zwzdoac.cn/vendor/kosinix/grafika/src/Grafika/Gd/Editor.php:71]
+---------------------------------------------------------------
+[ 2024-03-28T17:39:30+08:00 ] 111.227.124.238 GET cuijingshui.zwzdoac.cn/addons/shop/api.dealer.dealer/spead_user
+[运行时间：0.063433s] [吞吐率：15.76req/s] [内存消耗：4,163.91kb] [文件加载：93]
+[ info ] [ BEHAVIOR ] Run Closure @app_init [ RunTime:0.000038s ]
+[ info ] [ CACHE ] INIT File
+[ info ] [ BEHAVIOR ] Run \addons\shop\Shop @app_init [ RunTime:0.003759s ]
+[ info ] [ BEHAVIOR ] Run Closure @app_init [ RunTime:0.003808s ]
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @app_init [ RunTime:0.000626s ]
+[ info ] [ LANG ] /www/wwwroot/cuijingshui.zwzdoac.cn/thinkphp/lang/zh-cn.php
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @app_dispatch [ RunTime:0.000034s ]
+[ info ] [ ROUTE ] array (
+  'type' => 'method',
+  'method' => 
+  array (
+    0 => '\\think\\addons\\Route',
+    1 => 'execute',
+  ),
+  'var' => 
+  array (
+  ),
+)
+[ info ] [ HEADER ] array (
+  'referer' => 'https://servicewechat.com/wxc89eceb102bebc8d/0/page-frame.html',
+  'sid' => 'uyQnZU0t0rIVrDbWwTVxaoFrPRRcuXnY',
+  'token' => '4ef80b99-af26-45c2-b173-e7cf857586ea',
+  'platform' => 'android',
+  'brand' => 'HONOR',
+  'accept-encoding' => 'gzip,compress,br,deflate',
+  'model' => 'TEL-AN00a',
+  'content-type' => 'application/json',
+  'user-agent' => 'Mozilla/5.0 (Linux; Android 10; TEL-AN00a Build/HONORTEL-AN00a; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/116.0.0.0 Mobile Safari/537.36 XWEB/1160083 MMWEBSDK/20240301 MMWEBID/9713 MicroMessenger/8.0.48.2580(0x28003038) WeChat/arm64 Weixin NetType/WIFI Language/zh_CN ABI/arm64 MiniProgramEnv/android',
+  'x-requested-with' => 'xmlhttprequest',
+  'charset' => 'utf-8',
+  'uid' => '1',
+  'connection' => 'keep-alive',
+  'host' => 'cuijingshui.zwzdoac.cn',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+  'addon' => 'shop',
+  'controller' => 'api.dealer.dealer',
+  'action' => 'spead_user',
+)
+[ info ] [ RUN ] think\addons\Route->execute[ /www/wwwroot/cuijingshui.zwzdoac.cn/vendor/karsonzhang/fastadmin-addons/src/addons/Route.php ]
+[ info ] [ LANG ] /www/wwwroot/cuijingshui.zwzdoac.cn/public/../application/common/lang/zh-cn/addon.php
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @addon_begin [ RunTime:0.002029s ]
+[ info ] [ TOKEN ] INIT Mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LANG ] /www/wwwroot/cuijingshui.zwzdoac.cn//addons/shop/lang/zh-cn.php
+[ info ] [ LANG ] /www/wwwroot/cuijingshui.zwzdoac.cn/public/../application//index/lang/zh-cn/user.php
+[ info ] [ BEHAVIOR ] Run \addons\epay\Epay @addon_action_begin [ RunTime:0.001442s ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2024-03-28T17:44:00+08:00 ] 111.227.124.238 GET cuijingshui.zwzdoac.cn/addons/shop/api.user/index
+[运行时间：0.064934s] [吞吐率：15.40req/s] [内存消耗：4,244.91kb] [文件加载：91]
+[ info ] [ BEHAVIOR ] Run Closure @app_init [ RunTime:0.000029s ]
+[ info ] [ CACHE ] INIT File
+[ info ] [ BEHAVIOR ] Run \addons\shop\Shop @app_init [ RunTime:0.003832s ]
+[ info ] [ BEHAVIOR ] Run Closure @app_init [ RunTime:0.003882s ]
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @app_init [ RunTime:0.000579s ]
+[ info ] [ LANG ] /www/wwwroot/cuijingshui.zwzdoac.cn/thinkphp/lang/zh-cn.php
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @app_dispatch [ RunTime:0.000031s ]
+[ info ] [ ROUTE ] array (
+  'type' => 'method',
+  'method' => 
+  array (
+    0 => '\\think\\addons\\Route',
+    1 => 'execute',
+  ),
+  'var' => 
+  array (
+  ),
+)
+[ info ] [ HEADER ] array (
+  'referer' => 'https://servicewechat.com/wxc89eceb102bebc8d/0/page-frame.html',
+  'sid' => 'uyQnZU0t0rIVrDbWwTVxaoFrPRRcuXnY',
+  'token' => '4ef80b99-af26-45c2-b173-e7cf857586ea',
+  'platform' => 'android',
+  'brand' => 'HONOR',
+  'accept-encoding' => 'gzip,compress,br,deflate',
+  'model' => 'TEL-AN00a',
+  'content-type' => 'application/json',
+  'user-agent' => 'Mozilla/5.0 (Linux; Android 10; TEL-AN00a Build/HONORTEL-AN00a; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/116.0.0.0 Mobile Safari/537.36 XWEB/1160083 MMWEBSDK/20240301 MMWEBID/9713 MicroMessenger/8.0.48.2580(0x28003038) WeChat/arm64 Weixin NetType/WIFI Language/zh_CN ABI/arm64 MiniProgramEnv/android',
+  'x-requested-with' => 'xmlhttprequest',
+  'charset' => 'utf-8',
+  'uid' => '1',
+  'connection' => 'keep-alive',
+  'host' => 'cuijingshui.zwzdoac.cn',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+  'addon' => 'shop',
+  'controller' => 'api.user',
+  'action' => 'index',
+)
+[ info ] [ RUN ] think\addons\Route->execute[ /www/wwwroot/cuijingshui.zwzdoac.cn/vendor/karsonzhang/fastadmin-addons/src/addons/Route.php ]
+[ info ] [ LANG ] /www/wwwroot/cuijingshui.zwzdoac.cn/public/../application/common/lang/zh-cn/addon.php
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @addon_begin [ RunTime:0.001979s ]
+[ info ] [ TOKEN ] INIT Mysql
+[ info ] [ DB ] INIT mysql
+[ info ] [ LANG ] /www/wwwroot/cuijingshui.zwzdoac.cn//addons/shop/lang/zh-cn.php
+[ info ] [ LANG ] /www/wwwroot/cuijingshui.zwzdoac.cn/public/../application//index/lang/zh-cn/user.php
+[ info ] [ BEHAVIOR ] Run \addons\epay\Epay @addon_action_begin [ RunTime:0.001556s ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2024-03-28T17:44:05+08:00 ] 220.196.160.75 GET cuijingshui.zwzdoac.cn/
+[运行时间：0.050309s] [吞吐率：19.88req/s] [内存消耗：3,080.96kb] [文件加载：79]
+[ info ] [ BEHAVIOR ] Run Closure @app_init [ RunTime:0.000029s ]
+[ info ] [ CACHE ] INIT File
+[ info ] [ BEHAVIOR ] Run \addons\shop\Shop @app_init [ RunTime:0.003807s ]
+[ info ] [ BEHAVIOR ] Run Closure @app_init [ RunTime:0.003856s ]
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @app_init [ RunTime:0.000619s ]
+[ info ] [ LANG ] /www/wwwroot/cuijingshui.zwzdoac.cn/thinkphp/lang/zh-cn.php
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @app_dispatch [ RunTime:0.000025s ]
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => '',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'x-forwarded-for' => '1.15.173.107',
+  'upgrade-insecure-requests' => '1',
+  'connection' => 'keep-alive',
+  'cache-control' => 'max-age=0',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone os 15_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.4 Mobile/11D257 Safari/604.1',
+  'host' => 'cuijingshui.zwzdoac.cn',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ LANG ] /www/wwwroot/cuijingshui.zwzdoac.cn/public/../application/index/lang/zh-cn.php
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @module_init [ RunTime:0.001795s ]
+[ info ] [ BEHAVIOR ] Run \addons\third\Third @module_init [ RunTime:0.001232s ]
+[ info ] [ BEHAVIOR ] Run \addons\third\Third @config_init [ RunTime:0.000110s ]
+[ info ] [ LANG ] /www/wwwroot/cuijingshui.zwzdoac.cn/public/../application/index/lang/zh-cn/index.php
+[ info ] [ BEHAVIOR ] Run \addons\epay\Epay @action_begin [ RunTime:0.001363s ]
+[ info ] [ BEHAVIOR ] Run \addons\third\Third @action_begin [ RunTime:0.000051s ]
+[ info ] [ RUN ] app\index\controller\Index->index[ /www/wwwroot/cuijingshui.zwzdoac.cn/application/index/controller/Index.php ]
+[ info ] [ VIEW ] /www/wwwroot/cuijingshui.zwzdoac.cn/public/../application/index/view/index/index.html [ array (
+  0 => 'user',
+  1 => 'site',
+  2 => 'config',
+) ]
+[ info ] [ BEHAVIOR ] Run \addons\shop\Shop @view_filter [ RunTime:0.000049s ]
+[ info ] [ BEHAVIOR ] Run \addons\third\Third @view_filter [ RunTime:0.000037s ]
+[ info ] [ LOG ] INIT File

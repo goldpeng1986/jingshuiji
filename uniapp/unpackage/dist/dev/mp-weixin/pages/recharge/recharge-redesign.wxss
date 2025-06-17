@@ -1,0 +1,411 @@
+@charset "UTF-8";
+/**
+ * 这里是uni-app内置的常用样式变量
+ *
+ * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量
+ * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App
+ *
+ */
+/**
+ * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能
+ *
+ * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件
+ */
+/* 颜色变量 */
+/* 行为相关颜色 */
+/* 文字基本颜色 */
+/* 背景颜色 */
+/* 边框颜色 */
+/* 尺寸变量 */
+/* 文字尺寸 */
+/* 图片尺寸 */
+/* Border Radius */
+/* 水平间距 */
+/* 垂直间距 */
+/* 透明度 */
+/* 文章场景相关 */
+.container.data-v-2b66dc68 {
+  min-height: 100vh;
+  background-color: #f8f9fc;
+  padding-bottom: 50rpx;
+}
+.balance-card.data-v-2b66dc68 {
+  margin: 100rpx 30rpx 30rpx;
+  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+  border-radius: 20rpx;
+  overflow: hidden;
+  box-shadow: 0 8rpx 30rpx rgba(59, 130, 246, 0.3);
+}
+.card-content.data-v-2b66dc68 {
+  padding: 30rpx;
+  position: relative;
+  overflow: hidden;
+}
+.balance-info.data-v-2b66dc68 {
+  position: relative;
+  z-index: 2;
+}
+.balance-label.data-v-2b66dc68 {
+  font-size: 28rpx;
+  color: rgba(255, 255, 255, 0.8);
+  display: block;
+}
+.balance-amount-row.data-v-2b66dc68 {
+  display: flex;
+  align-items: baseline;
+  margin-top: 10rpx;
+}
+.currency.data-v-2b66dc68 {
+  font-size: 36rpx;
+  color: #ffffff;
+  font-weight: 500;
+}
+.balance-amount.data-v-2b66dc68 {
+  font-size: 60rpx;
+  font-weight: bold;
+  color: #ffffff;
+  margin-left: 8rpx;
+}
+.card-decoration.data-v-2b66dc68 {
+  position: absolute;
+  right: 20rpx;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  opacity: 0.5;
+}
+.card-footer.data-v-2b66dc68 {
+  display: flex;
+  justify-content: space-between;
+  padding: 20rpx 30rpx;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.expense-item.data-v-2b66dc68 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.expense-label.data-v-2b66dc68 {
+  font-size: 24rpx;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 6rpx;
+}
+.expense-value.data-v-2b66dc68 {
+  font-size: 28rpx;
+  color: #ffffff;
+  font-weight: 500;
+}
+.expense-divider.data-v-2b66dc68 {
+  width: 2rpx;
+  height: 40rpx;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+.section.data-v-2b66dc68 {
+  margin: 30rpx;
+  background-color: #ffffff;
+  border-radius: 16rpx;
+  padding: 30rpx;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.05);
+}
+.section-header.data-v-2b66dc68 {
+  margin-bottom: 20rpx;
+}
+.section-title.data-v-2b66dc68 {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #333333;
+  display: block;
+}
+.section-subtitle.data-v-2b66dc68 {
+  font-size: 24rpx;
+  color: #909399;
+  margin-top: 6rpx;
+  display: block;
+}
+.amount-grid.data-v-2b66dc68 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20rpx;
+  margin-bottom: 30rpx;
+}
+.amount-item.data-v-2b66dc68 {
+  background-color: #f5f7fa;
+  border-radius: 12rpx;
+  padding: 20rpx 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: all 0.2s;
+}
+.amount-item.data-v-2b66dc68:active {
+  -webkit-transform: scale(0.98);
+          transform: scale(0.98);
+}
+.amount-item.active.data-v-2b66dc68 {
+  background-color: #e7f1ff;
+  border: 2rpx solid #3b82f6;
+}
+.amount-item.active .amount-value.data-v-2b66dc68 {
+  color: #3b82f6;
+}
+.amount-value.data-v-2b66dc68 {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333333;
+}
+.amount-desc.data-v-2b66dc68 {
+  font-size: 22rpx;
+  color: #909399;
+  margin-top: 8rpx;
+}
+.custom-amount-input.data-v-2b66dc68 {
+  display: flex;
+  align-items: center;
+  background-color: #f5f7fa;
+  border-radius: 12rpx;
+  padding: 0 20rpx;
+  margin-bottom: 10rpx;
+}
+.input-prefix.data-v-2b66dc68 {
+  margin-right: 10rpx;
+}
+.currency-symbol.data-v-2b66dc68 {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333333;
+}
+.input-tip.data-v-2b66dc68 {
+  font-size: 22rpx;
+  color: #909399;
+  padding-left: 10rpx;
+}
+.payment-options.data-v-2b66dc68 {
+  display: flex;
+  justify-content: space-between;
+}
+.payment-option.data-v-2b66dc68 {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20rpx;
+  border-radius: 12rpx;
+  transition: all 0.2s;
+}
+.payment-option.data-v-2b66dc68:active {
+  -webkit-transform: scale(0.98);
+          transform: scale(0.98);
+}
+.payment-option.active.data-v-2b66dc68 {
+  background-color: #e7f1ff;
+}
+.payment-icon.data-v-2b66dc68 {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10rpx;
+}
+.wechat-icon.data-v-2b66dc68 {
+  background-color: #e7f8ef;
+}
+.alipay-icon.data-v-2b66dc68 {
+  background-color: #e7f1ff;
+}
+.balance-icon.data-v-2b66dc68 {
+  background-color: #fdf6ec;
+}
+.payment-name.data-v-2b66dc68 {
+  font-size: 24rpx;
+  color: #606266;
+}
+.coupon-selector.data-v-2b66dc68 {
+  margin: 0 30rpx;
+  background-color: #ffffff;
+  border-radius: 16rpx;
+  padding: 30rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.05);
+}
+.selector-left.data-v-2b66dc68 {
+  display: flex;
+  align-items: center;
+}
+.selector-label.data-v-2b66dc68 {
+  font-size: 28rpx;
+  color: #333333;
+  margin-left: 10rpx;
+}
+.selector-right.data-v-2b66dc68 {
+  display: flex;
+  align-items: center;
+}
+.coupon-info.data-v-2b66dc68 {
+  font-size: 26rpx;
+  color: #909399;
+  margin-right: 10rpx;
+}
+.recharge-summary.data-v-2b66dc68 {
+  margin: 30rpx;
+  background-color: #ffffff;
+  border-radius: 16rpx;
+  padding: 30rpx;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.05);
+}
+.summary-item.data-v-2b66dc68 {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20rpx;
+}
+.summary-item.data-v-2b66dc68:last-child {
+  margin-bottom: 0;
+}
+.summary-item.total.data-v-2b66dc68 {
+  padding-top: 20rpx;
+  border-top: 2rpx dashed #e5e7eb;
+}
+.summary-item.total .summary-label.data-v-2b66dc68, .summary-item.total .summary-value.data-v-2b66dc68 {
+  font-weight: bold;
+  color: #333333;
+}
+.summary-item.total .summary-value.data-v-2b66dc68 {
+  color: #f43f5e;
+}
+.summary-label.data-v-2b66dc68 {
+  font-size: 28rpx;
+  color: #606266;
+}
+.summary-value.data-v-2b66dc68 {
+  font-size: 28rpx;
+  color: #333333;
+}
+.recharge-btn-container.data-v-2b66dc68 {
+  margin: 50rpx 30rpx;
+}
+.agreement-text.data-v-2b66dc68 {
+  font-size: 24rpx;
+  color: #909399;
+  text-align: center;
+  margin-top: 20rpx;
+  display: block;
+}
+.agreement-link.data-v-2b66dc68 {
+  color: #3b82f6;
+}
+.coupon-popup.data-v-2b66dc68 {
+  background-color: #ffffff;
+  border-radius: 16rpx 16rpx 0 0;
+  overflow: hidden;
+  height: 800rpx;
+  display: flex;
+  flex-direction: column;
+}
+.popup-header.data-v-2b66dc68 {
+  padding: 30rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2rpx solid #f2f3f5;
+}
+.popup-title.data-v-2b66dc68 {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #333333;
+}
+.coupon-list.data-v-2b66dc68 {
+  flex: 1;
+  padding: 30rpx;
+}
+.coupon-item.data-v-2b66dc68 {
+  display: flex;
+  background-color: #ffffff;
+  border: 2rpx solid #e5e7eb;
+  border-radius: 16rpx;
+  overflow: hidden;
+  margin-bottom: 20rpx;
+  position: relative;
+  transition: all 0.2s;
+}
+.coupon-item.selected.data-v-2b66dc68 {
+  border-color: #3b82f6;
+  background-color: #e7f1ff;
+}
+.coupon-left.data-v-2b66dc68 {
+  width: 200rpx;
+  padding: 30rpx 20rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.coupon-amount.data-v-2b66dc68 {
+  font-size: 40rpx;
+  font-weight: bold;
+  color: #ffffff;
+}
+.coupon-condition.data-v-2b66dc68 {
+  font-size: 22rpx;
+  color: rgba(255, 255, 255, 0.9);
+  margin-top: 8rpx;
+}
+.coupon-right.data-v-2b66dc68 {
+  flex: 1;
+  padding: 20rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.coupon-name.data-v-2b66dc68 {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #333333;
+  display: block;
+}
+.coupon-desc.data-v-2b66dc68 {
+  font-size: 24rpx;
+  color: #909399;
+  margin-top: 6rpx;
+  display: block;
+}
+.coupon-validity.data-v-2b66dc68 {
+  font-size: 22rpx;
+  color: #909399;
+  margin-top: 10rpx;
+}
+.coupon-check.data-v-2b66dc68 {
+  position: absolute;
+  right: 20rpx;
+  top: 20rpx;
+}
+.check-circle.data-v-2b66dc68 {
+  width: 40rpx;
+  height: 40rpx;
+  border-radius: 50%;
+  border: 2rpx solid #e5e7eb;
+}
+.no-coupon-item.data-v-2b66dc68 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30rpx;
+  background-color: #ffffff;
+  border: 2rpx solid #e5e7eb;
+  border-radius: 16rpx;
+  margin-bottom: 20rpx;
+}
+.no-coupon-item.selected.data-v-2b66dc68 {
+  border-color: #3b82f6;
+  background-color: #e7f1ff;
+}
+.no-coupon-text.data-v-2b66dc68 {
+  font-size: 28rpx;
+  color: #333333;
+}
+.popup-footer.data-v-2b66dc68 {
+  padding: 20rpx 30rpx 50rpx;
+  border-top: 2rpx solid #f2f3f5;
+}

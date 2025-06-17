@@ -1,0 +1,12 @@
+{
+  "navigationBarTitleText": "商用净水机",
+  "usingComponents": {
+    "u-search": "/uni_modules/uview-ui/components/u-search/u-search",
+    "u-icon": "/uni_modules/uview-ui/components/u-icon/u-icon",
+    "u-swiper": "/uni_modules/uview-ui/components/u-swiper/u-swiper",
+    "u-image": "/uni_modules/uview-ui/components/u-image/u-image",
+    "u-button": "/uni_modules/uview-ui/components/u-button/u-button",
+    "u-tabbar": "/uni_modules/uview-ui/components/u-tabbar/u-tabbar",
+    "u-tabbar-item": "/uni_modules/uview-ui/components/u-tabbar-item/u-tabbar-item"
+  }
+}

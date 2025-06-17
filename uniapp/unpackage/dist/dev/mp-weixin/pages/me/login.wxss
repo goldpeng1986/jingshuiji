@@ -1,0 +1,204 @@
+@charset "UTF-8";
+/**
+ * 这里是uni-app内置的常用样式变量
+ *
+ * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量
+ * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App
+ *
+ */
+/**
+ * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能
+ *
+ * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件
+ */
+/* 颜色变量 */
+/* 行为相关颜色 */
+/* 文字基本颜色 */
+/* 背景颜色 */
+/* 边框颜色 */
+/* 尺寸变量 */
+/* 文字尺寸 */
+/* 图片尺寸 */
+/* Border Radius */
+/* 水平间距 */
+/* 垂直间距 */
+/* 透明度 */
+/* 文章场景相关 */
+.container.data-v-00e334ab {
+  min-height: 100vh;
+  background-color: #f5f5f5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.login-header.data-v-00e334ab {
+  width: 100%;
+  height: 320rpx;
+  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+  position: relative;
+  overflow: hidden;
+}
+.login-header .wave-animation.data-v-00e334ab {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 80rpx;
+  background: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNDQwIDMyMCI+PHBhdGggZmlsbD0iI2Y1ZjVmNSIgZmlsbC1vcGFjaXR5PSIxIiBkPSJNMCwxNjBMNDAsMTQ0QzgwLDEyOCwxNjAsOTYsMjQwLDEwNkMzMjAsMTE3LDQwMCwxNzEsNDgwLDE5MkM1NjAsMjEzLDY0MCwyMDMsNzIwLDE5MkM4MDAsMTgxLDg4MCwxNzEsOTYwLDE3NkMxMDQwLDE4MSwxMTIwLDIwMywxMjAwLDIwM0MxMjgwLDIwMywxMzYwLDE4MSwxNDAwLDE3MUwxNDQwLDE2MEwxNDQwLDMyMEwxNDAwLDMyMEMxMzYwLDMyMCwxMjgwLDMyMCwxMjAwLDMyMEMxMTIwLDMyMCwxMDQwLDMyMCw5NjAsMzIwQzg4MCwzMjAsODAwLDMyMCw3MjAsMzIwQzY0MCwzMjAsNTYwLDMyMCw0ODAsMzIwQzQwMCwzMjAsMzIwLDMyMCwyNDAsMzIwQzE2MCwzMjAsODAsMzIwLDQwLDMyMEwwLDMyMFoiPjwvcGF0aD48L3N2Zz4=") repeat-x;
+  background-size: 1440px 80rpx;
+  -webkit-animation: wave-data-v-00e334ab 10s linear infinite;
+          animation: wave-data-v-00e334ab 10s linear infinite;
+}
+@-webkit-keyframes wave-data-v-00e334ab {
+0% {
+    background-position-x: 0;
+}
+100% {
+    background-position-x: 1440px;
+}
+}
+@keyframes wave-data-v-00e334ab {
+0% {
+    background-position-x: 0;
+}
+100% {
+    background-position-x: 1440px;
+}
+}
+.login-title.data-v-00e334ab {
+  margin-top: 60rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.login-title .title-icon.data-v-00e334ab {
+  background: linear-gradient(135deg, #e6f7ff 0%, #d0e8ff 100%);
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8rpx 16rpx rgba(60, 156, 255, 0.2);
+  margin-bottom: 24rpx;
+}
+.login-title .title-content.data-v-00e334ab {
+  text-align: center;
+}
+.login-title .main-title.data-v-00e334ab {
+  font-size: 52rpx;
+  font-weight: bold;
+  background: linear-gradient(135deg, #3c9cff 0%, #1d4ed8 100%);
+  -webkit-background-clip: text;
+  color: transparent;
+  display: block;
+  margin-bottom: 16rpx;
+  text-shadow: 0 2rpx 4rpx rgba(0, 0, 0, 0.1);
+  letter-spacing: 2rpx;
+}
+.login-title .sub-title.data-v-00e334ab {
+  font-size: 30rpx;
+  color: #666666;
+  display: block;
+  letter-spacing: 1rpx;
+}
+.login-form.data-v-00e334ab {
+  width: 90%;
+  margin-top: 60rpx;
+}
+.form-item.data-v-00e334ab {
+  margin-bottom: 24rpx;
+}
+.input-container.data-v-00e334ab {
+  display: flex;
+  align-items: center;
+  background-color: #ffffff;
+  border-radius: 14rpx;
+  padding: 16rpx 24rpx;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.05);
+}
+.code-btn.data-v-00e334ab {
+  min-width: 160rpx;
+  text-align: center;
+  padding: 8rpx 16rpx;
+  border-left: 1px solid #eeeeee;
+  margin-left: 16rpx;
+}
+.code-btn text.data-v-00e334ab {
+  font-size: 24rpx;
+  color: #3c9cff;
+}
+.code-btn text.disabled.data-v-00e334ab {
+  color: #999999;
+}
+.agreement-section.data-v-00e334ab {
+  display: flex;
+  align-items: center;
+  margin-top: 20rpx;
+  padding: 0 10rpx;
+}
+.agreement-text.data-v-00e334ab {
+  font-size: 24rpx;
+  color: #666666;
+  margin-left: 10rpx;
+}
+.agreement-text .link.data-v-00e334ab {
+  color: #3c9cff;
+}
+.btn-content.data-v-00e334ab {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 10rpx;
+  height: 90rpx;
+}
+.btn-content text.data-v-00e334ab {
+  font-size: 32rpx;
+  font-weight: 500;
+  color: #ffffff;
+}
+.wechat-login-section.data-v-00e334ab {
+  margin-top: 80rpx;
+  width: 100%;
+}
+.divider.data-v-00e334ab {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 40rpx;
+}
+.divider .line.data-v-00e334ab {
+  flex: 1;
+  height: 1px;
+  background-color: #eeeeee;
+}
+.divider .divider-text.data-v-00e334ab {
+  padding: 0 30rpx;
+  font-size: 24rpx;
+  color: #999999;
+}
+.wechat-btn.data-v-00e334ab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 30rpx;
+}
+.wechat-btn text.data-v-00e334ab {
+  font-size: 26rpx;
+  color: #666666;
+  margin-top: 10rpx;
+  margin-top: 10rpx;
+}
+.wechat-phone-btn.data-v-00e334ab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.wechat-phone-btn text.data-v-00e334ab {
+  font-size: 26rpx;
+  color: #666666;
+  margin-top: 10rpx;
+  margin-top: 16rpx;
+}

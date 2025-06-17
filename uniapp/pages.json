@@ -1,0 +1,161 @@
+{
+	"pages": [ 
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "首页"
+			}
+		},
+		{
+			"path": "pages/shop/family",
+			"style": {
+				"navigationBarTitleText": "家用净水机"
+			}
+		},
+		{
+			"path": "pages/shop/addinfo",
+			"style": {
+				"navigationBarTitleText": "填写信息"
+			}
+		},
+		{
+			"path": "pages/shop/index",
+			"style": {
+				"navigationBarTitleText": "商用净水机"
+			}
+		},
+		{
+			"path": "pages/shop/shop-redesign",
+			"style": {
+				"navigationBarTitleText": "商用净水机"
+			}
+		},
+		{
+			"path": "pages/notice/index",
+			"style": {
+				"navigationBarTitleText": "通知公告"
+			}
+		},
+		{
+			"path": "pages/notice/index-redesign",
+			"style": {
+				"navigationBarTitleText": "通知公告"
+			}
+		},
+		{
+			"path": "pages/notice/info",
+			"style": {
+				"navigationBarTitleText": "详情"
+			}
+		},
+		{
+			"path": "pages/me/index",
+			"style": {
+				"navigationBarTitleText": "个人中心"
+			}
+		},
+		{
+			"path": "pages/me/me",
+			"style": {
+				"navigationBarTitleText": "个人中心"
+			}
+		},
+		{
+			"path": "pages/me/promotion",
+			"style": {
+				"navigationBarTitleText": "我的推广码"
+			}
+		},
+		{
+			"path": "pages/me/login",
+			"style": {
+				"navigationBarTitleText": "登录"
+			}
+		},
+		// {
+		// 	"path": "pages/me/wxlogin",
+		// 	"style": {
+		// 		"navigationBarTitleText": "微信登录"
+		// 	}
+		// },
+		{
+			"path": "pages/devices/index",
+			"style": {
+				"navigationBarTitleText": "我的设备"
+			}
+		},
+		{
+			"path": "pages/records/index",
+			"style": {
+				"navigationBarTitleText": "使用记录"
+			}
+		},
+		{
+			"path": "pages/records/records-redesign",
+			"style": {
+				"navigationBarTitleText": "使用记录"
+			}
+		},
+		{
+			"path": "pages/recharge/index",
+			"style": {
+				"navigationBarTitleText": "我的钱包"
+			}
+		},
+		{
+			"path": "pages/recharge/recharge-redesign",
+			"style": {
+				"navigationBarTitleText": "我的钱包"
+			}
+		},
+		{
+			"path": "pages/order/index",
+			"style": {
+				"navigationBarTitleText": "我的订单"
+			}
+		},
+		{
+			"path": "pages/coupons/index",
+			"style": {
+				"navigationBarTitleText": "优惠券"
+			}
+		},
+		{
+			"path": "pages/help/index",
+			"style": {
+				"navigationBarTitleText": "帮助中心"
+			}
+		},
+		{
+			"path": "pages/set/index",
+			"style": {
+				"navigationBarTitleText": "设置"
+			}
+		},
+		{
+			"path": "pages/set/about",
+			"style": {
+				"navigationBarTitleText": "关于我们"
+			}
+		},
+		{
+			"path": "pages/set/change-password",
+			"style": {
+				"navigationBarTitleText": "修改密码"
+			}
+		}
+	],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8"
+	},
+	"uniIdRouter": {},
+	"easycom": {
+		"autoscan": true,
+		"custom": {
+			"^u-(.*)": "@/uni_modules/uview-ui/components/u-$1/u-$1.vue"
+		}
+	}
+}

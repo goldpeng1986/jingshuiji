@@ -1,0 +1,11 @@
+{
+  "navigationBarTitleText": "家用净水机",
+  "usingComponents": {
+    "u-swiper": "/uni_modules/uview-ui/components/u-swiper/u-swiper",
+    "u-tag": "/uni_modules/uview-ui/components/u-tag/u-tag",
+    "u-icon": "/uni_modules/uview-ui/components/u-icon/u-icon",
+    "u-number-box": "/uni_modules/uview-ui/components/u-number-box/u-number-box",
+    "u-line": "/uni_modules/uview-ui/components/u-line/u-line",
+    "u-button": "/uni_modules/uview-ui/components/u-button/u-button"
+  }
+}

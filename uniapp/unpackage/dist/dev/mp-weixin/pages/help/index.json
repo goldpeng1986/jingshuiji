@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "帮助中心",
+  "usingComponents": {
+    "u-search": "/uni_modules/uview-ui/components/u-search/u-search",
+    "u-icon": "/uni_modules/uview-ui/components/u-icon/u-icon",
+    "u-button": "/uni_modules/uview-ui/components/u-button/u-button"
+  }
+}

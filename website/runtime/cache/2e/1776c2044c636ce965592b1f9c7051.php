@@ -1,0 +1,4 @@
+<?php
+//000000000000
+ exit();?>
+C:29:"Yansongda\Supports\Collection":590:{a:16:{s:5:"appid";s:18:"wxc89eceb102bebc8d";s:9:"bank_type";s:6:"OTHERS";s:8:"cash_fee";s:1:"1";s:8:"fee_type";s:3:"CNY";s:12:"is_subscribe";s:1:"N";s:6:"mch_id";s:10:"1671267162";s:9:"nonce_str";s:16:"igBs9AOf7opuuXWj";s:6:"openid";s:28:"o5ROq67eXA_UhhFKWtMB8X7zVjdg";s:12:"out_trade_no";s:26:"20240321092312000000019640";s:11:"result_code";s:7:"SUCCESS";s:11:"return_code";s:7:"SUCCESS";s:4:"sign";s:32:"FC55B52B4EBAE52C6207E54612484C7D";s:8:"time_end";s:14:"20240321092415";s:9:"total_fee";s:1:"1";s:10:"trade_type";s:5:"JSAPI";s:14:"transaction_id";s:28:"4200002149202403211532994374";}}

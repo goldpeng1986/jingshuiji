@@ -1,0 +1,89 @@
+---------------------------------------------------------------
+[ 2024-03-24T20:04:34+08:00 ] 198.235.24.161 GET cuijingshui.zwzdoac.cn/
+[运行时间：0.061719s] [吞吐率：16.20req/s] [内存消耗：3,075.81kb] [文件加载：79]
+[ info ] [ BEHAVIOR ] Run Closure @app_init [ RunTime:0.000032s ]
+[ info ] [ CACHE ] INIT File
+[ info ] [ BEHAVIOR ] Run \addons\shop\Shop @app_init [ RunTime:0.003964s ]
+[ info ] [ BEHAVIOR ] Run Closure @app_init [ RunTime:0.004015s ]
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @app_init [ RunTime:0.000609s ]
+[ info ] [ LANG ] /www/wwwroot/cuijingshui.zwzdoac.cn/thinkphp/lang/zh-cn.php
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @app_dispatch [ RunTime:0.000030s ]
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => '',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'referer' => 'http://1.15.173.107:80/',
+  'host' => 'cuijingshui.zwzdoac.cn',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ LANG ] /www/wwwroot/cuijingshui.zwzdoac.cn/public/../application/index/lang/zh-cn.php
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @module_init [ RunTime:0.002937s ]
+[ info ] [ BEHAVIOR ] Run \addons\third\Third @module_init [ RunTime:0.002149s ]
+[ info ] [ BEHAVIOR ] Run \addons\third\Third @config_init [ RunTime:0.000085s ]
+[ info ] [ LANG ] /www/wwwroot/cuijingshui.zwzdoac.cn/public/../application/index/lang/zh-cn/index.php
+[ info ] [ BEHAVIOR ] Run \addons\epay\Epay @action_begin [ RunTime:0.003815s ]
+[ info ] [ BEHAVIOR ] Run \addons\third\Third @action_begin [ RunTime:0.000065s ]
+[ info ] [ RUN ] app\index\controller\Index->index[ /www/wwwroot/cuijingshui.zwzdoac.cn/application/index/controller/Index.php ]
+[ info ] [ VIEW ] /www/wwwroot/cuijingshui.zwzdoac.cn/public/../application/index/view/index/index.html [ array (
+  0 => 'user',
+  1 => 'site',
+  2 => 'config',
+) ]
+[ info ] [ BEHAVIOR ] Run \addons\shop\Shop @view_filter [ RunTime:0.000051s ]
+[ info ] [ BEHAVIOR ] Run \addons\third\Third @view_filter [ RunTime:0.000038s ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2024-03-24T23:00:38+08:00 ] 180.163.29.234 GET cuijingshui.zwzdoac.cn/
+[运行时间：0.063124s] [吞吐率：15.84req/s] [内存消耗：3,077.80kb] [文件加载：79]
+[ info ] [ BEHAVIOR ] Run Closure @app_init [ RunTime:0.000033s ]
+[ info ] [ CACHE ] INIT File
+[ info ] [ BEHAVIOR ] Run \addons\shop\Shop @app_init [ RunTime:0.003717s ]
+[ info ] [ BEHAVIOR ] Run Closure @app_init [ RunTime:0.003764s ]
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @app_init [ RunTime:0.000607s ]
+[ info ] [ LANG ] /www/wwwroot/cuijingshui.zwzdoac.cn/thinkphp/lang/zh-cn.php
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @app_dispatch [ RunTime:0.000029s ]
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => '',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.8,en-US;q=0.6,en;q=0.4',
+  'referer' => 'http://cuijingshui.zwzdoac.cn/',
+  'accept' => '*/*',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.104 Safari/537.36 Core/1.53.2141.400 QQBrowser/9.5.10219.400',
+  'host' => 'cuijingshui.zwzdoac.cn',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ LANG ] /www/wwwroot/cuijingshui.zwzdoac.cn/public/../application/index/lang/zh-cn.php
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @module_init [ RunTime:0.002783s ]
+[ info ] [ BEHAVIOR ] Run \addons\third\Third @module_init [ RunTime:0.001012s ]
+[ info ] [ BEHAVIOR ] Run \addons\third\Third @config_init [ RunTime:0.000109s ]
+[ info ] [ LANG ] /www/wwwroot/cuijingshui.zwzdoac.cn/public/../application/index/lang/zh-cn/index.php
+[ info ] [ BEHAVIOR ] Run \addons\epay\Epay @action_begin [ RunTime:0.002796s ]
+[ info ] [ BEHAVIOR ] Run \addons\third\Third @action_begin [ RunTime:0.000063s ]
+[ info ] [ RUN ] app\index\controller\Index->index[ /www/wwwroot/cuijingshui.zwzdoac.cn/application/index/controller/Index.php ]
+[ info ] [ VIEW ] /www/wwwroot/cuijingshui.zwzdoac.cn/public/../application/index/view/index/index.html [ array (
+  0 => 'user',
+  1 => 'site',
+  2 => 'config',
+) ]
+[ info ] [ BEHAVIOR ] Run \addons\shop\Shop @view_filter [ RunTime:0.000046s ]
+[ info ] [ BEHAVIOR ] Run \addons\third\Third @view_filter [ RunTime:0.000039s ]
+[ info ] [ LOG ] INIT File

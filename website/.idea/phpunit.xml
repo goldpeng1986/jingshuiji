@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PHPUnit">
+    <option name="directories">
+      <list>
+        <option value="$PROJECT_DIR$/addons/shop/library/hashids/tests" />
+        <option value="$PROJECT_DIR$/addons/epay/library/hyperf/pimple/tests" />
+        <option value="$PROJECT_DIR$/addons/epay/library/hyperf/engine/tests" />
+        <option value="$PROJECT_DIR$/thinkphp/tests/thinkphp" />
+      </list>
+    </option>
+  </component>
+</project>

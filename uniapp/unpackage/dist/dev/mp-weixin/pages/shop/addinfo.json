@@ -1,0 +1,11 @@
+{
+  "navigationBarTitleText": "填写信息",
+  "usingComponents": {
+    "u-icon": "/uni_modules/uview-ui/components/u-icon/u-icon",
+    "u-input": "/uni_modules/uview-ui/components/u-input/u-input",
+    "u-line": "/uni_modules/uview-ui/components/u-line/u-line",
+    "u-button": "/uni_modules/uview-ui/components/u-button/u-button",
+    "u-picker": "/uni_modules/uview-ui/components/u-picker/u-picker",
+    "u-calendar": "/uni_modules/uview-ui/components/u-calendar/u-calendar"
+  }
+}

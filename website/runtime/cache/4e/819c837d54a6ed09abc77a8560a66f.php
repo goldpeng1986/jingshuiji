@@ -1,0 +1,4 @@
+<?php
+//000000000000
+ exit();?>
+a:14:{s:8:"sms_send";a:1:{i:0;s:21:"\addons\alisms\Alisms";}s:10:"sms_notice";a:1:{i:0;s:21:"\addons\alisms\Alisms";}s:9:"sms_check";a:1:{i:0;s:21:"\addons\alisms\Alisms";}s:16:"epay_config_init";a:1:{i:0;s:17:"\addons\epay\Epay";}s:18:"addon_action_begin";a:1:{i:0;s:17:"\addons\epay\Epay";}s:12:"action_begin";a:2:{i:0;s:17:"\addons\epay\Epay";i:1;s:19:"\addons\third\Third";}s:7:"upgrade";a:1:{i:0;s:17:"\addons\shop\Shop";}s:8:"app_init";a:1:{i:0;s:17:"\addons\shop\Shop";}s:11:"view_filter";a:2:{i:0;s:17:"\addons\shop\Shop";i:1;s:19:"\addons\third\Third";}s:18:"user_sidenav_after";a:2:{i:0;s:17:"\addons\shop\Shop";i:1;s:21:"\addons\signin\Signin";}s:11:"config_init";a:1:{i:1;s:19:"\addons\third\Third";}s:21:"user_delete_successed";a:1:{i:0;s:19:"\addons\third\Third";}s:21:"user_logout_successed";a:1:{i:0;s:19:"\addons\third\Third";}s:11:"module_init";a:1:{i:0;s:19:"\addons\third\Third";}}

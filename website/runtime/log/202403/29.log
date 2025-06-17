@@ -1,0 +1,1113 @@
+---------------------------------------------------------------
+[ 2024-03-29T17:16:10+08:00 ] 106.55.202.118 GET jingshui.sddianfeng.cn/addons/shop/api.page/lists?page=1&type=help%27%29%20OR%20%28SELECT%2AFROM%28SELECT%28SLEEP%284%29%29%29fymz%29%20limit%201%23
+[运行时间：0.034376s] [吞吐率：29.09req/s] [内存消耗：4,053.07kb] [文件加载：91]
+[ info ] [ BEHAVIOR ] Run Closure @app_init [ RunTime:0.000014s ]
+[ info ] [ CACHE ] INIT File
+[ info ] [ BEHAVIOR ] Run \addons\shop\Shop @app_init [ RunTime:0.002275s ]
+[ info ] [ BEHAVIOR ] Run Closure @app_init [ RunTime:0.002296s ]
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @app_init [ RunTime:0.000457s ]
+[ info ] [ LANG ] /www/wwwroot/jingshui.sddianfeng.cn/thinkphp/lang/zh-cn.php
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @app_dispatch [ RunTime:0.000015s ]
+[ info ] [ ROUTE ] array (
+  'type' => 'method',
+  'method' => 
+  array (
+    0 => '\\think\\addons\\Route',
+    1 => 'execute',
+  ),
+  'var' => 
+  array (
+  ),
+)
+[ info ] [ HEADER ] array (
+  'referer' => 'https://jingshui.sddianfeng.cn/',
+  'platform' => 'windows',
+  'user-agent' => 'Tencent Security Team, more information: https://developers.weixin.qq.com/community/minihome/doc/0008ea401c89c02cff2d1345051001 (6606762ef41e22b4cffbcd86289d) 5c68',
+  'uid' => '0',
+  'x-requested-with' => 'xmlhttprequest',
+  'tencent-leakscan' => 'TST(Tencent Security Team)',
+  'model' => 'microsoft',
+  'sid' => 'uRyRFflcNDhqkMiroNF91JwKSCv1X7Rz',
+  'brand' => 'microsoft',
+  'token' => '',
+  'content-type' => 'application/json',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+  'content-length' => '0',
+  'cookie' => '',
+  'host' => 'jingshui.sddianfeng.cn',
+)
+[ info ] [ PARAM ] array (
+  'page' => '1',
+  'type' => 'help\') OR (SELECT*FROM(SELECT(SLEEP(4)))fymz) limit 1#',
+  'addon' => 'shop',
+  'controller' => 'api.page',
+  'action' => 'lists',
+)
+[ info ] [ RUN ] think\addons\Route->execute[ /www/wwwroot/jingshui.sddianfeng.cn/vendor/karsonzhang/fastadmin-addons/src/addons/Route.php ]
+[ info ] [ LANG ] /www/wwwroot/jingshui.sddianfeng.cn/public/../application/common/lang/zh-cn/addon.php
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @addon_begin [ RunTime:0.001121s ]
+[ info ] [ LANG ] /www/wwwroot/jingshui.sddianfeng.cn//addons/shop/lang/zh-cn.php
+[ info ] [ LANG ] /www/wwwroot/jingshui.sddianfeng.cn/public/../application//index/lang/zh-cn/user.php
+[ info ] [ BEHAVIOR ] Run \addons\epay\Epay @addon_action_begin [ RunTime:0.001117s ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2024-03-29T17:16:10+08:00 ] 106.55.202.118 GET jingshui.sddianfeng.cn/addons/shop/api.page/lists?page=1&type=help%22%20union%20select%201--%20
+[运行时间：0.034476s] [吞吐率：29.01req/s] [内存消耗：4,052.86kb] [文件加载：91]
+[ info ] [ BEHAVIOR ] Run Closure @app_init [ RunTime:0.000013s ]
+[ info ] [ CACHE ] INIT File
+[ info ] [ BEHAVIOR ] Run \addons\shop\Shop @app_init [ RunTime:0.002251s ]
+[ info ] [ BEHAVIOR ] Run Closure @app_init [ RunTime:0.002272s ]
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @app_init [ RunTime:0.000471s ]
+[ info ] [ LANG ] /www/wwwroot/jingshui.sddianfeng.cn/thinkphp/lang/zh-cn.php
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @app_dispatch [ RunTime:0.000015s ]
+[ info ] [ ROUTE ] array (
+  'type' => 'method',
+  'method' => 
+  array (
+    0 => '\\think\\addons\\Route',
+    1 => 'execute',
+  ),
+  'var' => 
+  array (
+  ),
+)
+[ info ] [ HEADER ] array (
+  'referer' => 'https://jingshui.sddianfeng.cn/',
+  'platform' => 'windows',
+  'user-agent' => 'Tencent Security Team, more information: https://developers.weixin.qq.com/community/minihome/doc/0008ea401c89c02cff2d1345051001 (6606762ef41e22b4cffbcd86289d) 5c68',
+  'uid' => '0',
+  'x-requested-with' => 'xmlhttprequest',
+  'tencent-leakscan' => 'TST(Tencent Security Team)',
+  'model' => 'microsoft',
+  'sid' => 'uRyRFflcNDhqkMiroNF91JwKSCv1X7Rz',
+  'brand' => 'microsoft',
+  'token' => '',
+  'content-type' => 'application/json',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+  'content-length' => '0',
+  'cookie' => '',
+  'host' => 'jingshui.sddianfeng.cn',
+)
+[ info ] [ PARAM ] array (
+  'page' => '1',
+  'type' => 'help" union select 1-- ',
+  'addon' => 'shop',
+  'controller' => 'api.page',
+  'action' => 'lists',
+)
+[ info ] [ RUN ] think\addons\Route->execute[ /www/wwwroot/jingshui.sddianfeng.cn/vendor/karsonzhang/fastadmin-addons/src/addons/Route.php ]
+[ info ] [ LANG ] /www/wwwroot/jingshui.sddianfeng.cn/public/../application/common/lang/zh-cn/addon.php
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @addon_begin [ RunTime:0.001143s ]
+[ info ] [ LANG ] /www/wwwroot/jingshui.sddianfeng.cn//addons/shop/lang/zh-cn.php
+[ info ] [ LANG ] /www/wwwroot/jingshui.sddianfeng.cn/public/../application//index/lang/zh-cn/user.php
+[ info ] [ BEHAVIOR ] Run \addons\epay\Epay @addon_action_begin [ RunTime:0.001102s ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2024-03-29T17:16:10+08:00 ] 106.55.202.118 GET jingshui.sddianfeng.cn/addons/shop/api.page/lists?page=1&type=help%22%20union%20select%201%2C2--%20
+[运行时间：0.034824s] [吞吐率：28.72req/s] [内存消耗：4,052.86kb] [文件加载：91]
+[ info ] [ BEHAVIOR ] Run Closure @app_init [ RunTime:0.000014s ]
+[ info ] [ CACHE ] INIT File
+[ info ] [ BEHAVIOR ] Run \addons\shop\Shop @app_init [ RunTime:0.002265s ]
+[ info ] [ BEHAVIOR ] Run Closure @app_init [ RunTime:0.002287s ]
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @app_init [ RunTime:0.000472s ]
+[ info ] [ LANG ] /www/wwwroot/jingshui.sddianfeng.cn/thinkphp/lang/zh-cn.php
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @app_dispatch [ RunTime:0.000015s ]
+[ info ] [ ROUTE ] array (
+  'type' => 'method',
+  'method' => 
+  array (
+    0 => '\\think\\addons\\Route',
+    1 => 'execute',
+  ),
+  'var' => 
+  array (
+  ),
+)
+[ info ] [ HEADER ] array (
+  'referer' => 'https://jingshui.sddianfeng.cn/',
+  'platform' => 'windows',
+  'user-agent' => 'Tencent Security Team, more information: https://developers.weixin.qq.com/community/minihome/doc/0008ea401c89c02cff2d1345051001 (6606762ef41e22b4cffbcd86289d) 5c68',
+  'uid' => '0',
+  'x-requested-with' => 'xmlhttprequest',
+  'tencent-leakscan' => 'TST(Tencent Security Team)',
+  'model' => 'microsoft',
+  'sid' => 'uRyRFflcNDhqkMiroNF91JwKSCv1X7Rz',
+  'brand' => 'microsoft',
+  'token' => '',
+  'content-type' => 'application/json',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+  'content-length' => '0',
+  'cookie' => '',
+  'host' => 'jingshui.sddianfeng.cn',
+)
+[ info ] [ PARAM ] array (
+  'page' => '1',
+  'type' => 'help" union select 1,2-- ',
+  'addon' => 'shop',
+  'controller' => 'api.page',
+  'action' => 'lists',
+)
+[ info ] [ RUN ] think\addons\Route->execute[ /www/wwwroot/jingshui.sddianfeng.cn/vendor/karsonzhang/fastadmin-addons/src/addons/Route.php ]
+[ info ] [ LANG ] /www/wwwroot/jingshui.sddianfeng.cn/public/../application/common/lang/zh-cn/addon.php
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @addon_begin [ RunTime:0.001132s ]
+[ info ] [ LANG ] /www/wwwroot/jingshui.sddianfeng.cn//addons/shop/lang/zh-cn.php
+[ info ] [ LANG ] /www/wwwroot/jingshui.sddianfeng.cn/public/../application//index/lang/zh-cn/user.php
+[ info ] [ BEHAVIOR ] Run \addons\epay\Epay @addon_action_begin [ RunTime:0.001127s ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2024-03-29T17:16:10+08:00 ] 106.55.202.118 GET jingshui.sddianfeng.cn/addons/shop/api.page/lists?page=1&type=help%22%20union%20select%201%2C2%2C3--%20
+[运行时间：0.034285s] [吞吐率：29.17req/s] [内存消耗：4,052.86kb] [文件加载：91]
+[ info ] [ BEHAVIOR ] Run Closure @app_init [ RunTime:0.000014s ]
+[ info ] [ CACHE ] INIT File
+[ info ] [ BEHAVIOR ] Run \addons\shop\Shop @app_init [ RunTime:0.002262s ]
+[ info ] [ BEHAVIOR ] Run Closure @app_init [ RunTime:0.002283s ]
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @app_init [ RunTime:0.000459s ]
+[ info ] [ LANG ] /www/wwwroot/jingshui.sddianfeng.cn/thinkphp/lang/zh-cn.php
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @app_dispatch [ RunTime:0.000014s ]
+[ info ] [ ROUTE ] array (
+  'type' => 'method',
+  'method' => 
+  array (
+    0 => '\\think\\addons\\Route',
+    1 => 'execute',
+  ),
+  'var' => 
+  array (
+  ),
+)
+[ info ] [ HEADER ] array (
+  'referer' => 'https://jingshui.sddianfeng.cn/',
+  'platform' => 'windows',
+  'user-agent' => 'Tencent Security Team, more information: https://developers.weixin.qq.com/community/minihome/doc/0008ea401c89c02cff2d1345051001 (6606762ef41e22b4cffbcd86289d) 5c68',
+  'uid' => '0',
+  'x-requested-with' => 'xmlhttprequest',
+  'tencent-leakscan' => 'TST(Tencent Security Team)',
+  'model' => 'microsoft',
+  'sid' => 'uRyRFflcNDhqkMiroNF91JwKSCv1X7Rz',
+  'brand' => 'microsoft',
+  'token' => '',
+  'content-type' => 'application/json',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+  'content-length' => '0',
+  'cookie' => '',
+  'host' => 'jingshui.sddianfeng.cn',
+)
+[ info ] [ PARAM ] array (
+  'page' => '1',
+  'type' => 'help" union select 1,2,3-- ',
+  'addon' => 'shop',
+  'controller' => 'api.page',
+  'action' => 'lists',
+)
+[ info ] [ RUN ] think\addons\Route->execute[ /www/wwwroot/jingshui.sddianfeng.cn/vendor/karsonzhang/fastadmin-addons/src/addons/Route.php ]
+[ info ] [ LANG ] /www/wwwroot/jingshui.sddianfeng.cn/public/../application/common/lang/zh-cn/addon.php
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @addon_begin [ RunTime:0.001133s ]
+[ info ] [ LANG ] /www/wwwroot/jingshui.sddianfeng.cn//addons/shop/lang/zh-cn.php
+[ info ] [ LANG ] /www/wwwroot/jingshui.sddianfeng.cn/public/../application//index/lang/zh-cn/user.php
+[ info ] [ BEHAVIOR ] Run \addons\epay\Epay @addon_action_begin [ RunTime:0.001110s ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2024-03-29T17:16:10+08:00 ] 106.55.202.118 GET jingshui.sddianfeng.cn/addons/shop/api.page/lists?page=1&type=help%22%20union%20select%201%2C2%2C3%2C4--%20
+[运行时间：0.034310s] [吞吐率：29.15req/s] [内存消耗：4,052.87kb] [文件加载：91]
+[ info ] [ BEHAVIOR ] Run Closure @app_init [ RunTime:0.000012s ]
+[ info ] [ CACHE ] INIT File
+[ info ] [ BEHAVIOR ] Run \addons\shop\Shop @app_init [ RunTime:0.002229s ]
+[ info ] [ BEHAVIOR ] Run Closure @app_init [ RunTime:0.002249s ]
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @app_init [ RunTime:0.000470s ]
+[ info ] [ LANG ] /www/wwwroot/jingshui.sddianfeng.cn/thinkphp/lang/zh-cn.php
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @app_dispatch [ RunTime:0.000016s ]
+[ info ] [ ROUTE ] array (
+  'type' => 'method',
+  'method' => 
+  array (
+    0 => '\\think\\addons\\Route',
+    1 => 'execute',
+  ),
+  'var' => 
+  array (
+  ),
+)
+[ info ] [ HEADER ] array (
+  'referer' => 'https://jingshui.sddianfeng.cn/',
+  'platform' => 'windows',
+  'user-agent' => 'Tencent Security Team, more information: https://developers.weixin.qq.com/community/minihome/doc/0008ea401c89c02cff2d1345051001 (6606762ef41e22b4cffbcd86289d) 5c68',
+  'uid' => '0',
+  'x-requested-with' => 'xmlhttprequest',
+  'tencent-leakscan' => 'TST(Tencent Security Team)',
+  'model' => 'microsoft',
+  'sid' => 'uRyRFflcNDhqkMiroNF91JwKSCv1X7Rz',
+  'brand' => 'microsoft',
+  'token' => '',
+  'content-type' => 'application/json',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+  'content-length' => '0',
+  'cookie' => '',
+  'host' => 'jingshui.sddianfeng.cn',
+)
+[ info ] [ PARAM ] array (
+  'page' => '1',
+  'type' => 'help" union select 1,2,3,4-- ',
+  'addon' => 'shop',
+  'controller' => 'api.page',
+  'action' => 'lists',
+)
+[ info ] [ RUN ] think\addons\Route->execute[ /www/wwwroot/jingshui.sddianfeng.cn/vendor/karsonzhang/fastadmin-addons/src/addons/Route.php ]
+[ info ] [ LANG ] /www/wwwroot/jingshui.sddianfeng.cn/public/../application/common/lang/zh-cn/addon.php
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @addon_begin [ RunTime:0.001129s ]
+[ info ] [ LANG ] /www/wwwroot/jingshui.sddianfeng.cn//addons/shop/lang/zh-cn.php
+[ info ] [ LANG ] /www/wwwroot/jingshui.sddianfeng.cn/public/../application//index/lang/zh-cn/user.php
+[ info ] [ BEHAVIOR ] Run \addons\epay\Epay @addon_action_begin [ RunTime:0.001119s ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2024-03-29T17:16:11+08:00 ] 106.55.202.118 GET jingshui.sddianfeng.cn/addons/shop/api.page/lists?page=1&type=help%22%20union%20select%201%2C2%2C3%2C4%2C5--%20
+[运行时间：0.034146s] [吞吐率：29.29req/s] [内存消耗：4,052.93kb] [文件加载：91]
+[ info ] [ BEHAVIOR ] Run Closure @app_init [ RunTime:0.000013s ]
+[ info ] [ CACHE ] INIT File
+[ info ] [ BEHAVIOR ] Run \addons\shop\Shop @app_init [ RunTime:0.002247s ]
+[ info ] [ BEHAVIOR ] Run Closure @app_init [ RunTime:0.002267s ]
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @app_init [ RunTime:0.000475s ]
+[ info ] [ LANG ] /www/wwwroot/jingshui.sddianfeng.cn/thinkphp/lang/zh-cn.php
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @app_dispatch [ RunTime:0.000016s ]
+[ info ] [ ROUTE ] array (
+  'type' => 'method',
+  'method' => 
+  array (
+    0 => '\\think\\addons\\Route',
+    1 => 'execute',
+  ),
+  'var' => 
+  array (
+  ),
+)
+[ info ] [ HEADER ] array (
+  'referer' => 'https://jingshui.sddianfeng.cn/',
+  'platform' => 'windows',
+  'user-agent' => 'Tencent Security Team, more information: https://developers.weixin.qq.com/community/minihome/doc/0008ea401c89c02cff2d1345051001 (6606762ef41e22b4cffbcd86289d) 5c68',
+  'uid' => '0',
+  'x-requested-with' => 'xmlhttprequest',
+  'tencent-leakscan' => 'TST(Tencent Security Team)',
+  'model' => 'microsoft',
+  'sid' => 'uRyRFflcNDhqkMiroNF91JwKSCv1X7Rz',
+  'brand' => 'microsoft',
+  'token' => '',
+  'content-type' => 'application/json',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+  'content-length' => '0',
+  'cookie' => '',
+  'host' => 'jingshui.sddianfeng.cn',
+)
+[ info ] [ PARAM ] array (
+  'page' => '1',
+  'type' => 'help" union select 1,2,3,4,5-- ',
+  'addon' => 'shop',
+  'controller' => 'api.page',
+  'action' => 'lists',
+)
+[ info ] [ RUN ] think\addons\Route->execute[ /www/wwwroot/jingshui.sddianfeng.cn/vendor/karsonzhang/fastadmin-addons/src/addons/Route.php ]
+[ info ] [ LANG ] /www/wwwroot/jingshui.sddianfeng.cn/public/../application/common/lang/zh-cn/addon.php
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @addon_begin [ RunTime:0.001136s ]
+[ info ] [ LANG ] /www/wwwroot/jingshui.sddianfeng.cn//addons/shop/lang/zh-cn.php
+[ info ] [ LANG ] /www/wwwroot/jingshui.sddianfeng.cn/public/../application//index/lang/zh-cn/user.php
+[ info ] [ BEHAVIOR ] Run \addons\epay\Epay @addon_action_begin [ RunTime:0.001131s ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2024-03-29T17:16:11+08:00 ] 106.55.202.118 GET jingshui.sddianfeng.cn/addons/shop/api.page/lists?page=1&type=help%22%20union%20select%20md5%283141592657%29%2C2%2C3%2C4%2C5--%20
+[运行时间：0.034420s] [吞吐率：29.05req/s] [内存消耗：4,053.13kb] [文件加载：91]
+[ info ] [ BEHAVIOR ] Run Closure @app_init [ RunTime:0.000013s ]
+[ info ] [ CACHE ] INIT File
+[ info ] [ BEHAVIOR ] Run \addons\shop\Shop @app_init [ RunTime:0.002264s ]
+[ info ] [ BEHAVIOR ] Run Closure @app_init [ RunTime:0.002284s ]
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @app_init [ RunTime:0.000474s ]
+[ info ] [ LANG ] /www/wwwroot/jingshui.sddianfeng.cn/thinkphp/lang/zh-cn.php
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @app_dispatch [ RunTime:0.000015s ]
+[ info ] [ ROUTE ] array (
+  'type' => 'method',
+  'method' => 
+  array (
+    0 => '\\think\\addons\\Route',
+    1 => 'execute',
+  ),
+  'var' => 
+  array (
+  ),
+)
+[ info ] [ HEADER ] array (
+  'referer' => 'https://jingshui.sddianfeng.cn/',
+  'platform' => 'windows',
+  'user-agent' => 'Tencent Security Team, more information: https://developers.weixin.qq.com/community/minihome/doc/0008ea401c89c02cff2d1345051001 (6606762ef41e22b4cffbcd86289d) 5c68',
+  'uid' => '0',
+  'x-requested-with' => 'xmlhttprequest',
+  'tencent-leakscan' => 'TST(Tencent Security Team)',
+  'model' => 'microsoft',
+  'sid' => 'uRyRFflcNDhqkMiroNF91JwKSCv1X7Rz',
+  'brand' => 'microsoft',
+  'token' => '',
+  'content-type' => 'application/json',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+  'content-length' => '0',
+  'cookie' => '',
+  'host' => 'jingshui.sddianfeng.cn',
+)
+[ info ] [ PARAM ] array (
+  'page' => '1',
+  'type' => 'help" union select md5(3141592657),2,3,4,5-- ',
+  'addon' => 'shop',
+  'controller' => 'api.page',
+  'action' => 'lists',
+)
+[ info ] [ RUN ] think\addons\Route->execute[ /www/wwwroot/jingshui.sddianfeng.cn/vendor/karsonzhang/fastadmin-addons/src/addons/Route.php ]
+[ info ] [ LANG ] /www/wwwroot/jingshui.sddianfeng.cn/public/../application/common/lang/zh-cn/addon.php
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @addon_begin [ RunTime:0.001119s ]
+[ info ] [ LANG ] /www/wwwroot/jingshui.sddianfeng.cn//addons/shop/lang/zh-cn.php
+[ info ] [ LANG ] /www/wwwroot/jingshui.sddianfeng.cn/public/../application//index/lang/zh-cn/user.php
+[ info ] [ BEHAVIOR ] Run \addons\epay\Epay @addon_action_begin [ RunTime:0.001107s ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2024-03-29T17:16:11+08:00 ] 106.55.202.118 GET jingshui.sddianfeng.cn/addons/shop/api.page/lists?page=1&type=help%22%20union%20select%201%2Cmd5%283141592657%29%2C3%2C4%2C5--%20
+[运行时间：0.034267s] [吞吐率：29.18req/s] [内存消耗：4,053.13kb] [文件加载：91]
+[ info ] [ BEHAVIOR ] Run Closure @app_init [ RunTime:0.000013s ]
+[ info ] [ CACHE ] INIT File
+[ info ] [ BEHAVIOR ] Run \addons\shop\Shop @app_init [ RunTime:0.002259s ]
+[ info ] [ BEHAVIOR ] Run Closure @app_init [ RunTime:0.002280s ]
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @app_init [ RunTime:0.000443s ]
+[ info ] [ LANG ] /www/wwwroot/jingshui.sddianfeng.cn/thinkphp/lang/zh-cn.php
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @app_dispatch [ RunTime:0.000015s ]
+[ info ] [ ROUTE ] array (
+  'type' => 'method',
+  'method' => 
+  array (
+    0 => '\\think\\addons\\Route',
+    1 => 'execute',
+  ),
+  'var' => 
+  array (
+  ),
+)
+[ info ] [ HEADER ] array (
+  'referer' => 'https://jingshui.sddianfeng.cn/',
+  'platform' => 'windows',
+  'user-agent' => 'Tencent Security Team, more information: https://developers.weixin.qq.com/community/minihome/doc/0008ea401c89c02cff2d1345051001 (6606762ef41e22b4cffbcd86289d) 5c68',
+  'uid' => '0',
+  'x-requested-with' => 'xmlhttprequest',
+  'tencent-leakscan' => 'TST(Tencent Security Team)',
+  'model' => 'microsoft',
+  'sid' => 'uRyRFflcNDhqkMiroNF91JwKSCv1X7Rz',
+  'brand' => 'microsoft',
+  'token' => '',
+  'content-type' => 'application/json',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+  'content-length' => '0',
+  'cookie' => '',
+  'host' => 'jingshui.sddianfeng.cn',
+)
+[ info ] [ PARAM ] array (
+  'page' => '1',
+  'type' => 'help" union select 1,md5(3141592657),3,4,5-- ',
+  'addon' => 'shop',
+  'controller' => 'api.page',
+  'action' => 'lists',
+)
+[ info ] [ RUN ] think\addons\Route->execute[ /www/wwwroot/jingshui.sddianfeng.cn/vendor/karsonzhang/fastadmin-addons/src/addons/Route.php ]
+[ info ] [ LANG ] /www/wwwroot/jingshui.sddianfeng.cn/public/../application/common/lang/zh-cn/addon.php
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @addon_begin [ RunTime:0.001119s ]
+[ info ] [ LANG ] /www/wwwroot/jingshui.sddianfeng.cn//addons/shop/lang/zh-cn.php
+[ info ] [ LANG ] /www/wwwroot/jingshui.sddianfeng.cn/public/../application//index/lang/zh-cn/user.php
+[ info ] [ BEHAVIOR ] Run \addons\epay\Epay @addon_action_begin [ RunTime:0.001109s ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2024-03-29T17:16:11+08:00 ] 106.55.202.118 GET jingshui.sddianfeng.cn/addons/shop/api.page/lists?page=1&type=%27%29%29%20AND%20%28SELECT%2AFROM%28SELECT%28SLEEP%284%29%29%29uqjc%29%20limit%201%23
+[运行时间：0.034595s] [吞吐率：28.91req/s] [内存消耗：4,053.13kb] [文件加载：91]
+[ info ] [ BEHAVIOR ] Run Closure @app_init [ RunTime:0.000014s ]
+[ info ] [ CACHE ] INIT File
+[ info ] [ BEHAVIOR ] Run \addons\shop\Shop @app_init [ RunTime:0.002248s ]
+[ info ] [ BEHAVIOR ] Run Closure @app_init [ RunTime:0.002269s ]
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @app_init [ RunTime:0.000509s ]
+[ info ] [ LANG ] /www/wwwroot/jingshui.sddianfeng.cn/thinkphp/lang/zh-cn.php
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @app_dispatch [ RunTime:0.000015s ]
+[ info ] [ ROUTE ] array (
+  'type' => 'method',
+  'method' => 
+  array (
+    0 => '\\think\\addons\\Route',
+    1 => 'execute',
+  ),
+  'var' => 
+  array (
+  ),
+)
+[ info ] [ HEADER ] array (
+  'referer' => 'https://jingshui.sddianfeng.cn/',
+  'platform' => 'windows',
+  'user-agent' => 'Tencent Security Team, more information: https://developers.weixin.qq.com/community/minihome/doc/0008ea401c89c02cff2d1345051001 (6606762ef41e22b4cffbcd86289d) 5c68',
+  'uid' => '0',
+  'x-requested-with' => 'xmlhttprequest',
+  'tencent-leakscan' => 'TST(Tencent Security Team)',
+  'model' => 'microsoft',
+  'sid' => 'uRyRFflcNDhqkMiroNF91JwKSCv1X7Rz',
+  'brand' => 'microsoft',
+  'token' => '',
+  'content-type' => 'application/json',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+  'content-length' => '0',
+  'cookie' => '',
+  'host' => 'jingshui.sddianfeng.cn',
+)
+[ info ] [ PARAM ] array (
+  'page' => '1',
+  'type' => '\')) AND (SELECT*FROM(SELECT(SLEEP(4)))uqjc) limit 1#',
+  'addon' => 'shop',
+  'controller' => 'api.page',
+  'action' => 'lists',
+)
+[ info ] [ RUN ] think\addons\Route->execute[ /www/wwwroot/jingshui.sddianfeng.cn/vendor/karsonzhang/fastadmin-addons/src/addons/Route.php ]
+[ info ] [ LANG ] /www/wwwroot/jingshui.sddianfeng.cn/public/../application/common/lang/zh-cn/addon.php
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @addon_begin [ RunTime:0.001147s ]
+[ info ] [ LANG ] /www/wwwroot/jingshui.sddianfeng.cn//addons/shop/lang/zh-cn.php
+[ info ] [ LANG ] /www/wwwroot/jingshui.sddianfeng.cn/public/../application//index/lang/zh-cn/user.php
+[ info ] [ BEHAVIOR ] Run \addons\epay\Epay @addon_action_begin [ RunTime:0.001138s ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2024-03-29T17:16:11+08:00 ] 106.55.202.118 GET jingshui.sddianfeng.cn/addons/shop/api.page/lists?page=1&type=%27%29%29%20AND%20%28SELECT%2AFROM%28SELECT%28SLEEP%283%29%29%29kszu%29%20limit%201%23
+[运行时间：0.034395s] [吞吐率：29.07req/s] [内存消耗：4,053.13kb] [文件加载：91]
+[ info ] [ BEHAVIOR ] Run Closure @app_init [ RunTime:0.000014s ]
+[ info ] [ CACHE ] INIT File
+[ info ] [ BEHAVIOR ] Run \addons\shop\Shop @app_init [ RunTime:0.002302s ]
+[ info ] [ BEHAVIOR ] Run Closure @app_init [ RunTime:0.002323s ]
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @app_init [ RunTime:0.000448s ]
+[ info ] [ LANG ] /www/wwwroot/jingshui.sddianfeng.cn/thinkphp/lang/zh-cn.php
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @app_dispatch [ RunTime:0.000015s ]
+[ info ] [ ROUTE ] array (
+  'type' => 'method',
+  'method' => 
+  array (
+    0 => '\\think\\addons\\Route',
+    1 => 'execute',
+  ),
+  'var' => 
+  array (
+  ),
+)
+[ info ] [ HEADER ] array (
+  'referer' => 'https://jingshui.sddianfeng.cn/',
+  'platform' => 'windows',
+  'user-agent' => 'Tencent Security Team, more information: https://developers.weixin.qq.com/community/minihome/doc/0008ea401c89c02cff2d1345051001 (6606762ef41e22b4cffbcd86289d) 5c68',
+  'uid' => '0',
+  'x-requested-with' => 'xmlhttprequest',
+  'tencent-leakscan' => 'TST(Tencent Security Team)',
+  'model' => 'microsoft',
+  'sid' => 'uRyRFflcNDhqkMiroNF91JwKSCv1X7Rz',
+  'brand' => 'microsoft',
+  'token' => '',
+  'content-type' => 'application/json',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+  'content-length' => '0',
+  'cookie' => '',
+  'host' => 'jingshui.sddianfeng.cn',
+)
+[ info ] [ PARAM ] array (
+  'page' => '1',
+  'type' => '\')) AND (SELECT*FROM(SELECT(SLEEP(3)))kszu) limit 1#',
+  'addon' => 'shop',
+  'controller' => 'api.page',
+  'action' => 'lists',
+)
+[ info ] [ RUN ] think\addons\Route->execute[ /www/wwwroot/jingshui.sddianfeng.cn/vendor/karsonzhang/fastadmin-addons/src/addons/Route.php ]
+[ info ] [ LANG ] /www/wwwroot/jingshui.sddianfeng.cn/public/../application/common/lang/zh-cn/addon.php
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @addon_begin [ RunTime:0.001126s ]
+[ info ] [ LANG ] /www/wwwroot/jingshui.sddianfeng.cn//addons/shop/lang/zh-cn.php
+[ info ] [ LANG ] /www/wwwroot/jingshui.sddianfeng.cn/public/../application//index/lang/zh-cn/user.php
+[ info ] [ BEHAVIOR ] Run \addons\epay\Epay @addon_action_begin [ RunTime:0.001110s ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2024-03-29T17:16:12+08:00 ] 106.55.202.118 GET jingshui.sddianfeng.cn/addons/shop/api.page/lists?page=%27%20union%20select%20md5%283141592657%29%2C2%2C3%2C4%2C5%2C6--%20&type=help
+[运行时间：0.034456s] [吞吐率：29.02req/s] [内存消耗：4,053.09kb] [文件加载：91]
+[ info ] [ BEHAVIOR ] Run Closure @app_init [ RunTime:0.000014s ]
+[ info ] [ CACHE ] INIT File
+[ info ] [ BEHAVIOR ] Run \addons\shop\Shop @app_init [ RunTime:0.002286s ]
+[ info ] [ BEHAVIOR ] Run Closure @app_init [ RunTime:0.002308s ]
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @app_init [ RunTime:0.000461s ]
+[ info ] [ LANG ] /www/wwwroot/jingshui.sddianfeng.cn/thinkphp/lang/zh-cn.php
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @app_dispatch [ RunTime:0.000017s ]
+[ info ] [ ROUTE ] array (
+  'type' => 'method',
+  'method' => 
+  array (
+    0 => '\\think\\addons\\Route',
+    1 => 'execute',
+  ),
+  'var' => 
+  array (
+  ),
+)
+[ info ] [ HEADER ] array (
+  'referer' => 'https://jingshui.sddianfeng.cn/',
+  'platform' => 'windows',
+  'user-agent' => 'Tencent Security Team, more information: https://developers.weixin.qq.com/community/minihome/doc/0008ea401c89c02cff2d1345051001 (6606762ef41e22b4cffbcd86289d) 5c68',
+  'uid' => '0',
+  'x-requested-with' => 'xmlhttprequest',
+  'tencent-leakscan' => 'TST(Tencent Security Team)',
+  'model' => 'microsoft',
+  'sid' => 'uRyRFflcNDhqkMiroNF91JwKSCv1X7Rz',
+  'brand' => 'microsoft',
+  'token' => '',
+  'content-type' => 'application/json',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+  'content-length' => '0',
+  'cookie' => '',
+  'host' => 'jingshui.sddianfeng.cn',
+)
+[ info ] [ PARAM ] array (
+  'page' => '\' union select md5(3141592657),2,3,4,5,6-- ',
+  'type' => 'help',
+  'addon' => 'shop',
+  'controller' => 'api.page',
+  'action' => 'lists',
+)
+[ info ] [ RUN ] think\addons\Route->execute[ /www/wwwroot/jingshui.sddianfeng.cn/vendor/karsonzhang/fastadmin-addons/src/addons/Route.php ]
+[ info ] [ LANG ] /www/wwwroot/jingshui.sddianfeng.cn/public/../application/common/lang/zh-cn/addon.php
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @addon_begin [ RunTime:0.001122s ]
+[ info ] [ LANG ] /www/wwwroot/jingshui.sddianfeng.cn//addons/shop/lang/zh-cn.php
+[ info ] [ LANG ] /www/wwwroot/jingshui.sddianfeng.cn/public/../application//index/lang/zh-cn/user.php
+[ info ] [ BEHAVIOR ] Run \addons\epay\Epay @addon_action_begin [ RunTime:0.001107s ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2024-03-29T17:16:12+08:00 ] 106.55.202.118 GET jingshui.sddianfeng.cn/addons/shop/api.page/lists?page=%27%20union%20select%201%2Cmd5%283141592657%29%2C3%2C4%2C5%2C6--%20&type=help
+[运行时间：0.034324s] [吞吐率：29.13req/s] [内存消耗：4,053.09kb] [文件加载：91]
+[ info ] [ BEHAVIOR ] Run Closure @app_init [ RunTime:0.000013s ]
+[ info ] [ CACHE ] INIT File
+[ info ] [ BEHAVIOR ] Run \addons\shop\Shop @app_init [ RunTime:0.002254s ]
+[ info ] [ BEHAVIOR ] Run Closure @app_init [ RunTime:0.002274s ]
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @app_init [ RunTime:0.000477s ]
+[ info ] [ LANG ] /www/wwwroot/jingshui.sddianfeng.cn/thinkphp/lang/zh-cn.php
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @app_dispatch [ RunTime:0.000015s ]
+[ info ] [ ROUTE ] array (
+  'type' => 'method',
+  'method' => 
+  array (
+    0 => '\\think\\addons\\Route',
+    1 => 'execute',
+  ),
+  'var' => 
+  array (
+  ),
+)
+[ info ] [ HEADER ] array (
+  'referer' => 'https://jingshui.sddianfeng.cn/',
+  'platform' => 'windows',
+  'user-agent' => 'Tencent Security Team, more information: https://developers.weixin.qq.com/community/minihome/doc/0008ea401c89c02cff2d1345051001 (6606762ef41e22b4cffbcd86289d) 5c68',
+  'uid' => '0',
+  'x-requested-with' => 'xmlhttprequest',
+  'tencent-leakscan' => 'TST(Tencent Security Team)',
+  'model' => 'microsoft',
+  'sid' => 'uRyRFflcNDhqkMiroNF91JwKSCv1X7Rz',
+  'brand' => 'microsoft',
+  'token' => '',
+  'content-type' => 'application/json',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+  'content-length' => '0',
+  'cookie' => '',
+  'host' => 'jingshui.sddianfeng.cn',
+)
+[ info ] [ PARAM ] array (
+  'page' => '\' union select 1,md5(3141592657),3,4,5,6-- ',
+  'type' => 'help',
+  'addon' => 'shop',
+  'controller' => 'api.page',
+  'action' => 'lists',
+)
+[ info ] [ RUN ] think\addons\Route->execute[ /www/wwwroot/jingshui.sddianfeng.cn/vendor/karsonzhang/fastadmin-addons/src/addons/Route.php ]
+[ info ] [ LANG ] /www/wwwroot/jingshui.sddianfeng.cn/public/../application/common/lang/zh-cn/addon.php
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @addon_begin [ RunTime:0.001150s ]
+[ info ] [ LANG ] /www/wwwroot/jingshui.sddianfeng.cn//addons/shop/lang/zh-cn.php
+[ info ] [ LANG ] /www/wwwroot/jingshui.sddianfeng.cn/public/../application//index/lang/zh-cn/user.php
+[ info ] [ BEHAVIOR ] Run \addons\epay\Epay @addon_action_begin [ RunTime:0.001110s ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2024-03-29T17:16:12+08:00 ] 106.55.202.118 GET jingshui.sddianfeng.cn/addons/shop/api.page/lists?page=%27%20union%20select%201%2C2%2Cmd5%283141592657%29%2C4%2C5%2C6--%20&type=help
+[运行时间：0.034435s] [吞吐率：29.04req/s] [内存消耗：4,053.09kb] [文件加载：91]
+[ info ] [ BEHAVIOR ] Run Closure @app_init [ RunTime:0.000013s ]
+[ info ] [ CACHE ] INIT File
+[ info ] [ BEHAVIOR ] Run \addons\shop\Shop @app_init [ RunTime:0.002237s ]
+[ info ] [ BEHAVIOR ] Run Closure @app_init [ RunTime:0.002261s ]
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @app_init [ RunTime:0.000490s ]
+[ info ] [ LANG ] /www/wwwroot/jingshui.sddianfeng.cn/thinkphp/lang/zh-cn.php
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @app_dispatch [ RunTime:0.000015s ]
+[ info ] [ ROUTE ] array (
+  'type' => 'method',
+  'method' => 
+  array (
+    0 => '\\think\\addons\\Route',
+    1 => 'execute',
+  ),
+  'var' => 
+  array (
+  ),
+)
+[ info ] [ HEADER ] array (
+  'referer' => 'https://jingshui.sddianfeng.cn/',
+  'platform' => 'windows',
+  'user-agent' => 'Tencent Security Team, more information: https://developers.weixin.qq.com/community/minihome/doc/0008ea401c89c02cff2d1345051001 (6606762ef41e22b4cffbcd86289d) 5c68',
+  'uid' => '0',
+  'x-requested-with' => 'xmlhttprequest',
+  'tencent-leakscan' => 'TST(Tencent Security Team)',
+  'model' => 'microsoft',
+  'sid' => 'uRyRFflcNDhqkMiroNF91JwKSCv1X7Rz',
+  'brand' => 'microsoft',
+  'token' => '',
+  'content-type' => 'application/json',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+  'content-length' => '0',
+  'cookie' => '',
+  'host' => 'jingshui.sddianfeng.cn',
+)
+[ info ] [ PARAM ] array (
+  'page' => '\' union select 1,2,md5(3141592657),4,5,6-- ',
+  'type' => 'help',
+  'addon' => 'shop',
+  'controller' => 'api.page',
+  'action' => 'lists',
+)
+[ info ] [ RUN ] think\addons\Route->execute[ /www/wwwroot/jingshui.sddianfeng.cn/vendor/karsonzhang/fastadmin-addons/src/addons/Route.php ]
+[ info ] [ LANG ] /www/wwwroot/jingshui.sddianfeng.cn/public/../application/common/lang/zh-cn/addon.php
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @addon_begin [ RunTime:0.001137s ]
+[ info ] [ LANG ] /www/wwwroot/jingshui.sddianfeng.cn//addons/shop/lang/zh-cn.php
+[ info ] [ LANG ] /www/wwwroot/jingshui.sddianfeng.cn/public/../application//index/lang/zh-cn/user.php
+[ info ] [ BEHAVIOR ] Run \addons\epay\Epay @addon_action_begin [ RunTime:0.001122s ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2024-03-29T17:16:12+08:00 ] 106.55.202.118 GET jingshui.sddianfeng.cn/addons/shop/api.page/lists?page=%27%20union%20select%201%2C2%2C3%2Cmd5%283141592657%29%2C5%2C6--%20&type=help
+[运行时间：0.034397s] [吞吐率：29.07req/s] [内存消耗：4,053.09kb] [文件加载：91]
+[ info ] [ BEHAVIOR ] Run Closure @app_init [ RunTime:0.000013s ]
+[ info ] [ CACHE ] INIT File
+[ info ] [ BEHAVIOR ] Run \addons\shop\Shop @app_init [ RunTime:0.002275s ]
+[ info ] [ BEHAVIOR ] Run Closure @app_init [ RunTime:0.002295s ]
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @app_init [ RunTime:0.000457s ]
+[ info ] [ LANG ] /www/wwwroot/jingshui.sddianfeng.cn/thinkphp/lang/zh-cn.php
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @app_dispatch [ RunTime:0.000014s ]
+[ info ] [ ROUTE ] array (
+  'type' => 'method',
+  'method' => 
+  array (
+    0 => '\\think\\addons\\Route',
+    1 => 'execute',
+  ),
+  'var' => 
+  array (
+  ),
+)
+[ info ] [ HEADER ] array (
+  'referer' => 'https://jingshui.sddianfeng.cn/',
+  'platform' => 'windows',
+  'user-agent' => 'Tencent Security Team, more information: https://developers.weixin.qq.com/community/minihome/doc/0008ea401c89c02cff2d1345051001 (6606762ef41e22b4cffbcd86289d) 5c68',
+  'uid' => '0',
+  'x-requested-with' => 'xmlhttprequest',
+  'tencent-leakscan' => 'TST(Tencent Security Team)',
+  'model' => 'microsoft',
+  'sid' => 'uRyRFflcNDhqkMiroNF91JwKSCv1X7Rz',
+  'brand' => 'microsoft',
+  'token' => '',
+  'content-type' => 'application/json',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+  'content-length' => '0',
+  'cookie' => '',
+  'host' => 'jingshui.sddianfeng.cn',
+)
+[ info ] [ PARAM ] array (
+  'page' => '\' union select 1,2,3,md5(3141592657),5,6-- ',
+  'type' => 'help',
+  'addon' => 'shop',
+  'controller' => 'api.page',
+  'action' => 'lists',
+)
+[ info ] [ RUN ] think\addons\Route->execute[ /www/wwwroot/jingshui.sddianfeng.cn/vendor/karsonzhang/fastadmin-addons/src/addons/Route.php ]
+[ info ] [ LANG ] /www/wwwroot/jingshui.sddianfeng.cn/public/../application/common/lang/zh-cn/addon.php
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @addon_begin [ RunTime:0.001128s ]
+[ info ] [ LANG ] /www/wwwroot/jingshui.sddianfeng.cn//addons/shop/lang/zh-cn.php
+[ info ] [ LANG ] /www/wwwroot/jingshui.sddianfeng.cn/public/../application//index/lang/zh-cn/user.php
+[ info ] [ BEHAVIOR ] Run \addons\epay\Epay @addon_action_begin [ RunTime:0.001124s ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2024-03-29T17:16:12+08:00 ] 106.55.202.118 GET jingshui.sddianfeng.cn/addons/shop/api.page/lists?page=%27%20union%20select%201%2C2%2C3%2C4%2Cmd5%283141592657%29%2C6--%20&type=help
+[运行时间：0.036414s] [吞吐率：27.46req/s] [内存消耗：4,053.09kb] [文件加载：91]
+[ info ] [ BEHAVIOR ] Run Closure @app_init [ RunTime:0.000014s ]
+[ info ] [ CACHE ] INIT File
+[ info ] [ BEHAVIOR ] Run \addons\shop\Shop @app_init [ RunTime:0.002332s ]
+[ info ] [ BEHAVIOR ] Run Closure @app_init [ RunTime:0.002356s ]
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @app_init [ RunTime:0.000475s ]
+[ info ] [ LANG ] /www/wwwroot/jingshui.sddianfeng.cn/thinkphp/lang/zh-cn.php
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @app_dispatch [ RunTime:0.000016s ]
+[ info ] [ ROUTE ] array (
+  'type' => 'method',
+  'method' => 
+  array (
+    0 => '\\think\\addons\\Route',
+    1 => 'execute',
+  ),
+  'var' => 
+  array (
+  ),
+)
+[ info ] [ HEADER ] array (
+  'referer' => 'https://jingshui.sddianfeng.cn/',
+  'platform' => 'windows',
+  'user-agent' => 'Tencent Security Team, more information: https://developers.weixin.qq.com/community/minihome/doc/0008ea401c89c02cff2d1345051001 (6606762ef41e22b4cffbcd86289d) 5c68',
+  'uid' => '0',
+  'x-requested-with' => 'xmlhttprequest',
+  'tencent-leakscan' => 'TST(Tencent Security Team)',
+  'model' => 'microsoft',
+  'sid' => 'uRyRFflcNDhqkMiroNF91JwKSCv1X7Rz',
+  'brand' => 'microsoft',
+  'token' => '',
+  'content-type' => 'application/json',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+  'content-length' => '0',
+  'cookie' => '',
+  'host' => 'jingshui.sddianfeng.cn',
+)
+[ info ] [ PARAM ] array (
+  'page' => '\' union select 1,2,3,4,md5(3141592657),6-- ',
+  'type' => 'help',
+  'addon' => 'shop',
+  'controller' => 'api.page',
+  'action' => 'lists',
+)
+[ info ] [ RUN ] think\addons\Route->execute[ /www/wwwroot/jingshui.sddianfeng.cn/vendor/karsonzhang/fastadmin-addons/src/addons/Route.php ]
+[ info ] [ LANG ] /www/wwwroot/jingshui.sddianfeng.cn/public/../application/common/lang/zh-cn/addon.php
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @addon_begin [ RunTime:0.001161s ]
+[ info ] [ LANG ] /www/wwwroot/jingshui.sddianfeng.cn//addons/shop/lang/zh-cn.php
+[ info ] [ LANG ] /www/wwwroot/jingshui.sddianfeng.cn/public/../application//index/lang/zh-cn/user.php
+[ info ] [ BEHAVIOR ] Run \addons\epay\Epay @addon_action_begin [ RunTime:0.001135s ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2024-03-29T17:16:12+08:00 ] 106.55.202.118 GET jingshui.sddianfeng.cn/addons/shop/api.page/lists?page=%27%20union%20select%201%2C2%2C3%2C4%2C5%2Cmd5%283141592657%29--%20&type=help
+[运行时间：0.034340s] [吞吐率：29.12req/s] [内存消耗：4,053.09kb] [文件加载：91]
+[ info ] [ BEHAVIOR ] Run Closure @app_init [ RunTime:0.000013s ]
+[ info ] [ CACHE ] INIT File
+[ info ] [ BEHAVIOR ] Run \addons\shop\Shop @app_init [ RunTime:0.002227s ]
+[ info ] [ BEHAVIOR ] Run Closure @app_init [ RunTime:0.002247s ]
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @app_init [ RunTime:0.000476s ]
+[ info ] [ LANG ] /www/wwwroot/jingshui.sddianfeng.cn/thinkphp/lang/zh-cn.php
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @app_dispatch [ RunTime:0.000015s ]
+[ info ] [ ROUTE ] array (
+  'type' => 'method',
+  'method' => 
+  array (
+    0 => '\\think\\addons\\Route',
+    1 => 'execute',
+  ),
+  'var' => 
+  array (
+  ),
+)
+[ info ] [ HEADER ] array (
+  'referer' => 'https://jingshui.sddianfeng.cn/',
+  'platform' => 'windows',
+  'user-agent' => 'Tencent Security Team, more information: https://developers.weixin.qq.com/community/minihome/doc/0008ea401c89c02cff2d1345051001 (6606762ef41e22b4cffbcd86289d) 5c68',
+  'uid' => '0',
+  'x-requested-with' => 'xmlhttprequest',
+  'tencent-leakscan' => 'TST(Tencent Security Team)',
+  'model' => 'microsoft',
+  'sid' => 'uRyRFflcNDhqkMiroNF91JwKSCv1X7Rz',
+  'brand' => 'microsoft',
+  'token' => '',
+  'content-type' => 'application/json',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+  'content-length' => '0',
+  'cookie' => '',
+  'host' => 'jingshui.sddianfeng.cn',
+)
+[ info ] [ PARAM ] array (
+  'page' => '\' union select 1,2,3,4,5,md5(3141592657)-- ',
+  'type' => 'help',
+  'addon' => 'shop',
+  'controller' => 'api.page',
+  'action' => 'lists',
+)
+[ info ] [ RUN ] think\addons\Route->execute[ /www/wwwroot/jingshui.sddianfeng.cn/vendor/karsonzhang/fastadmin-addons/src/addons/Route.php ]
+[ info ] [ LANG ] /www/wwwroot/jingshui.sddianfeng.cn/public/../application/common/lang/zh-cn/addon.php
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @addon_begin [ RunTime:0.001151s ]
+[ info ] [ LANG ] /www/wwwroot/jingshui.sddianfeng.cn//addons/shop/lang/zh-cn.php
+[ info ] [ LANG ] /www/wwwroot/jingshui.sddianfeng.cn/public/../application//index/lang/zh-cn/user.php
+[ info ] [ BEHAVIOR ] Run \addons\epay\Epay @addon_action_begin [ RunTime:0.001119s ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2024-03-29T17:16:12+08:00 ] 106.55.202.118 GET jingshui.sddianfeng.cn/addons/shop/api.page/lists?page=1%29%20AND%20%28SELECT%2AFROM%28SELECT%28SLEEP%284%29%29%29uqjc%29%20limit%201%23&type=help
+[运行时间：0.034547s] [吞吐率：28.95req/s] [内存消耗：4,053.09kb] [文件加载：91]
+[ info ] [ BEHAVIOR ] Run Closure @app_init [ RunTime:0.000014s ]
+[ info ] [ CACHE ] INIT File
+[ info ] [ BEHAVIOR ] Run \addons\shop\Shop @app_init [ RunTime:0.002238s ]
+[ info ] [ BEHAVIOR ] Run Closure @app_init [ RunTime:0.002265s ]
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @app_init [ RunTime:0.000465s ]
+[ info ] [ LANG ] /www/wwwroot/jingshui.sddianfeng.cn/thinkphp/lang/zh-cn.php
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @app_dispatch [ RunTime:0.000015s ]
+[ info ] [ ROUTE ] array (
+  'type' => 'method',
+  'method' => 
+  array (
+    0 => '\\think\\addons\\Route',
+    1 => 'execute',
+  ),
+  'var' => 
+  array (
+  ),
+)
+[ info ] [ HEADER ] array (
+  'referer' => 'https://jingshui.sddianfeng.cn/',
+  'platform' => 'windows',
+  'user-agent' => 'Tencent Security Team, more information: https://developers.weixin.qq.com/community/minihome/doc/0008ea401c89c02cff2d1345051001 (6606762ef41e22b4cffbcd86289d) 5c68',
+  'uid' => '0',
+  'x-requested-with' => 'xmlhttprequest',
+  'tencent-leakscan' => 'TST(Tencent Security Team)',
+  'model' => 'microsoft',
+  'sid' => 'uRyRFflcNDhqkMiroNF91JwKSCv1X7Rz',
+  'brand' => 'microsoft',
+  'token' => '',
+  'content-type' => 'application/json',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+  'content-length' => '0',
+  'cookie' => '',
+  'host' => 'jingshui.sddianfeng.cn',
+)
+[ info ] [ PARAM ] array (
+  'page' => '1) AND (SELECT*FROM(SELECT(SLEEP(4)))uqjc) limit 1#',
+  'type' => 'help',
+  'addon' => 'shop',
+  'controller' => 'api.page',
+  'action' => 'lists',
+)
+[ info ] [ RUN ] think\addons\Route->execute[ /www/wwwroot/jingshui.sddianfeng.cn/vendor/karsonzhang/fastadmin-addons/src/addons/Route.php ]
+[ info ] [ LANG ] /www/wwwroot/jingshui.sddianfeng.cn/public/../application/common/lang/zh-cn/addon.php
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @addon_begin [ RunTime:0.001127s ]
+[ info ] [ LANG ] /www/wwwroot/jingshui.sddianfeng.cn//addons/shop/lang/zh-cn.php
+[ info ] [ LANG ] /www/wwwroot/jingshui.sddianfeng.cn/public/../application//index/lang/zh-cn/user.php
+[ info ] [ BEHAVIOR ] Run \addons\epay\Epay @addon_action_begin [ RunTime:0.001122s ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2024-03-29T17:16:12+08:00 ] 106.55.202.118 GET jingshui.sddianfeng.cn/addons/shop/api.page/lists?page=1%29%20AND%20%28SELECT%2AFROM%28SELECT%28SLEEP%283%29%29%29snwe%29%20limit%201%23&type=help
+[运行时间：0.034191s] [吞吐率：29.25req/s] [内存消耗：4,053.09kb] [文件加载：91]
+[ info ] [ BEHAVIOR ] Run Closure @app_init [ RunTime:0.000013s ]
+[ info ] [ CACHE ] INIT File
+[ info ] [ BEHAVIOR ] Run \addons\shop\Shop @app_init [ RunTime:0.002262s ]
+[ info ] [ BEHAVIOR ] Run Closure @app_init [ RunTime:0.002282s ]
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @app_init [ RunTime:0.000476s ]
+[ info ] [ LANG ] /www/wwwroot/jingshui.sddianfeng.cn/thinkphp/lang/zh-cn.php
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @app_dispatch [ RunTime:0.000014s ]
+[ info ] [ ROUTE ] array (
+  'type' => 'method',
+  'method' => 
+  array (
+    0 => '\\think\\addons\\Route',
+    1 => 'execute',
+  ),
+  'var' => 
+  array (
+  ),
+)
+[ info ] [ HEADER ] array (
+  'referer' => 'https://jingshui.sddianfeng.cn/',
+  'platform' => 'windows',
+  'user-agent' => 'Tencent Security Team, more information: https://developers.weixin.qq.com/community/minihome/doc/0008ea401c89c02cff2d1345051001 (6606762ef41e22b4cffbcd86289d) 5c68',
+  'uid' => '0',
+  'x-requested-with' => 'xmlhttprequest',
+  'tencent-leakscan' => 'TST(Tencent Security Team)',
+  'model' => 'microsoft',
+  'sid' => 'uRyRFflcNDhqkMiroNF91JwKSCv1X7Rz',
+  'brand' => 'microsoft',
+  'token' => '',
+  'content-type' => 'application/json',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+  'content-length' => '0',
+  'cookie' => '',
+  'host' => 'jingshui.sddianfeng.cn',
+)
+[ info ] [ PARAM ] array (
+  'page' => '1) AND (SELECT*FROM(SELECT(SLEEP(3)))snwe) limit 1#',
+  'type' => 'help',
+  'addon' => 'shop',
+  'controller' => 'api.page',
+  'action' => 'lists',
+)
+[ info ] [ RUN ] think\addons\Route->execute[ /www/wwwroot/jingshui.sddianfeng.cn/vendor/karsonzhang/fastadmin-addons/src/addons/Route.php ]
+[ info ] [ LANG ] /www/wwwroot/jingshui.sddianfeng.cn/public/../application/common/lang/zh-cn/addon.php
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @addon_begin [ RunTime:0.001134s ]
+[ info ] [ LANG ] /www/wwwroot/jingshui.sddianfeng.cn//addons/shop/lang/zh-cn.php
+[ info ] [ LANG ] /www/wwwroot/jingshui.sddianfeng.cn/public/../application//index/lang/zh-cn/user.php
+[ info ] [ BEHAVIOR ] Run \addons\epay\Epay @addon_action_begin [ RunTime:0.001102s ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2024-03-29T17:16:13+08:00 ] 106.55.202.118 GET jingshui.sddianfeng.cn/addons/shop/api.page/lists?page=1&type=%22%20union%20select%201%2Cmd5%283141592657%29%2C3%2C4--%20
+[运行时间：0.034732s] [吞吐率：28.79req/s] [内存消耗：4,052.98kb] [文件加载：91]
+[ info ] [ BEHAVIOR ] Run Closure @app_init [ RunTime:0.000014s ]
+[ info ] [ CACHE ] INIT File
+[ info ] [ BEHAVIOR ] Run \addons\shop\Shop @app_init [ RunTime:0.002269s ]
+[ info ] [ BEHAVIOR ] Run Closure @app_init [ RunTime:0.002291s ]
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @app_init [ RunTime:0.000481s ]
+[ info ] [ LANG ] /www/wwwroot/jingshui.sddianfeng.cn/thinkphp/lang/zh-cn.php
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @app_dispatch [ RunTime:0.000016s ]
+[ info ] [ ROUTE ] array (
+  'type' => 'method',
+  'method' => 
+  array (
+    0 => '\\think\\addons\\Route',
+    1 => 'execute',
+  ),
+  'var' => 
+  array (
+  ),
+)
+[ info ] [ HEADER ] array (
+  'referer' => 'https://jingshui.sddianfeng.cn/',
+  'platform' => 'windows',
+  'user-agent' => 'Tencent Security Team, more information: https://developers.weixin.qq.com/community/minihome/doc/0008ea401c89c02cff2d1345051001 (6606762ef41e22b4cffbcd86289d) 5c68',
+  'uid' => '0',
+  'x-requested-with' => 'xmlhttprequest',
+  'tencent-leakscan' => 'TST(Tencent Security Team)',
+  'model' => 'microsoft',
+  'sid' => 'uRyRFflcNDhqkMiroNF91JwKSCv1X7Rz',
+  'brand' => 'microsoft',
+  'token' => '',
+  'content-type' => 'application/json',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+  'content-length' => '0',
+  'cookie' => '',
+  'host' => 'jingshui.sddianfeng.cn',
+)
+[ info ] [ PARAM ] array (
+  'page' => '1',
+  'type' => '" union select 1,md5(3141592657),3,4-- ',
+  'addon' => 'shop',
+  'controller' => 'api.page',
+  'action' => 'lists',
+)
+[ info ] [ RUN ] think\addons\Route->execute[ /www/wwwroot/jingshui.sddianfeng.cn/vendor/karsonzhang/fastadmin-addons/src/addons/Route.php ]
+[ info ] [ LANG ] /www/wwwroot/jingshui.sddianfeng.cn/public/../application/common/lang/zh-cn/addon.php
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @addon_begin [ RunTime:0.001141s ]
+[ info ] [ LANG ] /www/wwwroot/jingshui.sddianfeng.cn//addons/shop/lang/zh-cn.php
+[ info ] [ LANG ] /www/wwwroot/jingshui.sddianfeng.cn/public/../application//index/lang/zh-cn/user.php
+[ info ] [ BEHAVIOR ] Run \addons\epay\Epay @addon_action_begin [ RunTime:0.001121s ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2024-03-29T17:16:13+08:00 ] 106.55.202.118 GET jingshui.sddianfeng.cn/addons/shop/api.page/lists?page=1&type=%22%20union%20select%201%2C2%2Cmd5%283141592657%29%2C4--%20
+[运行时间：0.034696s] [吞吐率：28.82req/s] [内存消耗：4,052.98kb] [文件加载：91]
+[ info ] [ BEHAVIOR ] Run Closure @app_init [ RunTime:0.000014s ]
+[ info ] [ CACHE ] INIT File
+[ info ] [ BEHAVIOR ] Run \addons\shop\Shop @app_init [ RunTime:0.002290s ]
+[ info ] [ BEHAVIOR ] Run Closure @app_init [ RunTime:0.002312s ]
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @app_init [ RunTime:0.000458s ]
+[ info ] [ LANG ] /www/wwwroot/jingshui.sddianfeng.cn/thinkphp/lang/zh-cn.php
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @app_dispatch [ RunTime:0.000016s ]
+[ info ] [ ROUTE ] array (
+  'type' => 'method',
+  'method' => 
+  array (
+    0 => '\\think\\addons\\Route',
+    1 => 'execute',
+  ),
+  'var' => 
+  array (
+  ),
+)
+[ info ] [ HEADER ] array (
+  'referer' => 'https://jingshui.sddianfeng.cn/',
+  'platform' => 'windows',
+  'user-agent' => 'Tencent Security Team, more information: https://developers.weixin.qq.com/community/minihome/doc/0008ea401c89c02cff2d1345051001 (6606762ef41e22b4cffbcd86289d) 5c68',
+  'uid' => '0',
+  'x-requested-with' => 'xmlhttprequest',
+  'tencent-leakscan' => 'TST(Tencent Security Team)',
+  'model' => 'microsoft',
+  'sid' => 'uRyRFflcNDhqkMiroNF91JwKSCv1X7Rz',
+  'brand' => 'microsoft',
+  'token' => '',
+  'content-type' => 'application/json',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+  'content-length' => '0',
+  'cookie' => '',
+  'host' => 'jingshui.sddianfeng.cn',
+)
+[ info ] [ PARAM ] array (
+  'page' => '1',
+  'type' => '" union select 1,2,md5(3141592657),4-- ',
+  'addon' => 'shop',
+  'controller' => 'api.page',
+  'action' => 'lists',
+)
+[ info ] [ RUN ] think\addons\Route->execute[ /www/wwwroot/jingshui.sddianfeng.cn/vendor/karsonzhang/fastadmin-addons/src/addons/Route.php ]
+[ info ] [ LANG ] /www/wwwroot/jingshui.sddianfeng.cn/public/../application/common/lang/zh-cn/addon.php
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @addon_begin [ RunTime:0.001137s ]
+[ info ] [ LANG ] /www/wwwroot/jingshui.sddianfeng.cn//addons/shop/lang/zh-cn.php
+[ info ] [ LANG ] /www/wwwroot/jingshui.sddianfeng.cn/public/../application//index/lang/zh-cn/user.php
+[ info ] [ BEHAVIOR ] Run \addons\epay\Epay @addon_action_begin [ RunTime:0.001135s ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2024-03-29T17:16:13+08:00 ] 106.55.202.118 GET jingshui.sddianfeng.cn/addons/shop/api.page/lists?page=1&type=%22%20union%20select%201%2C2%2C3%2Cmd5%283141592657%29--%20
+[运行时间：0.034635s] [吞吐率：28.87req/s] [内存消耗：4,052.98kb] [文件加载：91]
+[ info ] [ BEHAVIOR ] Run Closure @app_init [ RunTime:0.000026s ]
+[ info ] [ CACHE ] INIT File
+[ info ] [ BEHAVIOR ] Run \addons\shop\Shop @app_init [ RunTime:0.002254s ]
+[ info ] [ BEHAVIOR ] Run Closure @app_init [ RunTime:0.002275s ]
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @app_init [ RunTime:0.000484s ]
+[ info ] [ LANG ] /www/wwwroot/jingshui.sddianfeng.cn/thinkphp/lang/zh-cn.php
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @app_dispatch [ RunTime:0.000015s ]
+[ info ] [ ROUTE ] array (
+  'type' => 'method',
+  'method' => 
+  array (
+    0 => '\\think\\addons\\Route',
+    1 => 'execute',
+  ),
+  'var' => 
+  array (
+  ),
+)
+[ info ] [ HEADER ] array (
+  'referer' => 'https://jingshui.sddianfeng.cn/',
+  'platform' => 'windows',
+  'user-agent' => 'Tencent Security Team, more information: https://developers.weixin.qq.com/community/minihome/doc/0008ea401c89c02cff2d1345051001 (6606762ef41e22b4cffbcd86289d) 5c68',
+  'uid' => '0',
+  'x-requested-with' => 'xmlhttprequest',
+  'tencent-leakscan' => 'TST(Tencent Security Team)',
+  'model' => 'microsoft',
+  'sid' => 'uRyRFflcNDhqkMiroNF91JwKSCv1X7Rz',
+  'brand' => 'microsoft',
+  'token' => '',
+  'content-type' => 'application/json',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+  'content-length' => '0',
+  'cookie' => '',
+  'host' => 'jingshui.sddianfeng.cn',
+)
+[ info ] [ PARAM ] array (
+  'page' => '1',
+  'type' => '" union select 1,2,3,md5(3141592657)-- ',
+  'addon' => 'shop',
+  'controller' => 'api.page',
+  'action' => 'lists',
+)
+[ info ] [ RUN ] think\addons\Route->execute[ /www/wwwroot/jingshui.sddianfeng.cn/vendor/karsonzhang/fastadmin-addons/src/addons/Route.php ]
+[ info ] [ LANG ] /www/wwwroot/jingshui.sddianfeng.cn/public/../application/common/lang/zh-cn/addon.php
+[ info ] [ BEHAVIOR ] Run app\common\behavior\Common @addon_begin [ RunTime:0.001136s ]
+[ info ] [ LANG ] /www/wwwroot/jingshui.sddianfeng.cn//addons/shop/lang/zh-cn.php
+[ info ] [ LANG ] /www/wwwroot/jingshui.sddianfeng.cn/public/../application//index/lang/zh-cn/user.php
+[ info ] [ BEHAVIOR ] Run \addons\epay\Epay @addon_action_begin [ RunTime:0.001122s ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File

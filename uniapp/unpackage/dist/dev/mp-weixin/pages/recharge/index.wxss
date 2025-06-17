@@ -1,0 +1,234 @@
+@charset "UTF-8";
+/**
+ * 这里是uni-app内置的常用样式变量
+ *
+ * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量
+ * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App
+ *
+ */
+/**
+ * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能
+ *
+ * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件
+ */
+/* 颜色变量 */
+/* 行为相关颜色 */
+/* 文字基本颜色 */
+/* 背景颜色 */
+/* 边框颜色 */
+/* 尺寸变量 */
+/* 文字尺寸 */
+/* 图片尺寸 */
+/* Border Radius */
+/* 水平间距 */
+/* 垂直间距 */
+/* 透明度 */
+/* 文章场景相关 */
+.container.data-v-d93c61ba {
+  min-height: 100vh;
+  background-color: #f5f7fa;
+  padding-bottom: 50rpx;
+}
+.header.data-v-d93c61ba {
+  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+  padding: 30rpx;
+  position: relative;
+  overflow: hidden;
+}
+.header.data-v-d93c61ba::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 100%);
+}
+.header-content.data-v-d93c61ba {
+  display: flex;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+.back-btn.data-v-d93c61ba {
+  width: 60rpx;
+  height: 60rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.title.data-v-d93c61ba {
+  font-size: 36rpx;
+  font-weight: 600;
+  color: #ffffff;
+  margin-left: 20rpx;
+}
+.account-card.data-v-d93c61ba {
+  margin: 30rpx;
+  background-color: #ffffff;
+  border-radius: 16rpx;
+  padding: 30rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.05);
+  transition: -webkit-transform 0.2s;
+  transition: transform 0.2s;
+  transition: transform 0.2s, -webkit-transform 0.2s;
+}
+.account-card.data-v-d93c61ba:active {
+  -webkit-transform: scale(0.98);
+          transform: scale(0.98);
+}
+.balance-label.data-v-d93c61ba {
+  font-size: 26rpx;
+  color: #909399;
+  display: block;
+}
+.balance-amount.data-v-d93c61ba {
+  font-size: 48rpx;
+  font-weight: bold;
+  color: #3b82f6;
+  margin-top: 8rpx;
+  display: block;
+}
+.account-tag.data-v-d93c61ba {
+  background-color: #e7f1ff;
+  border-radius: 30rpx;
+  padding: 8rpx 20rpx;
+  display: flex;
+  align-items: center;
+}
+.tag-text.data-v-d93c61ba {
+  font-size: 24rpx;
+  color: #3b82f6;
+  margin-left: 8rpx;
+}
+.section-title.data-v-d93c61ba {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #333333;
+  margin: 30rpx 30rpx 20rpx;
+}
+.amount-grid.data-v-d93c61ba {
+  padding: 0 30rpx;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20rpx;
+}
+.amount-item.data-v-d93c61ba {
+  background-color: #ffffff;
+  border: 2rpx solid #e5e7eb;
+  border-radius: 16rpx;
+  padding: 24rpx 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: all 0.2s;
+}
+.amount-item.data-v-d93c61ba:active {
+  -webkit-transform: scale(0.98);
+          transform: scale(0.98);
+}
+.amount-item.active.data-v-d93c61ba {
+  background-color: #3b82f6;
+  border-color: #3b82f6;
+}
+.amount-item.active .amount-value.data-v-d93c61ba, .amount-item.active .amount-desc.data-v-d93c61ba {
+  color: #ffffff;
+}
+.amount-value.data-v-d93c61ba {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333333;
+}
+.amount-desc.data-v-d93c61ba {
+  font-size: 22rpx;
+  color: #909399;
+  margin-top: 8rpx;
+}
+.custom-amount-section.data-v-d93c61ba {
+  margin: 30rpx;
+  background-color: #ffffff;
+  border-radius: 16rpx;
+  padding: 20rpx 30rpx;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.05);
+}
+.input-label.data-v-d93c61ba {
+  font-size: 26rpx;
+  color: #909399;
+  margin-bottom: 16rpx;
+  display: block;
+}
+.input-container.data-v-d93c61ba {
+  display: flex;
+  align-items: center;
+  border-bottom: 2rpx solid #e5e7eb;
+  padding-bottom: 16rpx;
+  margin-bottom: 16rpx;
+}
+.currency-symbol.data-v-d93c61ba {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #333333;
+  margin-right: 16rpx;
+}
+.input-tip.data-v-d93c61ba {
+  font-size: 22rpx;
+  color: #909399;
+}
+.payment-card.data-v-d93c61ba {
+  margin: 0 30rpx;
+  background-color: #ffffff;
+  border-radius: 16rpx;
+  overflow: hidden;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.05);
+}
+.payment-item.data-v-d93c61ba {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30rpx;
+}
+.payment-item.data-v-d93c61ba:active {
+  background-color: #f9fafc;
+}
+.payment-item.data-v-d93c61ba:not(:last-child) {
+  border-bottom: 2rpx solid #f2f3f5;
+}
+.payment-left.data-v-d93c61ba {
+  display: flex;
+  align-items: center;
+}
+.payment-icon.data-v-d93c61ba {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 16rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 20rpx;
+}
+.wechat-bg.data-v-d93c61ba {
+  background-color: #e7f8ef;
+}
+.alipay-bg.data-v-d93c61ba {
+  background-color: #e7f1ff;
+}
+.payment-name.data-v-d93c61ba {
+  font-size: 30rpx;
+  color: #333333;
+}
+.recharge-btn-container.data-v-d93c61ba {
+  margin: 50rpx 30rpx;
+}
+.agreement-text.data-v-d93c61ba {
+  font-size: 24rpx;
+  color: #909399;
+  text-align: center;
+  margin-top: 20rpx;
+  display: block;
+}
+.agreement-link.data-v-d93c61ba {
+  color: #3b82f6;
+}

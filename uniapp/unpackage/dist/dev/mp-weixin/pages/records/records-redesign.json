@@ -1,0 +1,14 @@
+{
+  "navigationBarTitleText": "使用记录",
+  "usingComponents": {
+    "u-navbar": "/uni_modules/uview-ui/components/u-navbar/u-navbar",
+    "u-swiper": "/uni_modules/uview-ui/components/u-swiper/u-swiper",
+    "u-dropdown": "/uni_modules/uview-ui/components/u-dropdown/u-dropdown",
+    "u-dropdown-item": "/uni_modules/uview-ui/components/u-dropdown-item/u-dropdown-item",
+    "u-icon": "/uni_modules/uview-ui/components/u-icon/u-icon",
+    "u-button": "/uni_modules/uview-ui/components/u-button/u-button",
+    "u-empty": "/uni_modules/uview-ui/components/u-empty/u-empty",
+    "u-loadmore": "/uni_modules/uview-ui/components/u-loadmore/u-loadmore",
+    "u-popup": "/uni_modules/uview-ui/components/u-popup/u-popup"
+  }
+}

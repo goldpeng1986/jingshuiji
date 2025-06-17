@@ -1,0 +1,4 @@
+<?php
+//000000000000
+ exit();?>
+a:2:{i:0;a:14:{s:2:"id";i:4;s:4:"type";s:15:"uniapp焦点图";s:4:"name";s:11:"uniappfocus";s:5:"title";s:16:"uniapp焦点图2";s:5:"image";s:35:"/assets/addons/shop/img/swiper2.jpg";s:3:"url";s:18:"/pages/goods/goods";s:7:"content";s:0:"";s:8:"parsetpl";i:0;s:5:"weigh";i:5;s:9:"begintime";N;s:7:"endtime";N;s:10:"createtime";i:1625556518;s:10:"updatetime";i:1625556882;s:6:"status";s:6:"normal";}i:1;a:14:{s:2:"id";i:3;s:4:"type";s:15:"uniapp焦点图";s:4:"name";s:11:"uniappfocus";s:5:"title";s:16:"uniapp焦点图1";s:5:"image";s:35:"/assets/addons/shop/img/swiper1.jpg";s:3:"url";s:21:"/pages/category/index";s:7:"content";s:0:"";s:8:"parsetpl";i:0;s:5:"weigh";i:4;s:9:"begintime";N;s:7:"endtime";N;s:10:"createtime";i:1625556492;s:10:"updatetime";i:1625556891;s:6:"status";s:6:"normal";}}

@@ -1,0 +1,35 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/shop/family",
+    "pages/shop/addinfo",
+    "pages/shop/index",
+    "pages/shop/shop-redesign",
+    "pages/notice/index",
+    "pages/notice/index-redesign",
+    "pages/notice/info",
+    "pages/me/index",
+    "pages/me/me",
+    "pages/me/promotion",
+    "pages/me/login",
+    "pages/devices/index",
+    "pages/records/index",
+    "pages/records/records-redesign",
+    "pages/recharge/index",
+    "pages/recharge/recharge-redesign",
+    "pages/order/index",
+    "pages/coupons/index",
+    "pages/help/index",
+    "pages/set/index",
+    "pages/set/about",
+    "pages/set/change-password"
+  ],
+  "subPackages": [],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "uni-app",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#F8F8F8"
+  },
+  "usingComponents": {}
+}

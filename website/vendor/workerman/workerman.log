@@ -1,0 +1,165 @@
+2024-03-12 17:33:20 pid:592177 Workerman[service.php] start in DEBUG mode
+2024-03-12 17:33:25 pid:592177 Workerman[service.php] stopping ...
+2024-03-12 17:33:25 pid:592177 Workerman[service.php] has been stopped
+2024-03-12 17:34:28 pid:592569 Workerman[service.php] start in DEBUG mode
+2024-03-12 17:34:30 pid:592569 Workerman[service.php] stopping ...
+2024-03-12 17:34:30 pid:592569 Workerman[service.php] has been stopped
+2024-03-12 17:49:11 pid:598198 Workerman[service.php] start in DEBUG mode
+2024-03-12 17:49:15 pid:598198 Workerman[service.php] stopping ...
+2024-03-12 17:49:15 pid:598198 Workerman[service.php] has been stopped
+2024-03-12 17:49:27 pid:598281 Workerman[service.php] start in DEBUG mode
+2024-03-12 17:51:03 pid:598281 Workerman[service.php] stopping ...
+2024-03-12 17:51:03 pid:598281 Workerman[service.php] has been stopped
+2024-03-12 17:57:34 pid:601240 Workerman[think notice] start in DEBUG mode
+2024-03-12 17:57:41 pid:601240 Workerman[think] stopping ...
+2024-03-12 17:57:41 pid:601240 Workerman[think] has been stopped
+2024-03-12 17:58:17 pid:601523 Workerman[think notice] start in DEBUG mode
+2024-03-12 17:58:19 pid:601523 Workerman[think] stopping ...
+2024-03-12 17:58:19 pid:601523 Workerman[think] has been stopped
+2024-03-12 17:58:51 pid:601663 Workerman[think notice] start in DEBUG mode
+2024-03-12 17:58:54 pid:601663 Workerman[think] stopping ...
+2024-03-12 17:58:54 pid:601663 Workerman[think] has been stopped
+2024-03-12 18:00:46 pid:602501 Workerman[think notice] start in DEBUG mode
+2024-03-12 18:01:15 pid:602501 Workerman[think] stopping ...
+2024-03-12 18:01:15 pid:602501 Workerman[think] has been stopped
+2024-03-12 18:01:16 pid:602718 Workerman[think notice] start in DEBUG mode
+2024-03-12 18:06:41 pid:602718 Workerman[think] stopping ...
+2024-03-12 18:06:41 pid:602718 Workerman[think] has been stopped
+2024-03-12 18:06:43 pid:604563 Workerman[think notice] start in DEBUG mode
+2024-03-12 18:08:45 pid:604563 Workerman[think] stopping ...
+2024-03-12 18:08:45 pid:604563 Workerman[think] has been stopped
+2024-03-12 18:08:46 pid:605219 Workerman[think notice] start in DEBUG mode
+2024-03-12 18:10:50 pid:606012 Workerman[think notice] start in DEBUG mode
+2024-03-12 18:15:40 pid:606012 Workerman[think] stopping ...
+2024-03-12 18:15:40 pid:606012 Workerman[think] has been stopped
+2024-03-12 18:15:40 pid:607771 Workerman[think notice] start in DEBUG mode
+2024-03-12 18:17:45 pid:607771 Workerman[think] stopping ...
+2024-03-12 18:17:45 pid:607771 Workerman[think] has been stopped
+2024-03-12 18:17:46 pid:608432 Workerman[think notice] start in DEBUG mode
+2024-03-12 19:00:46 pid:623718 Workerman[think notice] start in DEBUG mode
+2024-03-12 19:33:13 pid:623718 Workerman[think] stopping ...
+2024-03-12 19:33:13 pid:623718 Workerman[think] has been stopped
+2024-03-12 19:33:14 pid:634896 Workerman[think notice] start in DEBUG mode
+2024-03-12 19:33:30 pid:634896 Workerman[think] stopping ...
+2024-03-12 19:33:30 pid:634896 Workerman[think] has been stopped
+2024-03-12 19:33:31 pid:634975 Workerman[think notice] start in DEBUG mode
+2024-03-12 19:33:38 pid:634976 Worker[634976] process terminated
+2024-03-12 19:33:38 pid:634975 worker[none:634976] exit with status 256
+2024-03-12 19:34:17 pid:634975 Workerman[think] stopping ...
+2024-03-12 19:34:17 pid:634975 Workerman[think] has been stopped
+2024-03-12 19:34:18 pid:635276 Workerman[think notice] start in DEBUG mode
+2024-03-12 19:34:37 pid:635277 Worker[635277] process terminated
+2024-03-12 19:34:37 pid:635276 worker[none:635277] exit with status 256
+2024-03-12 19:35:41 pid:635358 Worker[635358] process terminated
+2024-03-12 19:35:41 pid:635276 worker[none:635358] exit with status 256
+2024-03-12 19:35:52 pid:635276 Workerman[think] stopping ...
+2024-03-12 19:35:52 pid:635276 Workerman[think] has been stopped
+2024-03-12 19:35:53 pid:635845 Workerman[think notice] start in DEBUG mode
+2024-03-12 19:35:58 pid:635846 Worker[635846] process terminated
+2024-03-12 19:35:58 pid:635845 worker[none:635846] exit with status 256
+2024-03-13 09:02:35 pid:946492 Workerman[think notice] start in DEBUG mode
+2024-03-13 09:02:50 pid:946493 Worker[946493] process terminated
+2024-03-13 09:02:50 pid:946492 worker[none:946493] exit with status 256
+2024-03-13 09:03:23 pid:946594 Worker[946594] process terminated
+2024-03-13 09:03:23 pid:946492 worker[none:946594] exit with status 256
+2024-03-13 09:03:32 pid:946492 Workerman[think] stopping ...
+2024-03-13 09:03:32 pid:946492 Workerman[think] has been stopped
+2024-03-13 09:03:32 pid:946939 Workerman[think notice] start in DEBUG mode
+2024-03-13 09:03:37 pid:946940 Worker[946940] process terminated
+2024-03-13 09:04:52 pid:946939 Workerman[think] stopping ...
+2024-03-13 09:04:52 pid:946939 Workerman[think] has been stopped
+2024-03-13 09:04:52 pid:947493 Workerman[think notice] start in DEBUG mode
+2024-03-13 09:04:57 pid:947496 Worker[947496] process terminated
+2024-03-13 09:04:57 pid:947493 worker[none:947496] exit with status 256
+2024-03-13 09:05:14 pid:947493 Workerman[think] stopping ...
+2024-03-13 09:05:14 pid:947493 Workerman[think] has been stopped
+2024-03-13 09:05:15 pid:947811 Workerman[think notice] start in DEBUG mode
+2024-03-13 09:06:01 pid:947811 Workerman[think] stopping ...
+2024-03-13 09:06:01 pid:947811 Workerman[think] has been stopped
+2024-03-13 09:21:30 pid:955415 Workerman[think notice] start in DEBUG mode
+2024-03-13 09:24:56 pid:955415 Workerman[think] stopping ...
+2024-03-13 09:24:56 pid:955415 Workerman[think] has been stopped
+2024-03-13 09:24:58 pid:956859 Workerman[think notice] start in DEBUG mode
+2024-03-13 09:28:34 pid:956859 Workerman[think] stopping ...
+2024-03-13 09:28:34 pid:956859 Workerman[think] has been stopped
+2024-03-13 09:28:35 pid:958449 Workerman[think notice] start in DEBUG mode
+2024-03-13 09:46:13 pid:958449 Workerman[think] stopping ...
+2024-03-13 09:46:13 pid:958449 Workerman[think] has been stopped
+2024-03-13 09:46:14 pid:965298 Workerman[think notice] start in DEBUG mode
+2024-03-13 09:51:34 pid:965298 Workerman[think] stopping ...
+2024-03-13 09:51:34 pid:965298 Workerman[think] has been stopped
+2024-03-13 09:51:35 pid:967185 Workerman[think notice] start in DEBUG mode
+2024-03-13 09:51:48 pid:967186 Worker[967186] process terminated
+2024-03-13 09:51:48 pid:967185 worker[none:967186] exit with status 256
+2024-03-13 09:52:11 pid:967185 Workerman[think] stopping ...
+2024-03-13 09:52:11 pid:967185 Workerman[think] has been stopped
+2024-03-13 09:52:12 pid:967440 Workerman[think notice] start in DEBUG mode
+2024-03-13 09:58:08 pid:967440 Workerman[think] stopping ...
+2024-03-13 09:58:08 pid:967440 Workerman[think] has been stopped
+2024-03-13 10:00:36 pid:970578 Workerman[think notice] start in DEBUG mode
+2024-03-13 10:02:03 pid:970578 Workerman[think] stopping ...
+2024-03-13 10:02:03 pid:970578 Workerman[think] has been stopped
+2024-03-13 10:02:04 pid:971213 Workerman[think notice] start in DEBUG mode
+2024-03-13 10:02:53 pid:971213 Workerman[think] stopping ...
+2024-03-13 10:02:53 pid:971213 Workerman[think] has been stopped
+2024-03-13 10:02:54 pid:971433 Workerman[think notice] start in DEBUG mode
+2024-03-13 10:46:49 pid:971433 Workerman[think] stopping ...
+2024-03-13 10:46:49 pid:971433 Workerman[think] has been stopped
+2024-03-15 18:01:18 pid:2260406 Workerman[think notice] start in DEBUG mode
+2024-03-15 18:47:17 pid:2279044 Workerman[think notice] start in DEBUG mode
+2024-03-15 18:56:43 pid:2279044 Workerman[think] stopping ...
+2024-03-15 18:56:43 pid:2279044 Workerman[think] has been stopped
+2024-03-15 18:56:45 pid:2282525 Workerman[think notice] start in DEBUG mode
+2024-03-15 19:08:36 pid:2282525 Workerman[think] stopping ...
+2024-03-15 19:08:36 pid:2282525 Workerman[think] has been stopped
+2024-03-15 19:10:17 pid:2288076 Workerman[think notice] start in DEBUG mode
+2024-03-15 19:42:06 pid:2288076 Workerman[think] stopping ...
+2024-03-15 19:42:18 pid:2300668 Workerman[think notice] start in DEBUG mode
+2024-03-15 20:28:32 pid:2300668 Workerman[think] stopping ...
+2024-03-15 20:29:18 pid:2318752 Workerman[think notice] start in DEBUG mode
+2024-03-15 20:30:41 pid:2318752 Workerman[think] stopping ...
+2024-03-15 20:30:41 pid:2318752 Workerman[think] has been stopped
+2024-03-15 20:30:54 pid:2319350 Workerman[think notice] start in DEBUG mode
+2024-03-18 09:08:30 pid:2319351 Worker[2319351] process terminated
+2024-03-18 09:08:30 pid:2319350 worker[none:2319351] exit with status 256
+2024-03-18 10:10:06 pid:2300669 worker[2300669] remains 0 connection(s)
+2024-03-18 11:06:25 pid:2319350 Workerman[think] stopping ...
+2024-03-18 11:06:37 pid:3776787 Workerman[think notice] start in DEBUG mode
+2024-03-18 11:25:56 pid:3776787 Workerman[think] stopping ...
+2024-03-18 11:25:56 pid:3776787 Workerman[think] has been stopped
+2024-03-18 11:26:55 pid:3784448 Workerman[think notice] start in DEBUG mode
+2024-03-18 11:30:05 pid:3784448 Workerman[think] stopping ...
+2024-03-18 11:30:05 pid:3784448 Workerman[think] has been stopped
+2024-03-18 11:30:07 pid:3785892 Workerman[think notice] start in DEBUG mode
+2024-03-18 11:30:58 pid:3785892 Workerman[think] stopping ...
+2024-03-18 11:31:11 pid:3786277 Workerman[think notice] start in DEBUG mode
+2024-03-18 11:31:38 pid:3785893 worker[3785893] remains 0 connection(s)
+2024-03-18 14:24:09 pid:3786277 Workerman[think] stopping ...
+2024-03-18 14:25:03 pid:3857292 Workerman[think notice] start in DEBUG mode
+2024-03-18 14:26:18 pid:3786278 worker[3786278] remains 0 connection(s)
+2024-03-23 16:00:28 pid:3857292 Workerman[think] stopping ...
+2024-03-23 16:00:40 pid:2632061 Workerman[think notice] start in DEBUG mode
+2024-03-23 16:00:50 pid:3857305 worker[3857305] remains 0 connection(s)
+2024-03-23 16:06:29 pid:2632061 Workerman[think] stopping ...
+2024-03-23 16:06:40 pid:2632062 worker[2632062] remains 0 connection(s)
+2024-03-23 16:06:41 pid:2634504 Workerman[think notice] start in DEBUG mode
+2024-03-29 15:49:03 pid:22842 Workerman[think notice] start in DEBUG mode
+2024-03-29 15:49:05 pid:22846 Workerman[think notice] start in DEBUG mode
+2024-03-29 15:49:08 pid:22850 Workerman[think notice] start in DEBUG mode
+2024-03-29 15:49:12 pid:22852 Workerman[think notice] start in DEBUG mode
+2024-03-29 15:52:51 pid:2387 Workerman[think notice] start in DEBUG mode
+2024-03-29 15:53:15 pid:3180 Workerman[think notice] start in DEBUG mode
+2024-03-29 15:53:38 pid:3597 Workerman[think notice] start in DEBUG mode
+2024-03-29 15:53:39 pid:3597 Workerman[think] stopping ...
+2024-03-29 15:54:02 pid:4183 Workerman[think notice] start in DEBUG mode
+2024-03-29 15:54:11 pid:4183 Workerman[think] stopping ...
+2024-03-29 15:54:11 pid:4183 Workerman[think] stopping ...
+2024-03-29 15:54:11 pid:4183 Workerman[think] stopping ...
+2024-03-29 15:54:12 pid:4183 Workerman[think] stopping ...
+2024-03-29 15:54:19 pid:4502 Workerman[think notice] start in DEBUG mode
+2024-03-29 15:54:32 pid:4502 Workerman[think] stopping ...
+2024-03-29 15:54:32 pid:4502 Workerman[think] has been stopped
+2024-03-29 15:54:33 pid:5176 Workerman[think notice] start in DEBUG mode
+2024-03-29 15:54:37 pid:5176 Workerman[think] stopping ...
+2024-03-29 15:54:37 pid:5176 Workerman[think] has been stopped
+2024-03-29 15:54:53 pid:6130 Workerman[think notice] start in DEBUG mode
