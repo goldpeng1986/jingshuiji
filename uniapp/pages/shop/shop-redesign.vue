@@ -19,35 +19,45 @@
 
     <!-- 轮播广告 -->
     <view class="swiper-section">
+      <u-loading-icon v-if="isLoadingBanners && bannerList.length === 0" mode="circle" size="30"></u-loading-icon>
       <u-swiper
+        v-if="bannerList.length > 0"
         :list="bannerList"
         keyName="image"
-        :height="300"
-        :radius="12"
-        :interval="3000"
-        :effect3d="true"
+        previousMargin="30rpx"
+        nextMargin="30rpx"
+        circular
         :autoplay="true"
-        indicatorMode="dot"
+        radius="12"
+        height="300rpx"
+        @click="clickBanner" <!-- 假设有点击banner的事件 -->
       ></u-swiper>
+      <u-empty mode="picture" text="暂无广告" v-if="!isLoadingBanners && bannerList.length === 0"></u-empty>
     </view>
 
     <!-- 分类导航 -->
     <view class="category-nav">
-      <view 
-        class="category-item" 
-        v-for="(item, index) in categories" 
-        :key="index"
-        @click="selectCategory(item)"
-      >
-        <view class="category-icon" :style="{backgroundColor: item.bgColor}">
-          <u-icon :name="item.icon" size="24" :color="item.iconColor"></u-icon>
+      <u-loading-icon v-if="isLoadingCategories && categories.length === 0" mode="circle" size="28"></u-loading-icon>
+      <template v-if="!isLoadingCategories && categories.length > 0">
+        <view
+          class="category-item"
+          v-for="(item) in categories"
+          :key="item.id" <!-- 使用API返回的id作为key -->
+          @click="selectCategory(item)"
+        >
+          <view class="category-icon" :style="{backgroundColor: item.bgColor}">
+             <!-- 优先使用API返回的图片作为图标 -->
+            <u-image v-if="item.image" :src="item.image" width="50rpx" height="50rpx" mode="aspectFit"></u-image>
+            <u-icon v-else :name="item.icon" size="24" :color="item.iconColor"></u-icon>
+          </view>
+          <text class="category-name">{{ item.name }}</text>
         </view>
-        <text class="category-name">{{ item.name }}</text>
-      </view>
+      </template>
+      <u-empty mode="data" text="分类加载失败" v-if="!isLoadingCategories && categories.length === 0"></u-empty>
     </view>
 
     <!-- 热销商品 -->
-    <view class="section">
+    <view class="section" v-if="hotProducts.length > 0 || isLoadingHotProducts">
       <view class="section-header">
         <text class="section-title">热销商品</text>
         <view class="more-link" @click="viewMore('hot')">
@@ -55,13 +65,13 @@
           <u-icon name="arrow-right" size="14" color="#909399"></u-icon>
         </view>
       </view>
-      
-      <scroll-view scroll-x class="scroll-products">
+      <u-loading-icon v-if="isLoadingHotProducts && hotProducts.length === 0" mode="circle" size="28"></u-loading-icon>
+      <scroll-view scroll-x class="scroll-products" v-if="hotProducts.length > 0">
         <view class="scroll-product-list">
           <view 
             class="product-card-vertical" 
-            v-for="(item, index) in hotProducts" 
-            :key="index"
+            v-for="(item) in hotProducts"
+            :key="item.id" <!-- 使用API返回的id作为key -->
             @click="viewProduct(item)"
           >
             <u-image 
@@ -69,9 +79,10 @@
               width="100%" 
               height="240rpx"
               mode="aspectFill"
-              :radius="12"
+              radius="12"
+              lazyLoad="true"
             ></u-image>
-            <view class="product-tag" :class="'tag-' + item.tagType">{{ item.tag }}</view>
+            <view class="product-tag" :class="'tag-' + item.tagType" v-if="item.tag">{{ item.tag }}</view>
             <view class="product-info-vertical">
               <text class="product-title-vertical">{{ item.title }}</text>
               <view class="price-row">
@@ -88,6 +99,7 @@
           </view>
         </view>
       </scroll-view>
+      <!-- <u-empty mode="list" text="暂无热销商品" v-if="!isLoadingHotProducts && hotProducts.length === 0"></u-empty> -->
     </view>
 
     <!-- 新品上市 -->
@@ -100,12 +112,13 @@
         </view>
       </view>
       
+      <u-loading-icon v-if="isLoadingNewProducts && newProducts.length === 0 && page === 1" mode="circle" size="28"></u-loading-icon>
       <!-- 商品列表 -->
-      <view class="product-grid">
+      <view class="product-grid" v-if="newProducts.length > 0">
         <view 
           class="product-card-grid" 
-          v-for="(item, index) in newProducts" 
-          :key="index"
+          v-for="(item) in newProducts"
+          :key="item.id" <!-- 使用API返回的id作为key -->
           @click="viewProduct(item)"
         >
           <view class="product-image-wrapper">
@@ -114,20 +127,23 @@
               width="100%" 
               height="240rpx"
               mode="aspectFill"
-              :radius="12"
+              radius="12"
+              lazyLoad="true"
             ></u-image>
-            <view class="product-tag" :class="'tag-' + item.tagType">{{ item.tag }}</view>
+            <view class="product-tag" :class="'tag-' + item.tagType" v-if="item.tag">{{ item.tag }}</view>
           </view>
           <view class="product-info-grid">
             <text class="product-title-grid">{{ item.title }}</text>
-            <text class="product-desc-grid">{{ item.description }}</text>
+            <text class="product-desc-grid" v-if="item.description">{{ item.description }}</text>
             <view class="price-row">
               <text class="price">¥{{ item.price }}</text>
-              <text class="unit">{{ item.unit }}</text>
+              <text class="unit" v-if="item.unit">{{ item.unit }}</text>
             </view>
           </view>
         </view>
       </view>
+      <u-loadmore :status="loadStatus" @loadmore="fetchNewProducts(true)" v-if="newProducts.length > 0 || loadStatus === 'loading'" />
+      <u-empty mode="list" text="暂无新品" v-if="!isLoadingNewProducts && newProducts.length === 0 && loadStatus !== 'loading'"></u-empty>
     </view>
 
     <!-- 底部导航栏 -->
@@ -163,156 +179,216 @@
 </template>
 
 <script>
+import { toast } from '@/utils/utils.js'; // 引入toast
+
 export default {
   data() {
     return {
-      title: '商城',
-      searchKeyword: '',
-      bannerList: [
-        {
-          image: 'https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600',
-          title: '高端净水机限时特惠'
-        },
-        {
-          image: 'https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600',
-          title: '新品滤芯上市'
-        },
-        {
-          image: 'https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600',
-          title: '618大促销'
-        }
-      ],
-      categories: [
-        {
-          name: '净水机',
-          icon: 'filter',
-          bgColor: '#e7f1ff',
-          iconColor: '#3c9cff'
-        },
-        {
-          name: '滤芯',
-          icon: 'reload',
-          bgColor: '#e5f7ef',
-          iconColor: '#19be6b'
-        },
-        {
-          name: '配件',
-          icon: 'setting',
-          bgColor: '#fdf6ec',
-          iconColor: '#ff9900'
-        },
-        {
-          name: '服务',
-          icon: 'server-fill',
-          bgColor: '#fef0f0',
-          iconColor: '#fa3534'
-        }
-      ],
-      hotProducts: [
-        {
-          id: 1,
-          title: '高端家用净水机',
-          price: '1999',
-          unit: '起',
-          image: 'https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600',
-          tag: '热销',
-          tagType: 'hot'
-        },
-        {
-          id: 2,
-          title: '高效复合滤芯',
-          price: '299',
-          unit: '/个',
-          image: 'https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600',
-          tag: '新品',
-          tagType: 'new'
-        },
-        {
-          id: 3,
-          title: '商用大流量净水机',
-          price: '3999',
-          unit: '起',
-          image: 'https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600',
-          tag: '特惠',
-          tagType: 'discount'
-        }
-      ],
-      newProducts: [
-        {
-          id: 1,
-          title: '高端家用净水机',
-          description: '五级过滤系统，智能控制，超静音设计',
-          price: '1999',
-          unit: '起',
-          image: 'https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600',
-          tag: '热销',
-          tagType: 'hot'
-        },
-        {
-          id: 2,
-          title: '高效复合滤芯',
-          description: '有效过滤杂质，持久耐用，智能提醒更换',
-          price: '299',
-          unit: '/个',
-          image: 'https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600',
-          tag: '新品',
-          tagType: 'new'
-        },
-        {
-          id: 3,
-          title: '商用大流量净水机',
-          description: '适用于商业场所，大流量供水系统',
-          price: '3999',
-          unit: '起',
-          image: 'https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600',
-          tag: '特惠',
-          tagType: 'discount'
-        },
-        {
-          id: 4,
-          title: '净水机配件套装',
-          description: '管道接头+扳手+密封圈，安装维护必备',
-          price: '159',
-          unit: '/套',
-          image: 'https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600',
-          tag: '套装',
-          tagType: 'package'
-        }
-      ]
-    }
+      title: '商城', // 页面标题
+      searchKeyword: '', // 搜索关键词
+      bannerList: [],    // Banner列表
+      categories: [],    // 分类导航列表
+      hotProducts: [],   // 热销商品列表
+      newProducts: [],   // 新品上市/主商品列表
+
+      isLoadingBanners: false,    // Banner加载状态
+      isLoadingCategories: false, // 分类加载状态
+      isLoadingHotProducts: false,// 热销商品加载状态
+      isLoadingNewProducts: false,// 新品加载状态
+
+      // 新品分页参数 (如果需要)
+      page: 1,
+      limit: 10, // 每页加载10条新品
+      loadStatus: 'loadmore' // 'loadmore', 'loading', 'nomore'
+    };
+  },
+  onLoad() {
+    // 页面加载时获取初始数据
+    this.loadInitialData();
+  },
+  onShow() {
+    // 可根据需求决定是否在onShow中也刷新部分或全部数据
+  },
+  onReachBottom() {
+    // 页面滚动到底部时加载更多新品
+    this.fetchNewProducts(true);
   },
   methods: {
+    // 加载所有初始数据
+    loadInitialData() {
+      this.fetchBanners();
+      this.fetchCategories();
+      this.fetchHotProducts();
+      this.fetchNewProducts(false); // 首次加载新品
+    },
+    // 获取Banner数据
+    async fetchBanners() {
+      this.isLoadingBanners = true;
+      try {
+        const res = await this.$api.getBlockListByType({ type: 'uniapp_shop_banner' }); // 假设Banner类型为 uniapp_shop_banner
+        if (res.code === 1 && res.data) {
+          this.bannerList = res.data.map(item => ({
+            ...item, // 保留API返回的其他字段，如url, title
+            image: item.image // API已处理cdnurl
+          }));
+        } else {
+          toast(res.msg || '获取Banner失败');
+          this.bannerList = []; // API失败则清空
+        }
+      } catch (error) {
+        console.error('fetchBanners error:', error);
+        toast('网络请求Banner出错');
+        this.bannerList = [];
+      } finally {
+        this.isLoadingBanners = false;
+      }
+    },
+    // 获取分类数据
+    async fetchCategories() {
+      this.isLoadingCategories = true;
+      // 预设分类样式，如果API不返回颜色和图标信息
+      const staticCategoryStyles = {
+        '净水机': { icon: 'filter', bgColor: '#e7f1ff', iconColor: '#3c9cff' },
+        '滤芯': { icon: 'reload', bgColor: '#e5f7ef', iconColor: '#19be6b' },
+        '配件': { icon: 'setting', bgColor: '#fdf6ec', iconColor: '#ff9900' },
+        '服务': { icon: 'server-fill', bgColor: '#fef0f0', iconColor: '#fa3534' }
+      };
+      try {
+        const res = await this.$api.getCategory(); // 或者 this.$api.allCategory()
+        if (res.code === 1 && res.data) {
+           // 假设 res.data 是一个数组，每个元素包含 id, name, image (可选)等
+          this.categories = res.data.map(item => {
+            const style = staticCategoryStyles[item.name] || { icon: 'list-dot', bgColor: '#f0f0f0', iconColor: '#909399' }; // 默认样式
+            return {
+              id: item.id,
+              name: item.name,
+              image: item.image ? item.image : null, // 如果API返回图片则使用，否则可能只用图标
+              icon: item.icon || style.icon, // 优先使用API返回的图标
+              bgColor: item.bgColor || style.bgColor, // 优先使用API返回的背景色
+              iconColor: item.iconColor || style.iconColor // 优先使用API返回的图标颜色
+            };
+          });
+        } else {
+          toast(res.msg || '获取分类失败');
+          this.categories = Object.entries(staticCategoryStyles).map(([name, style]) => ({ id: name, name, ...style })); // API失败则使用静态数据回退
+        }
+      } catch (error) {
+        console.error('fetchCategories error:', error);
+        toast('网络请求分类出错');
+        this.categories = Object.entries(staticCategoryStyles).map(([name, style]) => ({ id: name, name, ...style }));
+      } finally {
+        this.isLoadingCategories = false;
+      }
+    },
+    // 获取热销商品数据
+    async fetchHotProducts() {
+      this.isLoadingHotProducts = true;
+      try {
+        const res = await this.$api.getGoodsList({ is_hot: 1, limit: 4 }); // 假设 is_hot=1 表示热销
+        if (res.code === 1 && res.data && res.data.data) {
+          this.hotProducts = res.data.data.map(item => ({
+            id: item.id,
+            title: item.title,
+            price: parseFloat(item.price).toFixed(2),
+            image: item.image, // API已处理cdnurl
+            tag: item.flag_text || '热销', // 后端可能直接返回 flag_text
+            tagType: 'hot' // 前端定义样式用
+          }));
+        } else {
+          toast(res.msg || '获取热销商品失败');
+          this.hotProducts = [];
+        }
+      } catch (error) {
+        console.error('fetchHotProducts error:', error);
+        toast('网络请求热销商品出错');
+        this.hotProducts = [];
+      } finally {
+        this.isLoadingHotProducts = false;
+      }
+    },
+    // 获取新品/主列表商品数据 (支持分页)
+    async fetchNewProducts(isLoadMore = false) {
+      if (isLoadMore && (this.loadStatus === 'loading' || this.loadStatus === 'nomore')) {
+        return; // 防止重复加载或已无更多时加载
+      }
+      if (!isLoadMore) {
+        this.page = 1;
+        this.newProducts = [];
+        this.loadStatus = 'loadmore';
+      }
+      this.isLoadingNewProducts = !isLoadMore; // 首次加载时显示列表的loading状态
+      this.loadStatus = 'loading';
+
+      try {
+        const res = await this.$api.getGoodsList({ is_new: 1, page: this.page, limit: this.limit }); // 假设 is_new=1 表示新品
+        if (res.code === 1 && res.data && res.data.data) {
+          const productList = res.data.data.map(item => ({
+            id: item.id,
+            title: item.title,
+            description: item.description || item.keywords || '', // 简短描述
+            price: parseFloat(item.price).toFixed(2),
+            unit: item.unit || '件', // 商品单位，如果API提供
+            image: item.image, // API已处理cdnurl
+            tag: item.flag_text || (item.is_new ? '新品' : ''), // 标签文本
+            tagType: item.is_new ? 'new' : (item.is_hot ? 'hot' : (item.is_discount ? 'discount' : '')) // 标签类型
+          }));
+
+          if (isLoadMore) {
+            this.newProducts = this.newProducts.concat(productList);
+          } else {
+            this.newProducts = productList;
+          }
+
+          this.page++;
+          this.loadStatus = productList.length < this.limit ? 'nomore' : 'loadmore';
+        } else {
+          toast(res.msg || '获取新品失败');
+          this.loadStatus = isLoadMore ? 'loadmore' : 'nomore';
+        }
+      } catch (error) {
+        console.error('fetchNewProducts error:', error);
+        toast('网络请求新品出错');
+        this.loadStatus = 'loadmore';
+      } finally {
+        this.isLoadingNewProducts = false;
+      }
+    },
+    // 跳转到分类商品列表页
     selectCategory(category) {
-      uni.showToast({
-        title: `选择分类: ${category.name}`,
-        icon: 'none'
-      })
+      uni.navigateTo({
+        url: `/pages/shop/list?category_id=${category.id}&title=${category.name}` // 假设列表页用 category_id
+      });
     },
+    // 查看更多商品 (热销/新品)
     viewMore(type) {
-      uni.showToast({
-        title: `查看更多${type === 'hot' ? '热销' : '新品'}商品`,
-        icon: 'none'
-      })
+      let params = { type: type };
+      if (type === 'hot') params.is_hot = 1;
+      if (type === 'new') params.is_new = 1;
+      uni.navigateTo({
+        url: `/pages/shop/list?${this.$u.queryParams(params)}`
+      });
     },
+    // 查看商品详情
     viewProduct(item) {
-      uni.showToast({
-        title: `查看商品: ${item.title}`,
-        icon: 'none'
-      })
+      uni.navigateTo({
+        url: `/pages/shop/family?id=${item.id}` // 跳转到商品详情页，传递商品ID
+      });
     },
+    // 立即购买 (示例，具体逻辑根据业务调整)
     buyNow(item) {
-      uni.showToast({
-        title: `购买商品: ${item.title}`,
-        icon: 'none'
-      })
+      // 可能跳转到订单确认页或加入购物车等
+      uni.navigateTo({
+         url: `/pages/shop/addinfo?productId=${item.id}&price=${item.price}&title=${item.title}` // 简化版参数
+      });
     },
     tabbarChange(index) {
-      // 处理底部导航切换
+      // 底部导航栏切换处理，如果当前页不是tab页，则不需要此方法或应调整
+      // 此处goToPage已经处理了跳转
     },
     goToPage(url) {
-      uni.switchTab({
+      uni.switchTab({ // 使用switchTab跳转到Tab页
         url: url
-      })
+      });
     }
   }
 }

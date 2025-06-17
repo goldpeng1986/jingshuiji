@@ -134,21 +134,34 @@ export default {
         }, 1500);
       } else if (this.modalType === 'logout') {
         // 执行退出登录操作
-        uni.showToast({
-          title: '已退出登录',
-          icon: 'success'
-        });
-        
-        // 实际应用中应该清除登录状态并跳转到登录页
-        // uni.clearStorageSync();
-        // uni.reLaunch({
-        //   url: '/pages/login/index'
-        // });
+        uni.showLoading({ title: '正在退出...' }); // 显示加载提示
+        try {
+          const res = await this.$api.goUserLogout(); // 调用API退出登录
+          uni.hideLoading(); // 隐藏加载提示
+          if (res.code === 1) { // 假设code为1表示成功
+            // 清除本地存储的token和用户信息
+            uni.removeStorageSync('token');
+            uni.removeStorageSync('userInfo');
+
+            this.$u.toast('已退出登录'); // 显示成功提示
+
+            // 延时后跳转到登录页
+            setTimeout(() => {
+              uni.reLaunch({ url: '/pages/me/login' }); // 使用reLaunch确保其他页面栈被清除
+            }, 1000);
+          } else {
+            this.$u.toast(res.msg || '退出失败，请稍后再试'); // 显示后端返回的错误信息
+          }
+        } catch (error) {
+          uni.hideLoading(); // 隐藏加载提示
+          console.error('logout error:', error);
+          this.$u.toast('请求失败，请稍后再试'); // 显示通用网络错误提示
+        }
       }
-      this.showModal = false;
+      this.showModal = false; // 关闭弹窗
     },
     cancelModal() {
-      this.showModal = false;
+      this.showModal = false; // 关闭弹窗
     }
   }
 }
