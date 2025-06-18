@@ -10,7 +10,7 @@
     
     <!-- 修改密码表单 -->
     <view class="form-section">
-      <u-form :model="this" ref="uForm" :errorType="['message']"> <!-- :model can point to `this` if fields are direct properties -->
+      <u-form :model="this" ref="uForm" :errorType="['message']"> <!-- 如果表单字段是 data 中的直接属性，:model 可以指向 this -->
         <!-- 原密码 -->
         <u-form-item label="原密码" prop="oldPassword" borderBottom labelWidth="80">
           <u-input 
@@ -93,19 +93,21 @@ export default {
         newPassword: '',
         confirmPassword: ''
       }
-      // uView form rules removed, using custom validation
+      // uView 的表单规则已移除，改用自定义校验逻辑
     }
   },
   // onReady() {
-    // this.$refs.uForm.setRules(this.rules); // Not needed if not using uView rules prop
+    // 如果使用 uView 的 rules 属性进行校验，则在此设置规则
+    // this.$refs.uForm.setRules(this.rules);
   // },
   methods: {
     clearError(fieldName) {
+      // 清除指定字段的错误信息
       this.errorMessages[fieldName] = '';
     },
     validateForm() {
       let isValid = true;
-      // Clear previous errors
+      // 清除之前的错误信息
       this.errorMessages = { oldPassword: '', newPassword: '', confirmPassword: '' };
 
       if (!this.oldPassword) {
@@ -116,17 +118,16 @@ export default {
       if (!this.newPassword) {
         this.errorMessages.newPassword = '请输入新密码';
         isValid = false;
-      } else if (this.newPassword.length < 6) { // Example: min length 6
+      } else if (this.newPassword.length < 6) { // 示例：新密码最小长度为6位
         this.errorMessages.newPassword = '新密码长度至少为6位';
         isValid = false;
       }
-      // Add more complex regex validation if needed, e.g., for letters and numbers
-      // const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/;
+      // 如果需要更复杂的正则校验（例如，要求同时包含字母和数字），可以在此添加
+      // const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/; // 示例正则：至少6位，含字母和数字
       // if (this.newPassword && !passwordRegex.test(this.newPassword)) {
       //   this.errorMessages.newPassword = '密码必须包含字母和数字，且长度至少6位';
       //   isValid = false;
       // }
-
 
       if (!this.confirmPassword) {
         this.errorMessages.confirmPassword = '请再次输入新密码';
@@ -136,68 +137,72 @@ export default {
         isValid = false;
       }
 
-      return isValid;
+      return isValid; // 返回校验结果
     },
-    async handleChangePassword() { // Renamed from submitForm
-      if (!this.validateForm()) {
+    async handleChangePassword() { // 方法名从 submitForm 修改而来
+      if (!this.validateForm()) { // 首先进行表单校验
         uni.showToast({ title: '请检查输入内容', icon: 'none' });
         return;
       }
 
-      this.isLoading = true;
+      this.isLoading = true; // 开始加载状态
       try {
         const params = {
           old_password: this.oldPassword,
           new_password: this.newPassword,
-          confirm_password: this.confirmPassword // API might just need new_password
+          confirm_password: this.confirmPassword // API可能仅需要 new_password，根据实际情况调整
         };
-        // Adjust params based on actual API spec (e.g. some APIs only need old_password and new_password)
+        // 根据实际API规范调整参数 (例如，某些API仅需 old_password 和 new_password)
 
-        const res = await changeUserPassword(params); // Direct call
-        // Or: const res = await this.$api.changeUserPassword(params);
+        const res = await changeUserPassword(params); // 直接调用导入的API函数
+        // 或者: const res = await this.$api.changeUserPassword(params); // 如果是通过 this.$api 方式调用
 
-        this.isLoading = false;
+        this.isLoading = false; // 结束加载状态
 
-        // Assuming API returns a success message or specific structure on success
-        if (res && (res.code === 0 || res.success || res.code === 200)) { // Adjust condition based on API
+        // 假设API成功时返回特定结构或状态码
+        if (res && (res.code === 0 || res.success || res.code === 200)) { // 根据API实际响应调整成功判断条件
             uni.showToast({
               title: res.message || res.msg || '密码修改成功，请重新登录',
               icon: 'success',
               duration: 2000
             });
+            // 清空输入框
             this.oldPassword = '';
             this.newPassword = '';
             this.confirmPassword = '';
-            // Optionally navigate away
+            // 可选：延时后导航离开当前页面
             setTimeout(() => {
-              // uni.reLaunch({ url: '/pages/login/index' }); // Example: to login
-              uni.navigateBack();
+              // uni.reLaunch({ url: '/pages/login/index' }); // 示例：跳转到登录页
+              uni.navigateBack(); // 返回上一页
             }, 2000);
         } else {
-             // Handle cases where API indicates success=false but not via HTTP error
+             // 处理API返回 success=false 但非HTTP错误的情况
              uni.showToast({ title: res.message || res.msg || '密码修改失败', icon: 'none' });
         }
 
       } catch (err) {
-        this.isLoading = false;
-        console.error('Change password error:', err);
+        this.isLoading = false; // 发生错误时也结束加载状态
+        console.error('修改密码时发生错误:', err);
         if (err.data && err.data.errors) {
-          // Handle field-specific errors from backend
+          // 处理后端返回的字段特定错误
           const backendErrors = err.data.errors;
           for (const key in backendErrors) {
             if (this.errorMessages.hasOwnProperty(key)) {
-              this.errorMessages[key] = backendErrors[key][0]; // Take the first error message for the field
-            } else if (key === 'password') { // Common backend field name for new password
+              this.errorMessages[key] = backendErrors[key][0]; // 取该字段的第一个错误信息
+            } else if (key === 'password') { // 后端通用新密码字段名可能为 'password'
                  this.errorMessages.newPassword = backendErrors[key][0];
             }
           }
            uni.showToast({ title: err.data.message || '请检查表单字段', icon: 'none' });
         } else if (err.data && (err.data.message || err.data.msg) ) {
+          // 通用错误信息处理（非字段特定）
           uni.showToast({ title: err.data.message || err.data.msg, icon: 'none', duration: 3000 });
         } else if (err.message) {
+            // 其他类型的错误（如网络错误但通过catch捕获）
             uni.showToast({ title: err.message, icon: 'none', duration: 3000 });
         }
         else {
+          // 未知错误或上述条件均不满足时的通用提示
           uni.showToast({ title: '密码修改失败，请稍后再试', icon: 'none', duration: 3000 });
         }
       }

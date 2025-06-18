@@ -11,28 +11,28 @@
       </view>
     </view>
     
-    <!-- Loading State -->
+    <!-- 加载状态 -->
     <view v-if="isLoading" class="loading-state">
       <u-loading-icon text="正在加载..." size="24"></u-loading-icon>
     </view>
 
-    <!-- Error State -->
+    <!-- 错误状态 -->
     <view v-if="!isLoading && errorLoading" class="error-state">
       <u-empty mode="network" text="加载失败，请稍后重试"></u-empty>
       <u-button @click="fetchNoticeList" type="primary" size="small" text="重试" :customStyle="{marginTop: '20rpx'}"></u-button>
     </view>
 
-    <!-- 公告列表: Show only if not loading, no error, and list has items -->
+    <!-- 公告列表: 仅在非加载、无错误且列表有数据时显示 -->
     <view class="notice-list" v-if="!isLoading && !errorLoading && noticeList.length > 0">
       <view 
         class="notice-item" 
         v-for="(item, index) in noticeList" 
-        :key="item.id || index" <!-- Use item.id if available, otherwise fallback to index -->
+        :key="item.id || index" <!-- 如果 item.id 存在则使用，否则回退到使用 index -->
         @click="viewNoticeDetail(item)"
         :style="{animationDelay: index * 0.1 + 's'}"
       >
         <view class="notice-card">
-          <!-- Use fallback values for properties in case API structure varies -->
+          <!-- 如果API响应结构可能变化，为属性使用回退值 -->
           <view class="notice-tag" :style="{backgroundColor: item.tagBgColor || '#fef0f0'}">{{ item.type || item.category || '通知' }}</view>
           <view class="notice-header">
             <view class="notice-title">
@@ -61,7 +61,7 @@
       </view>
     </view>
     
-    <!-- 空状态: Show only if not loading, no error, and list is empty -->
+    <!-- 空状态: 仅在非加载、无错误且列表为空时显示 -->
     <view class="empty-state" v-if="!isLoading && !errorLoading && noticeList.length === 0">
       <u-empty 
         mode="data" 
@@ -97,6 +97,7 @@ export default {
         .then(res => {
           let notices = [];
           if (res && res.data) {
+            // API响应可能直接是数组，或者在 res.data.list 或 res.data.items 中
             if (Array.isArray(res.data)) {
               notices = res.data;
             } else if (res.data.list && Array.isArray(res.data.list)) {
@@ -105,10 +106,12 @@ export default {
                 notices = res.data.items;
             }
              else {
-              console.warn('API response for getNoticeList is not in expected format or data is not an array:', res.data);
+              // 如果API响应的data不是预期格式（例如不是数组），发出警告
+              console.warn('API响应 getNoticeList 的数据格式不符合预期或data不是一个数组:', res.data);
             }
           } else {
-            console.warn('API response for getNoticeList is empty or not in expected format:', res);
+             // 如果API响应为空或格式不符合预期，发出警告
+            console.warn('API响应 getNoticeList 为空或格式不符合预期:', res);
           }
           this.noticeList = notices;
           this.isLoading = false;
@@ -116,14 +119,14 @@ export default {
         .catch(error => {
           this.isLoading = false;
           this.errorLoading = true;
-          console.error('Error fetching notice list:', error);
+          console.error('获取通知列表时发生错误:', error);
         });
     },
     viewNoticeDetail(notice) {
-      // Example: uni.$u.route({ url: '/pages/notice/info', params: { id: notice.id } });
-      // If your detail page expects the full notice object, you might pass it like this:
+      // 示例：uni.$u.route({ url: '/pages/notice/info', params: { id: notice.id } });
+      // 如果详情页期望接收完整的 notice 对象，可以像这样传递：
       // uni.navigateTo({ url: '/pages/notice/info?item=' + encodeURIComponent(JSON.stringify(notice)) });
-      // For now, keeping the existing generic navigation until detail page requirements are known.
+      // 目前，在详情页需求明确前，保留现有的通用导航逻辑。
       uni.$u.route("/pages/notice/info");
     }
   }

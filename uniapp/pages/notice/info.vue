@@ -10,18 +10,18 @@
       </view>
     </view>
 
-    <!-- Loading State -->
+    <!-- 加载状态 -->
     <view v-if="isLoading" class="loading-state state-container">
       <u-loading-icon text="正在加载公告详情..." size="24"></u-loading-icon>
     </view>
 
-    <!-- Error State -->
+    <!-- 错误状态 -->
     <view v-if="!isLoading && errorLoading" class="error-state state-container">
       <u-empty mode="network" text="加载失败，请检查网络后重试"></u-empty>
       <u-button @click="fetchNoticeDetails" type="primary" size="medium" text="点我重试" :customStyle="{marginTop: '20rpx', width: '300rpx'}"></u-button>
     </view>
     
-    <!-- Content Display: Show only if not loading, no error, and noticeInfo is available -->
+    <!-- 内容展示: 仅在非加载中、无错误且 noticeInfo 有数据时显示 -->
     <view v-if="!isLoading && !errorLoading && noticeInfo" class="info-container" :style="{animationDelay: '0.1s'}">
       <view class="info-card">
         <view class="info-tag" :style="{backgroundColor: noticeInfo.tagBgColor || '#e5f7ff'}">{{ noticeInfo.type || noticeInfo.category || '通知' }}</view>
@@ -44,11 +44,11 @@
         </view>
         
         <view class="info-content">
-          <!-- If content can be HTML, use v-html and ensure it's sanitized. For plain text: -->
+          <!-- 如果内容可能包含HTML，使用v-html并确保其已净化。纯文本则直接使用： -->
           <text class="content-text">{{ noticeInfo.content }}</text>
         </view>
         
-        <!-- Additional Info Section - Conditionally render if data exists -->
+        <!-- 附加信息区域 - 如果数据存在则条件渲染 -->
         <view class="additional-info" v-if="noticeInfo.additionalInfo && noticeInfo.additionalInfo.length > 0">
           <u-line color="#f3f4f6" margin="20rpx 0"></u-line>
           <view class="section-title">附加信息</view>
@@ -90,7 +90,7 @@
       </view>
     </view>
     
-    <!-- Empty State for No Data Found (after successful load but no data) -->
+    <!-- 空状态 - 数据未找到 (API成功加载但无数据) -->
     <view class="empty-state state-container" v-if="!isLoading && !errorLoading && !noticeInfo">
       <u-empty 
         mode="data" 
@@ -108,110 +108,111 @@ import { getNoticeInfo } from '../../api/api';
 export default {
   data() {
     return {
-      title: '详情信息',
-      noticeInfo: null,
-      isLoading: false,
-      errorLoading: false,
-      noticeId: null
+      title: '详情信息', // 页面标题
+      noticeInfo: null, // 存储获取到的公告详情对象
+      isLoading: false, // 加载状态标志
+      errorLoading: false, // 错误状态标志
+      noticeId: null // 从路由参数中获取的公告ID
     }
   },
   onLoad(options) {
-    // Check for 'id' first, as it's the primary expected parameter.
+    // 首先检查 'id'，因为它是预期的主要参数。
     if (options && options.id) {
       this.noticeId = options.id;
       this.fetchNoticeDetails();
     }
-    // Fallback to 'item' if 'id' is not present. This might be a JSON string.
+    // 如果 'id' 不存在，则回退到检查 'item'。这可能是一个JSON字符串。
     else if (options && options.item) {
       try {
         const item = JSON.parse(decodeURIComponent(options.item));
         if (item && item.id) {
           this.noticeId = item.id;
-          // Option: If the full item is passed, you might want to display it immediately
-          // while fetching fresh data, or just use it directly if fresh data isn't critical.
-          // For this example, we'll prioritize fetching fresh data.
-          // this.noticeInfo = item; // Could be used for an initial quick display
+          // 可选项: 如果传递了完整的item对象，可以考虑立即显示它，
+          // 同时获取最新数据，或者如果最新数据不那么关键，就直接使用它。
+          // 本例中，我们将优先获取最新数据。
+          // this.noticeInfo = item; // 可用于初始快速显示
           this.fetchNoticeDetails();
         } else {
-          console.error('Parsed item does not contain an ID:', item);
-          this.handleMissingId();
+          console.error('解析后的 item 对象不包含 ID:', item);
+          this.handleMissingId(); // 处理ID缺失的情况
         }
       } catch (e) {
-        console.error('Error parsing item from options:', e);
-        this.handleMissingId();
+        console.error('从 options 解析 item 时发生错误:', e);
+        this.handleMissingId(); // 处理ID缺失的情况
       }
     }
-    // If neither 'id' nor 'item' (with a valid ID) is found.
+    // 如果既没有 'id' 也没有有效的 'item' (包含ID)。
     else {
-      console.error('Notice ID not found in options:', options);
-      this.handleMissingId();
+      console.error('在 options 中未找到公告 ID:', options);
+      this.handleMissingId(); // 处理ID缺失的情况
     }
   },
   methods: {
     handleMissingId() {
       this.isLoading = false;
-      this.errorLoading = true; // Show an error state in the template
+      this.errorLoading = true; // 在模板中显示错误状态
       uni.showToast({
         title: '无效的公告ID',
         icon: 'error',
         duration: 2000
       });
-      // Consider navigating back or showing a more permanent error message in the UI
+      // 考虑导航回上一页或在UI中显示更持久的错误消息
       // setTimeout(() => uni.navigateBack(), 2000);
     },
     fetchNoticeDetails() {
       if (!this.noticeId) {
-        // This case should ideally be caught by onLoad logic, but as a safeguard:
+        // 此情况理想上应由 onLoad 逻辑捕获，但作为安全措施：
         this.isLoading = false;
         this.errorLoading = true;
-        console.error('fetchNoticeDetails called without a noticeId.');
+        console.error('调用 fetchNoticeDetails 时 noticeId 为空');
         uni.showToast({ title: '公告ID缺失', icon: 'error' });
         return;
       }
       this.isLoading = true;
       this.errorLoading = false;
-      this.$api.getNoticeInfo({ id: this.noticeId })
+      this.$api.getNoticeInfo({ id: this.noticeId }) // API请求，传递ID
         .then(res => {
           if (res && res.data) {
-            // Assuming the actual notice object is within res.data
-            // Common patterns: res.data itself, or res.data.detail, res.data.info
+            // 假设实际的公告对象在 res.data 中
+            // 常见的模式有：res.data 本身，或者嵌套在 res.data.detail, res.data.info 中
             this.noticeInfo = res.data.info || res.data.detail || res.data;
           } else {
-            this.noticeInfo = null; // Explicitly set to null if no valid data
-            console.warn('Notice data not found in response or unexpected response structure:', res);
+            this.noticeInfo = null; // 如果未找到有效数据，则显式设置为 null
+            console.warn('未在响应中找到公告数据或响应结构不符合预期:', res);
           }
           this.isLoading = false;
         })
         .catch(error => {
           this.isLoading = false;
           this.errorLoading = true;
-          this.noticeInfo = null; // Clear any potentially stale data
-          console.error('Error fetching notice details:', error);
+          this.noticeInfo = null; // 清除任何可能存在的旧数据
+          console.error('获取公告详情时发生错误:', error);
           uni.showToast({
             title: '加载失败，请重试',
-            icon: 'none' // Using 'none' as error details are in console and UI will show error state
+            icon: 'none' // 使用 'none' 是因为错误详情已在控制台输出，且UI会显示错误状态
           });
         });
     },
     goBack() {
-      uni.navigateBack();
+      uni.navigateBack(); // 返回上一页
     },
     shareInfo() {
+      // 分享信息逻辑
       if (this.noticeInfo && this.noticeInfo.title && this.noticeInfo.id) {
         uni.share({
-          provider: 'weixin', // Example: share to WeChat
-          scene: 'WXSceneSession', // Example: share to chat session
-          type: 0, // 0 for webpage
-          href: `https://yourdomain.com/notice/${this.noticeInfo.id}`, // Replace with your actual notice URL
+          provider: 'weixin', // 例如：分享到微信
+          scene: 'WXSceneSession', // 例如：分享到聊天会话
+          type: 0, // 0 表示网页类型
+          href: `https://yourdomain.com/notice/${this.noticeInfo.id}`, // 替换为你的实际公告链接
           title: this.noticeInfo.title,
-          summary: this.noticeInfo.content ? (this.noticeInfo.content.substring(0, 50) + '...') : '查看公告详情',
-          imageUrl: this.noticeInfo.imageUrl || '', // Optional: Add an image URL if available
+          summary: this.noticeInfo.content ? (this.noticeInfo.content.substring(0, 50) + '...') : '查看公告详情', // 内容摘要
+          imageUrl: this.noticeInfo.imageUrl || '', // 可选：如果公告有图片，则添加图片URL
           success: (res) => {
             uni.showToast({ title: '分享成功', icon: 'success' });
           },
           fail: (err) => {
             uni.showToast({ title: '分享取消或失败', icon: 'none' });
-            console.error("Share failed:" + JSON.stringify(err));
+            console.error("分享失败:" + JSON.stringify(err));
           }
         });
       } else {
@@ -232,7 +233,7 @@ export default {
   padding-bottom: 30rpx;
 }
 
-.state-container { // Common styles for loading, error, and specific empty states
+.state-container { // 加载、错误和特定空状态的通用样式
   display: flex;
   flex-direction: column;
   align-items: center;

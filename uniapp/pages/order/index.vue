@@ -2,21 +2,21 @@
   <view class="container">
 
 
-    <!-- Initial Loading State -->
+    <!-- 初始加载状态 -->
     <view v-if="isLoading && orders.length === 0 && !errorLoading" class="loading-state state-container">
       <u-loading-icon text="正在加载订单..." size="24"></u-loading-icon>
     </view>
 
-    <!-- Error State -->
+    <!-- 错误状态 -->
     <view v-if="errorLoading && orders.length === 0" class="error-state state-container">
       <u-empty mode="network" text="订单加载失败"></u-empty>
       <u-button @click="fetchOrders(1)" type="primary" size="medium" text="点我重试" :customStyle="{marginTop: '20rpx', width: '300rpx'}"></u-button>
     </view>
 
-    <!-- Empty State -->
+    <!-- 空状态 -->
     <view v-if="!isLoading && !errorLoading && orders.length === 0" class="empty-state state-container">
       <u-empty mode="order" text="您还没有相关订单"></u-empty>
-      <!-- Optional: Button to browse products or something similar -->
+      <!-- 可选: 浏览商品或类似操作的按钮 -->
       <!-- <u-button @click="goToShop" type="primary" plain text="去逛逛" :customStyle="{marginTop: '20rpx', width: '300rpx'}"></u-button> -->
     </view>
 
@@ -25,22 +25,22 @@
       <!-- 订单卡片 -->
       <view 
         v-for="(order, index) in orders"
-        :key="order.id || order.order_sn || index" <!-- Ensure unique key -->
+        :key="order.id || order.order_sn || index" <!-- 确保key的唯一性 -->
         class="order-card"
-        @click="navigateToOrderDetail(order.id || order.order_sn)" <!-- Add navigation to detail page -->
+        @click="navigateToOrderDetail(order.id || order.order_sn)" <!-- 添加跳转到订单详情页的事件 -->
       >
         <view class="order-header">
           <view class="order-title-container">
-            <!-- Adjust status indicator based on API response -->
+            <!-- 根据API响应调整状态指示器 -->
             <view class="order-indicator" :class="getOrderStatusClass(order.status_code || order.status)"></view>
             <view>
               <text class="order-number">订单编号：{{ order.order_sn || order.order_no || 'N/A' }}</text>
-              <!-- Assuming a main product or title for the order, or generate one -->
+              <!-- 假设订单有一个主要商品或标题，或动态生成一个 -->
               <text class="order-title">{{ order.title || (order.items && order.items.length > 0 ? order.items[0].product_name : '服务订单') }}</text>
             </view>
           </view>
           <view class="status-container">
-             <!-- Adjust status icon and text based on API response -->
+             <!-- 根据API响应调整状态图标和文本 -->
             <view class="status-icon" :class="getOrderStatusClass(order.status_code || order.status)">
               <u-icon :name="getOrderStatusIcon(order.status_code || order.status)" color="#ffffff" size="12"></u-icon>
             </view>
@@ -48,7 +48,7 @@
           </view>
         </view>
         
-        <!-- Simplified details, or loop through order.items if that's the structure -->
+        <!-- 简化版详情，或如果API返回 order.items 结构则循环显示 -->
         <view class="order-details">
           <view class="detail-item" v-if="order.create_time">
             <text class="detail-label">下单时间:</text>
@@ -58,7 +58,7 @@
             <text class="detail-label">订单总额:</text>
             <text class="detail-value">¥{{ order.total_amount }}</text>
           </view>
-          <!-- Example for displaying first product item if order.items exists -->
+          <!-- 如果 order.items 存在，则显示第一个商品信息的示例 -->
           <view class="detail-item" v-if="order.items && order.items.length > 0">
               <text class="detail-label">{{ order.items[0].product_name }}:</text>
               <text class="detail-value">x{{ order.items[0].quantity }}</text>
@@ -71,13 +71,13 @@
             :type="getPayStatusType(order.pay_status_code || order.pay_status)"
             size="mini" 
             shape="circle"
-            @click.native.stop="handlePayment(order)" <!-- Add payment handling -->
+            @click.native.stop="handlePayment(order)" <!-- 添加支付处理事件 -->
           >{{ order.pay_status_text || order.pay_status_name || 'N/A' }}</u-button>
         </view>
       </view>
     </view>
 
-    <!-- Load More / Loading state for pagination -->
+    <!-- 加载更多 / 分页加载状态 -->
     <view v-if="isLoading && orders.length > 0" class="loading-more state-container">
         <u-loadmore status="loading" loadingText="努力加载更多订单中..." />
     </view>
@@ -95,23 +95,23 @@ export default {
   data() {
     return {
       title: '我的订单',
-      orders: [], // Renamed from orderList and initialized as empty
-      isLoading: true, // Start with loading true
-      errorLoading: false,
-      currentPage: 1,
-      totalPages: 1,
-      apiToken: null, // To store the token
-      apiUserId: null, // To store user_id
+      orders: [], // 从 orderList 重命名并初始化为空数组
+      isLoading: true, // 初始加载状态设置为 true
+      errorLoading: false, // 错误加载状态
+      currentPage: 1, // 当前页码
+      totalPages: 1, // 总页数
+      apiToken: null, // 用于存储token
+      apiUserId: null, // 用于存储用户ID
     }
   },
   onLoad(e) {
-    // Store token and user_id, then fetch orders
+    // 存储token和用户ID，然后获取订单
     this.apiToken = getStorageSync('token');
     const userInfo = getStorageSync('userInfo');
-    this.apiUserId = userInfo ? userInfo.id : null; // Assuming userInfo has an id property
+    this.apiUserId = userInfo ? userInfo.id : null; // 假设 userInfo 对象有 id 属性
 
     if (!this.apiToken || !this.apiUserId) {
-      console.error("Token or User ID is missing. Cannot fetch orders.");
+      console.error("Token 或用户 ID 缺失，无法获取订单。");
       this.isLoading = false;
       this.errorLoading = true;
       uni.showToast({
@@ -119,47 +119,49 @@ export default {
         icon: 'error',
         duration: 2000
       });
-      // Optionally redirect to login if token/user_id is critical
+      // 如果token/用户ID是关键信息，可以选择重定向到登录页
       // uni.redirectTo({ url: '/pages/login/index' });
       return;
     }
 
-    this.fetchOrders(1); // Fetch initial page
+    this.fetchOrders(1); // 获取初始页数据
   },
   onReachBottom() {
+    // 页面触底加载更多
     if (this.currentPage < this.totalPages && !this.isLoading) {
       this.fetchOrders(this.currentPage + 1);
     } else if (this.currentPage >= this.totalPages && !this.isLoading) {
-      // No toast here, u-loadmore component shows "no more" state if used in template for it
+      // 此处无需提示，u-loadmore 组件会显示 "没有更多了" 的状态
     }
   },
   methods: {
     navigateToOrderDetail(orderId) {
+      // 跳转到订单详情页
       if (!orderId) {
-        console.warn('navigateToOrderDetail called without orderId');
+        console.warn('调用 navigateToOrderDetail 时 orderId 为空');
         uni.showToast({ title: '无效订单', icon: 'none' });
         return;
       }
       uni.navigateTo({
-        url: `/pages/order/detail?id=${orderId}` // Assuming detail page is order/detail
+        url: `/pages/order/detail?id=${orderId}` // 假设订单详情页路径为 order/detail
       });
     },
     getOrderStatusClass(status) {
-      // Example: Adjust based on your actual status codes/values
-      // These might be numeric codes or string identifiers from your API
+      // 示例：根据实际的状态码或值进行调整
+      // 这些可能是API返回的数字代码或字符串标识符
       if (status === 'completed' || status === 1 || status === '已安装' || status === '已完成') {
-        return 'status-installed'; // Greenish
+        return 'status-installed'; // 绿色系
       } if (status === 'pending_payment' || status === '待支付' || status === 2) {
-        return 'status-pending-payment'; // Bluish or Orangeish
+        return 'status-pending-payment'; // 蓝色系或橙色系
       } if (status === 'processing' || status === '处理中' || status === 3) {
-        return 'status-processing'; // Yellowish
+        return 'status-processing'; // 黄色系
       } if (status === 'cancelled' || status === '已取消' || status === 0 || status === 'canceled') {
-        return 'status-cancelled'; // Greyish
+        return 'status-cancelled'; //灰色系
       }
-      return 'status-not-installed'; // Default or other states
+      return 'status-not-installed'; // 默认或其他状态
     },
     getOrderStatusIcon(status) {
-      // Example:
+      // 示例：根据状态返回对应的uView图标名称
       if (status === 'completed' || status === 1 || status === '已安装' || status === '已完成') {
         return 'checkmark-circle-fill';
       } if (status === 'pending_payment' || status === '待支付' || status === 2) {
@@ -169,14 +171,14 @@ export default {
       } if (status === 'cancelled' || status === '已取消' || status === 0 || status === 'canceled') {
         return 'close-circle-fill';
       }
-      return 'question-circle-fill'; // Default for unknown states
+      return 'question-circle-fill'; // 未知状态的默认图标
     },
     getOrderStatusTextColor(status) {
-      // Example:
+      // 示例：根据状态返回对应的文本颜色class
       if (status === 'completed' || status === 1 || status === '已安装' || status === '已完成') {
         return 'text-green';
       } if (status === 'pending_payment' || status === '待支付' || status === 2) {
-        return 'text-blue'; // Or text-orange
+        return 'text-blue'; // 或 text-orange
       } if (status === 'processing' || status === '处理中' || status === 3) {
         return 'text-yellow';
       } if (status === 'cancelled' || status === '已取消' || status === 0 || status === 'canceled') {
@@ -185,9 +187,9 @@ export default {
       return 'text-grey';
     },
     getPayStatusType(payStatus) {
-      // Example: payStatus might be a string like 'UNPAID', 'PAID', 'REFUNDED' or numeric codes
+      // 示例：支付状态可能为 'UNPAID', 'PAID', 'REFUNDED' 等字符串或数字代码
       if (payStatus === 'UNPAID' || payStatus === 0 || payStatus === '未支付') {
-        return 'warning'; // uView type for button
+        return 'warning'; // uView按钮类型
       } if (payStatus === 'PAID' || payStatus === 1 || payStatus === '已支付') {
         return 'success';
       } if (payStatus === 'REFUNDED' || payStatus === 2 || payStatus === '已退款') {
@@ -196,25 +198,27 @@ export default {
       return 'default';
     },
     handlePayment(order) {
+      // 处理支付逻辑
       if (!order) return;
-      // Example: Navigate to a payment page or initiate payment
-      // Check if order is unpaid before proceeding
+      // 示例：跳转到支付页面或发起支付请求
+      // 在继续前检查订单是否未支付
       const isUnpaid = order.pay_status_code === 0 || order.pay_status === 'UNPAID' || order.pay_status_text === '未支付';
       if (isUnpaid) {
         uni.showToast({ title: `处理订单 ${order.order_sn || order.id} 的支付...`, icon: 'loading' });
-        // uni.navigateTo({ url: `/pages/payment/index?orderId=${order.id || order.order_sn}` });
+        // uni.navigateTo({ url: `/pages/payment/index?orderId=${order.id || order.order_sn}` }); // 跳转到支付页示例
       } else {
         uni.showToast({ title: `订单 ${order.pay_status_text || order.pay_status_name || '状态未知'}`, icon: 'none' });
       }
     },
-    goToShop() { // Optional method for empty state button
-        uni.switchTab({ // Assuming you have a tab for shop/home
+    goToShop() { // 空状态按钮的可选方法
+        uni.switchTab({ // 假设有一个商店/首页的tab
             url: '/pages/index/index'
         });
     },
     fetchOrders(page = 1) {
+      // 获取订单列表
       if (!this.apiToken || !this.apiUserId) {
-        console.warn("fetchOrders called without token or userId.");
+        console.warn("调用 fetchOrders 时 token 或 userId 为空。");
         this.isLoading = false;
         this.errorLoading = true;
         return;
@@ -226,32 +230,34 @@ export default {
         token: this.apiToken,
         user_id: this.apiUserId,
         page: page,
-        limit: 10 // Assuming a limit of 10 items per page
+        limit: 10 // 假设每页限制10条数据
       };
 
       this.$api.orderList(params).then(res => {
-        if (res && res.data && res.data.list) { // Adjust based on your API response structure
+        if (res && res.data && res.data.list) { // 根据你的API响应结构调整
           if (page === 1) {
-            this.orders = res.data.list;
+            this.orders = res.data.list; // 第一页，直接赋值
           } else {
-            this.orders = this.orders.concat(res.data.list);
+            this.orders = this.orders.concat(res.data.list); // 后续页，追加数据
           }
-          this.currentPage = parseInt(res.data.current_page || res.data.page || 1); // API might use 'page' or 'current_page'
-          this.totalPages = parseInt(res.data.last_page || res.data.total_pages || 1); // API might use 'last_page' or 'total_pages'
+          // API 可能使用 'page' 或 'current_page'
+          this.currentPage = parseInt(res.data.current_page || res.data.page || 1);
+          // API 可能使用 'last_page' 或 'total_pages'
+          this.totalPages = parseInt(res.data.last_page || res.data.total_pages || 1);
         } else {
-          console.warn("Orders data not found or in unexpected format:", res);
-          if (page === 1) this.orders = []; // Clear if first page load fails to get data
-          // Consider setting totalPages to currentPage if list is empty but response is otherwise ok
+          console.warn("未找到订单数据或数据格式不符合预期:", res);
+          if (page === 1) this.orders = []; // 如果是第一页且获取数据失败，则清空列表
+          // 如果列表为空但响应正常，考虑将总页数设为当前页
           if (res && res.data && !res.data.list) {
              this.totalPages = this.currentPage;
           }
         }
         this.isLoading = false;
       }).catch(error => {
-        console.error("Error fetching orders:", error);
+        console.error("获取订单时发生错误:", error);
         this.isLoading = false;
         this.errorLoading = true;
-        if (page === 1) this.orders = []; // Clear orders on error for the first page
+        if (page === 1) this.orders = []; // 如果是第一页且发生错误，则清空订单
          uni.showToast({
             title: '订单加载失败',
             icon: 'none'
@@ -259,12 +265,13 @@ export default {
       });
     },
     goBack() {
-      uni.navigateBack();
+      uni.navigateBack(); // 返回上一页
     },
     tabbarChange(index) {
-      // 处理底部导航切换
+      // 处理底部导航切换逻辑（如果适用）
     },
     goToPage(url) {
+      // 跳转到指定tab页面
       uni.switchTab({
         url: url
       })
@@ -277,7 +284,7 @@ export default {
 .container {
   min-height: 100vh;
   background-color: #f5f7fa;
-  padding-bottom: 120rpx; // Adjust if you have a tabbar
+  padding-bottom: 120rpx; // 如果有底部导航栏，调整此值
 }
 
 .state-container {
@@ -285,16 +292,16 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 100rpx 30rpx; // Standardized padding
+  padding: 100rpx 30rpx; // 标准化内边距
   text-align: center;
 }
 
-// Specific styles for status indicators if needed, complementing uView's text color classes
-.status-installed { background-color: #10b981; /* Green */ } // For the little vertical bar and icon bg
-.status-pending-payment { background-color: #3c9cff; /* Blue */ }
-.status-processing { background-color: #f59e0b; /* Yellow/Orange */ }
-.status-cancelled { background-color: #c8c9cc; /* Grey */ }
-.status-not-installed { background-color: #f59e0b; /* Default/fallback color for vertical bar */ }
+// 特定状态指示器的样式（如果需要），补充uView的文本颜色类
+.status-installed { background-color: #10b981; /* 绿色 */ } /* 用于小的垂直条和图标背景 */
+.status-pending-payment { background-color: #3c9cff; /* 蓝色 */ }
+.status-processing { background-color: #f59e0b; /* 黄色/橙色 */ }
+.status-cancelled { background-color: #c8c9cc; /* 灰色 */ }
+.status-not-installed { background-color: #f59e0b; /* 垂直条的默认/回退颜色 */ }
 
 
 .text-green { color: #10b981; }

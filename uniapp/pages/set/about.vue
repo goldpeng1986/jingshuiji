@@ -1,9 +1,9 @@
 <template>
   <view class="container">
-    <!-- Page Loading State -->
+    <!-- 页面加载状态 -->
     <u-loading-page :loading="isLoading" loading-text="正在加载..."></u-loading-page>
 
-    <!-- Page Header (remains static or can be part of API data) -->
+    <!-- 页面头部（如果数据加载成功且无错误，则显示） -->
     <view class="page-header" v-if="!isLoading && !errorLoading">
       <view class="header-title">
         <u-icon name="info-circle" size="28" color="#fff"></u-icon>
@@ -11,19 +11,19 @@
       </view>
     </view>
     
-    <!-- Error State -->
+    <!-- 错误状态 -->
     <view v-if="!isLoading && errorLoading" class="state-container">
       <u-empty mode="network" text="信息加载失败">
         <u-button slot="bottom" type="primary" size="medium" @click="retryFetch" text="点我重试" :customStyle="{marginTop: '20px'}"></u-button>
       </u-empty>
     </view>
 
-    <!-- Not Found State -->
+    <!-- 未找到信息状态 -->
     <view v-if="!isLoading && !errorLoading && !aboutInfo" class="state-container">
       <u-empty mode="data" text="未能获取到相关信息"></u-empty>
     </view>
 
-    <!-- Main Content: Display only if not loading, no error, and aboutInfo is available -->
+    <!-- 主要内容区域：仅当加载完毕、无错误且aboutInfo存在时显示 -->
     <view class="about-section" v-if="!isLoading && !errorLoading && aboutInfo">
       <view class="logo-container">
         <image :src="aboutInfo.logoUrl || '/static/logo.png'" mode="aspectFit" class="app-logo"></image>
@@ -32,7 +32,7 @@
       </view>
       
       <view class="app-intro" v-if="aboutInfo.description">
-        <!-- Use u-parse if description can contain HTML -->
+        <!-- 如果描述包含HTML标签，则使用u-parse组件解析 -->
         <u-parse :content="aboutInfo.description" v-if="aboutInfo.description.includes('<') && aboutInfo.description.includes('>')"></u-parse>
         <text class="intro-text" v-else>{{ aboutInfo.description }}</text>
       </view>
@@ -44,7 +44,7 @@
         </view>
         <view class="feature-item" v-for="(feature, index) in aboutInfo.features" :key="index">
           <u-icon name="checkbox-mark" size="16" color="#3c9cff"></u-icon>
-          <!-- Assuming features is an array of strings. If objects, use feature.text or similar -->
+          <!-- 假设 features 是一个字符串数组；如果是对象数组，则使用 feature.text 或类似属性 -->
           <text class="feature-text">{{ typeof feature === 'string' ? feature : feature.text }}</text>
         </view>
       </view>
@@ -79,14 +79,15 @@ import { getAboutInfo } from '../../api/api';
 export default {
   data() {
     return {
-      title: '关于我们', // Can be overridden by API if needed
-      isLoading: true,
-      errorLoading: false,
-      aboutInfo: null,
-      // features: [] // This will now come from aboutInfo if available
+      title: '关于我们', // 如果API提供appName，此标题可能会被覆盖
+      isLoading: true, // 加载状态标志
+      errorLoading: false, // 错误状态标志
+      aboutInfo: null,  // 用于存储从API获取的关于我们的信息对象
+      // features: [] // 功能特点列表，如果API提供，将从此填充
     }
   },
   onLoad() {
+    // 页面加载时获取“关于我们”的详细信息
     this.fetchAboutDetails();
   },
   methods: {
@@ -94,30 +95,32 @@ export default {
       this.isLoading = true;
       this.errorLoading = false;
       try {
-        // Assuming $api is globally available or getAboutInfo is directly callable
-        const res = await getAboutInfo(); // Direct call
-        // Or: const res = await this.$api.getAboutInfo();
+        // 假设 $api 已全局可用，或者直接调用 getAboutInfo (如果不是通过 $api 方式)
+        const res = await getAboutInfo(); // 直接调用导入的API函数
+        // 或者: const res = await this.$api.getAboutInfo(); // 如果是通过this.$api方式调用
 
         if (res && res.data) {
-          // Assuming API returns data directly, or nested like res.data.info
+          // 假设API直接返回数据对象，或者嵌套在如 res.data.info 中
           this.aboutInfo = res.data.info || res.data;
-          if (this.aboutInfo && this.aboutInfo.appName) { // Example: override page title if appName exists
+          // 示例：如果API返回了appName，则覆盖当前页面的导航栏标题
+          if (this.aboutInfo && this.aboutInfo.appName) {
              uni.setNavigationBarTitle({ title: `关于 ${this.aboutInfo.appName}` });
           }
         } else {
-          console.warn('About info not found or in unexpected format:', res);
-          this.aboutInfo = null; // Ensure it's null if data is not as expected
+          console.warn('“关于我们”信息未找到或格式不符合预期:', res);
+          this.aboutInfo = null; // 确保如果数据不符合预期，aboutInfo被设为null
         }
       } catch (err) {
-        console.error('Error fetching about info:', err);
+        console.error('获取“关于我们”信息时发生错误:', err);
         this.errorLoading = true;
         this.aboutInfo = null;
         uni.showToast({ title: '信息加载失败', icon: 'none' });
       } finally {
-        this.isLoading = false;
+        this.isLoading = false; // 无论成功或失败，结束加载状态
       }
     },
     callService(phoneNumber) {
+      // 拨打电话方法
       if (phoneNumber) {
         uni.makePhoneCall({
           phoneNumber: phoneNumber
@@ -127,23 +130,26 @@ export default {
       }
     },
     openLink(url) {
+      // 打开链接方法
       if (url) {
+        // 确保URL以http(s)://开头
         if (!url.startsWith('http://') && !url.startsWith('https://')) {
           url = 'http://' + url;
         }
-        // For web, directly open. For app, consider uni.navigateTo to a webview page or use plus.runtime.openURL
+        // H5环境下直接打开新标签页
         // #ifdef H5
         window.open(url, '_blank');
         // #endif
+        // App环境下使用plus.runtime.openURL打开外部浏览器
         // #ifdef APP-PLUS
         plus.runtime.openURL(url);
         // #endif
-        // Fallback for other platforms or if above don't work as expected
+        // 其他平台的后备方案：复制URL到剪贴板并提示用户
         // #ifndef H5 || APP-PLUS
         uni.setClipboardData({
             data: url,
             success: () => {
-                uni.showToast({ title: '网址已复制，请在浏览器中打开', icon: 'none' });
+                uni.showToast({ title: '网址已复制，请在浏览器中打开', icon: 'none', duration: 3000 });
             }
         });
         // #endif
@@ -152,6 +158,7 @@ export default {
       }
     },
     retryFetch() {
+      // 重试获取数据的方法
         this.fetchAboutDetails();
     }
   }
