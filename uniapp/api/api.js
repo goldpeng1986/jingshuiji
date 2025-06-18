@@ -1,4 +1,25 @@
 import request from '@/utils/request'
+
+// 通知列表 - 获取通知列表
+export const getNoticeList = data => request.get('/addons/shop/api.notice/list', data);
+// 通知详情 - 获取指定通知的详细信息
+export const getNoticeInfo = data => request.get('/addons/shop/api.notice/detail', data);
+// 充值记录 - 获取充值记录
+export const getRechargeRecords = data => request.get('/addons/shop/api.recharge/records', data);
+// 通用记录 - 获取通用记录列表
+export const getGenericRecords = data => request.get('/addons/shop/api.records/list', data);
+// 关于信息 - 获取关于我们的信息
+export const getAboutInfo = data => request.get('/addons/shop/api.common/aboutus', data);
+// 用户设置 - 获取用户设置信息
+export const getUserSettings = data => request.get('/addons/shop/api.user/settings', data);
+// 修改密码 - 提交修改密码请求
+export const changeUserPassword = data => request.post('/addons/shop/api.user/changepassword', data);
+// 添加店铺信息 - 添加店铺信息
+export const addShopInformation = data => request.post('/addons/shop/api.shop/addinfo', data);
+// 店铺家族列表 - 获取店铺家族信息
+export const getShopFamilyList = data => request.get('/addons/shop/api.shop/familylist', data);
+// 店铺页面数据 - 获取店铺页面的主要数据
+export const getShopPageData = data => request.get('/addons/shop/api.shop/pagedata', data);
 //使用说明
 //  export const getList = data => request.get('/api/list', data, false)
 //              页面调用名  请求参数       请求类型  接口地址         loading是否显示

@@ -3,52 +3,62 @@
     <!-- 顶部标题区域 -->
     <view class="header-section">
       <view class="header-content">
-       
         <view class="title-container">
-          
           <text class="page-title">详情信息</text>
         </view>
         <view class="header-decoration"></view>
       </view>
     </view>
+
+    <!-- 加载状态 -->
+    <view v-if="isLoading" class="loading-state state-container">
+      <u-loading-icon text="正在加载公告详情..." size="24"></u-loading-icon>
+    </view>
+
+    <!-- 错误状态 -->
+    <view v-if="!isLoading && errorLoading" class="error-state state-container">
+      <u-empty mode="network" text="加载失败，请检查网络后重试"></u-empty>
+      <u-button @click="fetchNoticeDetails" type="primary" size="medium" text="点我重试" :customStyle="{marginTop: '20rpx', width: '300rpx'}"></u-button>
+    </view>
     
-    <!-- 详情内容 -->
-    <view class="info-container" :style="{animationDelay: '0.1s'}">
+    <!-- 内容展示: 仅在非加载中、无错误且 noticeInfo 有数据时显示 -->
+    <view v-if="!isLoading && !errorLoading && noticeInfo" class="info-container" :style="{animationDelay: '0.1s'}">
       <view class="info-card">
-        <view class="info-tag" :style="{backgroundColor: infoData.tagBgColor}">{{ infoData.type }}</view>
+        <view class="info-tag" :style="{backgroundColor: noticeInfo.tagBgColor || '#e5f7ff'}">{{ noticeInfo.type || noticeInfo.category || '通知' }}</view>
         <view class="info-header">
           <view class="info-title">
-            <u-icon :name="infoData.icon" size="24" :color="infoData.iconColor"></u-icon>
-            <text class="title-content">{{ infoData.title }}</text>
+            <u-icon :name="noticeInfo.icon || 'file-text'" size="24" :color="noticeInfo.iconColor || '#3b82f6'"></u-icon>
+            <text class="title-content">{{ noticeInfo.title }}</text>
           </view>
           <view class="info-time">
             <u-icon name="calendar" size="14" color="#909399"></u-icon>
-            <text class="time-text">{{ infoData.time }}</text>
+            <text class="time-text">{{ noticeInfo.time || noticeInfo.publish_time || noticeInfo.create_time || 'N/A' }}</text>
           </view>
         </view>
         
         <u-line color="#f3f4f6" margin="20rpx 0"></u-line>
         
-        <view class="publisher-info">
+        <view class="publisher-info" v-if="noticeInfo.publisher || noticeInfo.author">
           <u-icon name="account" size="14" color="#909399"></u-icon>
-          <text class="publisher-text">{{ infoData.publisher }}</text>
+          <text class="publisher-text">{{ noticeInfo.publisher || noticeInfo.author }}</text>
         </view>
         
         <view class="info-content">
-          <text class="content-text">{{ infoData.content }}</text>
+          <!-- 如果内容可能包含HTML，使用v-html并确保其已净化。纯文本则直接使用： -->
+          <text class="content-text">{{ noticeInfo.content }}</text>
         </view>
         
-        <!-- 附加信息区域 -->
-        <view class="additional-info" v-if="infoData.additionalInfo && infoData.additionalInfo.length > 0">
+        <!-- 附加信息区域 - 如果数据存在则条件渲染 -->
+        <view class="additional-info" v-if="noticeInfo.additionalInfo && noticeInfo.additionalInfo.length > 0">
           <u-line color="#f3f4f6" margin="20rpx 0"></u-line>
           <view class="section-title">附加信息</view>
           <view 
             class="info-item" 
-            v-for="(item, index) in infoData.additionalInfo" 
+            v-for="(item, index) in noticeInfo.additionalInfo"
             :key="index"
           >
             <view class="info-item-header">
-              <u-icon :name="item.icon" size="16" :color="item.iconColor"></u-icon>
+              <u-icon :name="item.icon || 'tags'" size="16" :color="item.iconColor || '#3b82f6'"></u-icon>
               <text class="info-item-title">{{ item.title }}</text>
             </view>
             <view class="info-item-content">
@@ -72,6 +82,7 @@
             text="分享" 
             shape="circle" 
             size="medium" 
+            icon="share-square"
             @click="shareInfo"
             :customStyle="{background: 'linear-gradient(135deg, #3c9cff 0%, #5cadff 100%)', boxShadow: '0 4rpx 12rpx rgba(0, 0, 0, 0.15)', border: 'none'}"
           ></u-button>
@@ -79,78 +90,137 @@
       </view>
     </view>
     
-    <!-- 空状态 -->
-    <view class="empty-state" v-if="!infoData">
+    <!-- 空状态 - 数据未找到 (API成功加载但无数据) -->
+    <view class="empty-state state-container" v-if="!isLoading && !errorLoading && !noticeInfo">
       <u-empty 
         mode="data" 
         icon="http://cdn.uviewui.com/uview/empty/data.png" 
-        text="暂无详情信息"
+        text="公告不存在或已被删除"
         :customStyle="{padding: '120rpx 0'}"
       ></u-empty>
+       <u-button @click="goBack" type="primary" plain text="返回列表" :customStyle="{marginTop: '20rpx', width: '300rpx'}"></u-button>
     </view>
   </view>
 </template>
 
 <script>
+import { getNoticeInfo } from '../../api/api';
 export default {
   data() {
     return {
-      title: '详情信息',
-      infoData: {
-        id: 1,
-        title: '净水机使用指南',
-        content: '尊敬的用户：\n\n感谢您选择森泽共享净水机产品。为了帮助您更好地使用我们的产品，我们特别准备了这份详细的使用指南。\n\n【基本操作】\n1. 开机：轻触屏幕或按下电源键唤醒设备\n2. 选择模式：根据需要选择常温水、热水或冰水\n3. 出水：将水杯放在出水口下方，按下对应按钮即可出水\n4. 停止：水量达到预设值会自动停止，或再次按下按钮手动停止\n\n【注意事项】\n1. 首次使用前，请先冲洗3-5分钟\n2. 定期检查滤芯状态，及时更换\n3. 避免阳光直射和高温环境\n4. 如长时间不使用，请断开电源并排空水箱\n\n【常见问题】\n1. 出水量减少：可能是滤芯堵塞，请检查滤芯状态\n2. 水质异常：请联系客服进行检测和维护\n3. 设备不启动：检查电源连接是否正常\n\n如有任何疑问，请随时联系我们的客服热线：400-888-9999\n\n森泽共享净水机团队\n2023年10月10日',
-        time: '2023-10-10 15:30',
-        publisher: '产品团队',
-        icon: 'file-text',
-        iconColor: '#3b82f6',
-        type: '使用指南',
-        tagType: 'info',
-        tagBgColor: '#e5f7ff',
-        additionalInfo: [
-          {
-            title: '适用型号',
-            content: 'SZ-100、SZ-200、SZ-300系列',
-            icon: 'setting',
-            iconColor: '#3b82f6'
-          },
-          {
-            title: '保修信息',
-            content: '自购买日起12个月内免费保修（人为损坏除外）',
-            icon: 'calendar',
-            iconColor: '#f56c6c'
-          },
-          {
-            title: '联系方式',
-            content: '客服热线：400-888-9999（工作日 9:00-18:00）',
-            icon: 'phone',
-            iconColor: '#5ac725'
-          }
-        ]
-      }
+      title: '详情信息', // 页面标题
+      noticeInfo: null, // 存储获取到的公告详情对象
+      isLoading: false, // 加载状态标志
+      errorLoading: false, // 错误状态标志
+      noticeId: null // 从路由参数中获取的公告ID
     }
   },
   onLoad(options) {
-    // 如果有传入ID参数，可以根据ID获取详情
-    if (options.id) {
-      // 这里可以添加根据ID获取详情的逻辑
-      // this.getInfoById(options.id)
+    // 首先检查 'id'，因为它是预期的主要参数。
+    if (options && options.id) {
+      this.noticeId = options.id;
+      this.fetchNoticeDetails();
+    }
+    // 如果 'id' 不存在，则回退到检查 'item'。这可能是一个JSON字符串。
+    else if (options && options.item) {
+      try {
+        const item = JSON.parse(decodeURIComponent(options.item));
+        if (item && item.id) {
+          this.noticeId = item.id;
+          // 可选项: 如果传递了完整的item对象，可以考虑立即显示它，
+          // 同时获取最新数据，或者如果最新数据不那么关键，就直接使用它。
+          // 本例中，我们将优先获取最新数据。
+          // this.noticeInfo = item; // 可用于初始快速显示
+          this.fetchNoticeDetails();
+        } else {
+          console.error('解析后的 item 对象不包含 ID:', item);
+          this.handleMissingId(); // 处理ID缺失的情况
+        }
+      } catch (e) {
+        console.error('从 options 解析 item 时发生错误:', e);
+        this.handleMissingId(); // 处理ID缺失的情况
+      }
+    }
+    // 如果既没有 'id' 也没有有效的 'item' (包含ID)。
+    else {
+      console.error('在 options 中未找到公告 ID:', options);
+      this.handleMissingId(); // 处理ID缺失的情况
     }
   },
   methods: {
+    handleMissingId() {
+      this.isLoading = false;
+      this.errorLoading = true; // 在模板中显示错误状态
+      uni.showToast({
+        title: '无效的公告ID',
+        icon: 'error',
+        duration: 2000
+      });
+      // 考虑导航回上一页或在UI中显示更持久的错误消息
+      // setTimeout(() => uni.navigateBack(), 2000);
+    },
+    fetchNoticeDetails() {
+      if (!this.noticeId) {
+        // 此情况理想上应由 onLoad 逻辑捕获，但作为安全措施：
+        this.isLoading = false;
+        this.errorLoading = true;
+        console.error('调用 fetchNoticeDetails 时 noticeId 为空');
+        uni.showToast({ title: '公告ID缺失', icon: 'error' });
+        return;
+      }
+      this.isLoading = true;
+      this.errorLoading = false;
+      this.$api.getNoticeInfo({ id: this.noticeId }) // API请求，传递ID
+        .then(res => {
+          if (res && res.data) {
+            // 假设实际的公告对象在 res.data 中
+            // 常见的模式有：res.data 本身，或者嵌套在 res.data.detail, res.data.info 中
+            this.noticeInfo = res.data.info || res.data.detail || res.data;
+          } else {
+            this.noticeInfo = null; // 如果未找到有效数据，则显式设置为 null
+            console.warn('未在响应中找到公告数据或响应结构不符合预期:', res);
+          }
+          this.isLoading = false;
+        })
+        .catch(error => {
+          this.isLoading = false;
+          this.errorLoading = true;
+          this.noticeInfo = null; // 清除任何可能存在的旧数据
+          console.error('获取公告详情时发生错误:', error);
+          uni.showToast({
+            title: '加载失败，请重试',
+            icon: 'none' // 使用 'none' 是因为错误详情已在控制台输出，且UI会显示错误状态
+          });
+        });
+    },
     goBack() {
-      uni.navigateBack()
+      uni.navigateBack(); // 返回上一页
     },
     shareInfo() {
-      uni.showToast({
-        title: '分享功能开发中',
-        icon: 'none'
-      })
-    },
-    getInfoById(id) {
-      // 模拟从服务器获取数据
-      // 实际项目中应该通过API请求获取
-      console.log('获取ID为', id, '的详情信息')
+      // 分享信息逻辑
+      if (this.noticeInfo && this.noticeInfo.title && this.noticeInfo.id) {
+        uni.share({
+          provider: 'weixin', // 例如：分享到微信
+          scene: 'WXSceneSession', // 例如：分享到聊天会话
+          type: 0, // 0 表示网页类型
+          href: `https://yourdomain.com/notice/${this.noticeInfo.id}`, // 替换为你的实际公告链接
+          title: this.noticeInfo.title,
+          summary: this.noticeInfo.content ? (this.noticeInfo.content.substring(0, 50) + '...') : '查看公告详情', // 内容摘要
+          imageUrl: this.noticeInfo.imageUrl || '', // 可选：如果公告有图片，则添加图片URL
+          success: (res) => {
+            uni.showToast({ title: '分享成功', icon: 'success' });
+          },
+          fail: (err) => {
+            uni.showToast({ title: '分享取消或失败', icon: 'none' });
+            console.error("分享失败:" + JSON.stringify(err));
+          }
+        });
+      } else {
+        uni.showToast({
+          title: '无法分享，公告信息不完整',
+          icon: 'none'
+        });
+      }
     }
   }
 }
@@ -161,6 +231,15 @@ export default {
   min-height: 100vh;
   background-color: #f5f5f5;
   padding-bottom: 30rpx;
+}
+
+.state-container { // 加载、错误和特定空状态的通用样式
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 120rpx 30rpx;
+  text-align: center;
 }
 
 .header-section {
