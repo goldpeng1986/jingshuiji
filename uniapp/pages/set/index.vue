@@ -25,7 +25,7 @@
         <!-- 清除缓存 -->
         <u-cell 
           title="清除缓存" 
-          :value="cacheSize" 
+          :value="isLoadingSettings ? '获取中...' : (errorLoadingSettings ? '获取失败' : (settingsInfo && settingsInfo.cacheSize !== undefined ? settingsInfo.cacheSize : cacheSize))"
           @click="clearCache"
         >
           <view slot="icon" class="cell-icon" style="background-color: #fdf6ec;">
@@ -47,7 +47,7 @@
         <!-- 版本信息 -->
         <u-cell 
           title="版本信息" 
-          :value="appVersion"
+          :value="isLoadingSettings ? '获取中...' : (errorLoadingSettings ? '获取失败' : (settingsInfo && settingsInfo.appVersion !== undefined ? settingsInfo.appVersion : appVersion))"
         >
           <view slot="icon" class="cell-icon" style="background-color: #f3effa;">
             <u-icon name="reload" color="#9a6ee8" size="36"></u-icon>
@@ -80,30 +80,68 @@
 </template>
 
 <script>
+import { getUserSettings } from '../../api/api';
+
 export default {
   data() {
     return {
       title: '设置',
-      cacheSize: '8.5MB',
-      appVersion: 'v1.0.0',
+      cacheSize: '8.5MB', // Default/fallback value
+      appVersion: 'v1.0.0', // Default/fallback value
+      settingsInfo: null,
+      isLoadingSettings: false,
+      errorLoadingSettings: false,
       showModal: false,
       modalTitle: '',
       modalContent: '',
       modalType: '' // 'logout' 或 'clearCache'
     }
   },
+  onLoad() {
+    this.fetchSettings();
+  },
   methods: {
+    async fetchSettings() {
+      this.isLoadingSettings = true;
+      this.errorLoadingSettings = false;
+      try {
+        // Assuming $api is globally available or getUserSettings is directly callable
+        const res = await getUserSettings(); // Direct call
+        // Or: const res = await this.$api.getUserSettings();
+
+        if (res && res.data) {
+          this.settingsInfo = res.data.settings || res.data; // Adjust if nested
+          // Update local fallbacks if API provides these specific fields
+          if (this.settingsInfo && this.settingsInfo.appVersion !== undefined) {
+            this.appVersion = this.settingsInfo.appVersion;
+          }
+          if (this.settingsInfo && this.settingsInfo.cacheSize !== undefined) {
+            this.cacheSize = this.settingsInfo.cacheSize;
+          }
+          // Handle other settings like notificationStatus if needed
+          // e.g., this.notificationEnabled = this.settingsInfo.notificationStatus;
+        } else {
+          console.warn('User settings not found or in unexpected format:', res);
+          // Do not nullify settingsInfo here if parts of the page depend on its structure being an object
+        }
+      } catch (err) {
+        console.error('Error fetching user settings:', err);
+        this.errorLoadingSettings = true;
+        // Optionally show a toast, but inline indicators in template are preferred for non-critical data
+        // uni.showToast({ title: '设置加载失败', icon: 'none' });
+      } finally {
+        this.isLoadingSettings = false;
+      }
+    },
     goToChangePwd() {
-      // 跳转到修改密码页面
       uni.navigateTo({
         url: '/pages/set/change-password'
-      })
+      });
     },
     goToAbout() {
-      // 跳转到关于我们页面
       uni.navigateTo({
         url: '/pages/set/about'
-      })
+      });
     },
     clearCache() {
       this.modalType = 'clearCache';

@@ -11,34 +11,46 @@
       </view>
     </view>
     
-    <!-- 公告列表 -->
-    <view class="notice-list">
+    <!-- Loading State -->
+    <view v-if="isLoading" class="loading-state">
+      <u-loading-icon text="正在加载..." size="24"></u-loading-icon>
+    </view>
+
+    <!-- Error State -->
+    <view v-if="!isLoading && errorLoading" class="error-state">
+      <u-empty mode="network" text="加载失败，请稍后重试"></u-empty>
+      <u-button @click="fetchNoticeList" type="primary" size="small" text="重试" :customStyle="{marginTop: '20rpx'}"></u-button>
+    </view>
+
+    <!-- 公告列表: Show only if not loading, no error, and list has items -->
+    <view class="notice-list" v-if="!isLoading && !errorLoading && noticeList.length > 0">
       <view 
         class="notice-item" 
         v-for="(item, index) in noticeList" 
-        :key="index" 
+        :key="item.id || index" <!-- Use item.id if available, otherwise fallback to index -->
         @click="viewNoticeDetail(item)"
         :style="{animationDelay: index * 0.1 + 's'}"
       >
         <view class="notice-card">
-          <view class="notice-tag" :style="{backgroundColor: item.tagBgColor}">{{ item.type }}</view>
+          <!-- Use fallback values for properties in case API structure varies -->
+          <view class="notice-tag" :style="{backgroundColor: item.tagBgColor || '#fef0f0'}">{{ item.type || item.category || '通知' }}</view>
           <view class="notice-header">
             <view class="notice-title">
-              <u-icon :name="item.icon" size="24" :color="item.iconColor"></u-icon>
+              <u-icon :name="item.icon || 'info-circle'" size="24" :color="item.iconColor || '#f56c6c'"></u-icon>
               <text class="title-content">{{ item.title }}</text>
             </view>
             <view class="notice-time">
               <u-icon name="calendar" size="14" color="#909399"></u-icon>
-              <text class="time-text">{{ item.time }}</text>
+              <text class="time-text">{{ item.time || item.publish_time || item.create_time || 'N/A' }}</text>
             </view>
           </view>
           <view class="notice-content">
-            <text class="content-preview">{{ item.content }}</text>
+            <text class="content-preview">{{ item.content || item.description || item.summary || '暂无内容' }}</text>
           </view>
           <view class="notice-footer">
             <view class="publisher-info">
               <u-icon name="account" size="14" color="#909399"></u-icon>
-              <text class="publisher-text">{{ item.publisher }}</text>
+              <text class="publisher-text">{{ item.publisher || item.author || '管理员' }}</text>
             </view>
             <view class="notice-action">
               <text class="action-text">查看详情</text>
@@ -49,8 +61,8 @@
       </view>
     </view>
     
-    <!-- 空状态 -->
-    <view class="empty-state" v-if="noticeList.length === 0">
+    <!-- 空状态: Show only if not loading, no error, and list is empty -->
+    <view class="empty-state" v-if="!isLoading && !errorLoading && noticeList.length === 0">
       <u-empty 
         mode="data" 
         icon="http://cdn.uviewui.com/uview/empty/data.png" 
@@ -62,57 +74,56 @@
 </template>
 
 <script>
+import { getNoticeList } from '../../api/api';
 export default {
   data() {
     return {
       title: '通知公告',
       showDetail: false,
       currentNotice: null,
-      noticeList: [
-        {
-          id: 1,
-          title: '系统维护通知',
-          content: '尊敬的用户，我们将于2023年10月15日凌晨2:00-4:00进行系统维护，期间服务可能暂时不可用，给您带来的不便敬请谅解。',
-          fullContent: '尊敬的用户：\n\n为了给您提供更好的服务体验，我们将于2023年10月15日凌晨2:00-4:00进行系统维护升级。在此期间，森泽共享净水机APP及相关服务将暂时不可用。\n\n维护内容：\n1. 系统性能优化\n2. 安全性提升\n3. 新功能上线准备\n\n我们建议您提前做好相关安排，避免在维护时段使用我们的服务。系统维护结束后，您可能需要重新登录账号。\n\n感谢您的理解与支持！\n\n森泽共享净水机团队\n2023年10月13日',
-          time: '2023-10-13 10:00',
-          publisher: '系统管理员',
-          icon: 'info-circle',
-          iconColor: '#f56c6c',
-          type: '重要',
-          tagType: 'error',
-          tagBgColor: '#fef0f0'
-        },
-        {
-          id: 2,
-          title: '新功能上线公告',
-          content: '森泽共享净水机APP新版本V2.5.0已上线，新增设备远程控制、水质检测等功能，欢迎更新体验。',
-          fullContent: '亲爱的用户：\n\n我们很高兴地通知您，森泽共享净水机APP新版本V2.5.0现已正式上线！此次更新带来了多项实用新功能和体验优化：\n\n【主要更新】\n1. 设备远程控制：现在您可以通过APP远程控制家中的净水设备，随时随地调整设备状态\n2. 水质检测报告：新增水质检测功能，实时监控水质状况，守护家人健康\n3. 消费账单优化：账单明细更加清晰，消费记录一目了然\n4. 性能优化：提升APP运行速度，操作更流畅\n\n建议您立即更新到最新版本，体验全新功能。如在使用过程中遇到任何问题，请通过客服中心与我们联系。\n\n感谢您一直以来对森泽共享净水机的支持！\n\n森泽共享净水机团队\n2023年9月25日',
-          time: '2023-09-25 14:30',
-          publisher: '产品团队',
-          icon: 'checkbox-mark',
-          iconColor: '#5ac725',
-          type: '新功能',
-          tagType: 'success',
-          tagBgColor: '#e5f7ef'
-        },
-        {
-          id: 3,
-          title: '价格调整通知',
-          content: '因原材料成本上涨，自2023年11月1日起，部分净水服务将进行价格调整，详情请查看公告。',
-          fullContent: '尊敬的用户：\n\n因原材料成本上涨及运营成本增加，我们经慎重考虑后决定自2023年11月1日起对部分净水服务价格进行调整：\n\n【调整详情】\n1. 家用净水机：\n   - 基础套餐：由原价0.1元/60分钟调整为0.12元/60分钟\n   - 高级套餐：保持不变\n\n2. 商用净水机：\n   - 标准套餐：由原价0.1元/60分钟调整为0.15元/60分钟\n   - 企业套餐：根据具体合同执行\n\n我们始终致力于为您提供高品质的净水服务，此次调整将用于提升产品质量和服务水平。已购买套餐的用户将不受此次调整影响，套餐到期后续费将按新价格执行。\n\n如有任何疑问，请联系客服热线：400-888-9999\n\n感谢您的理解与支持！\n\n森泽共享净水机团队\n2023年10月1日',
-          time: '2023-10-01 09:15',
-          publisher: '运营团队',
-          icon: 'rmb-circle',
-          iconColor: '#f9ae3d',
-          type: '价格调整',
-          tagType: 'warning',
-          tagBgColor: '#fdf6ec'
-        }
-      ]
+      noticeList: [],
+      isLoading: false,
+      errorLoading: false,
     }
   },
+  mounted() {
+    this.fetchNoticeList();
+  },
   methods: {
+    fetchNoticeList() {
+      this.isLoading = true;
+      this.errorLoading = false;
+      this.$api.getNoticeList()
+        .then(res => {
+          let notices = [];
+          if (res && res.data) {
+            if (Array.isArray(res.data)) {
+              notices = res.data;
+            } else if (res.data.list && Array.isArray(res.data.list)) {
+              notices = res.data.list;
+            } else if (res.data.items && Array.isArray(res.data.items)) {
+                notices = res.data.items;
+            }
+             else {
+              console.warn('API response for getNoticeList is not in expected format or data is not an array:', res.data);
+            }
+          } else {
+            console.warn('API response for getNoticeList is empty or not in expected format:', res);
+          }
+          this.noticeList = notices;
+          this.isLoading = false;
+        })
+        .catch(error => {
+          this.isLoading = false;
+          this.errorLoading = true;
+          console.error('Error fetching notice list:', error);
+        });
+    },
     viewNoticeDetail(notice) {
+      // Example: uni.$u.route({ url: '/pages/notice/info', params: { id: notice.id } });
+      // If your detail page expects the full notice object, you might pass it like this:
+      // uni.navigateTo({ url: '/pages/notice/info?item=' + encodeURIComponent(JSON.stringify(notice)) });
+      // For now, keeping the existing generic navigation until detail page requirements are known.
       uni.$u.route("/pages/notice/info");
     }
   }
@@ -124,6 +135,18 @@ export default {
   min-height: 100vh;
   background-color: #f5f5f5;
   padding-bottom: 30rpx;
+}
+
+.loading-state, .error-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 100rpx 0;
+}
+
+.error-state u-button {
+  margin-top: 20rpx;
 }
 
 .header-section {
