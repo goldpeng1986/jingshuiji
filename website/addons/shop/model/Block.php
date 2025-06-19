@@ -183,4 +183,48 @@ class Block extends Model
         }
         return $result;
     }
+
+    /**
+     * 根据类型获取区块/Banner列表 (供API使用)
+     * @param string $type 区块类型标识
+     * @return array 列表数据
+     */
+    public static function getBlockListByType($type)
+    {
+        $now = time(); // 当前时间戳
+
+        $list = self::where('type', $type) // 根据类型筛选
+            ->where('status', 'normal')      // 只获取状态正常的
+            ->where(function ($query) use ($now) {
+                // 生效时间小于等于当前时间
+                $query->where('begintime', '<=', $now);
+            })
+            ->where(function ($query) use ($now) {
+                // (结束时间大于等于当前时间 或 结束时间为空/0 表示永不过期)
+                $query->where('endtime', '>=', $now)
+                      ->orWhereNull('endtime')
+                      ->orWhere('endtime', '=', 0);
+            })
+            ->order('weigh', 'desc') // 按权重降序排序
+            ->field('id, title, image, url, content') // 选择需要的字段
+            ->select();
+
+        // 结果处理: image 字段已通过模型的 getImageAttr 自动处理 cdnurl
+        // 如果没有 getImageAttr 或者它不符合API需求 (例如API不需要默认图片)，则需要手动处理:
+        // foreach ($list as $key => $item) {
+        //     // 确保即使 getImageAttr 存在，API也只获取实际配置的图片，而不是默认图
+        //     $originalImage = $item->getData('image'); // 获取原始图片路径
+        //     $list[$key]['image'] = $originalImage ? cdnurl($originalImage, true) : '';
+        // }
+        // 考虑到现有的 getImageAttr 可能会设置默认图片，这里我们显式获取原始值并处理
+        if ($list) {
+            foreach ($list as $item) {
+                $originalImage = $item->getRealAttr('image'); // 获取 image 字段的原始数据库值
+                $item->image = $originalImage ? cdnurl($originalImage, true) : ''; // 如果有原始图片则加 cdnurl，否则为空字符串
+            }
+            return $list->toArray(); // 返回数组格式的数据
+        }
+
+        return []; // 如果没有记录，返回空数组
+    }
 }

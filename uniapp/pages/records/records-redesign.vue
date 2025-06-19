@@ -13,16 +13,43 @@
     
     <!-- 统计卡片 -->
     <view class="stats-section">
+      <u-loading-icon v-if="isLoadingStats && statCardsForSwiper.length === 0" mode="circle" size="28" text="统计加载中..."></u-loading-icon>
       <u-swiper
-        :list="statCards"
-        keyName="content"
+        v-if="!isLoadingStats && statCardsForSwiper.length > 0"
+        :list="statCardsForSwiper"
+        keyName="title" <!-- 使用 statCardsForSwiper 中的属性，或者自定义key -->
         :height="220"
         :radius="16"
-        :interval="3000"
-        :effect3d="true"
-        :autoplay="false"
+        :interval="3500"
+        indicator
         indicatorMode="dot"
-      ></u-swiper>
+        circular
+      >
+        <!-- 自定义Swiper Item的内部结构 -->
+        <template v-slot:default="{item}">
+          <view class="stat-card-item" :class="`stat-card-${item.themeColor || 'blue'}`">
+            <view class="stat-card-header">
+              <text class="stat-card-title">{{ item.title }}</text>
+              <text class="stat-card-subtitle">{{ item.subtitle }}</text>
+            </view>
+            <view class="stat-card-content">
+              <view class="stat-item">
+                <text class="stat-value">{{ item.count }}次</text>
+                <text class="stat-label">用水次数</text>
+              </view>
+              <view class="stat-item">
+                <text class="stat-value">{{ item.volume }}L</text>
+                <text class="stat-label">用水量</text>
+              </view>
+              <view class="stat-item">
+                <text class="stat-value">¥{{ item.amount }}</text>
+                <text class="stat-label">消费金额</text>
+              </view>
+            </view>
+          </view>
+        </template>
+      </u-swiper>
+      <u-empty mode="data" text="暂无统计数据" v-if="!isLoadingStats && statCardsForSwiper.length === 0"></u-empty>
     </view>
     
     <!-- 图表区域 -->
@@ -71,75 +98,84 @@
       @refresherrefresh="onRefresh"
     >
       <view class="records-list">
+        <!-- 加载中提示 (针对列表区域) -->
+        <u-loading-icon v-if="isLoadingRecords && groupedRecords.length === 0 && page === 1" mode="circle" size="28" text="记录加载中..."></u-loading-icon>
+
         <!-- 日期分组 -->
-        <view class="date-group" v-for="(group, groupIndex) in groupedRecords" :key="groupIndex">
-          <view class="date-header">
-            <view class="date-badge">
-              <text>{{ group.date }}</text>
+        <template v-if="!isLoadingRecords || groupedRecords.length > 0"> <!-- 避免刷新时列表闪烁 -->
+          <view class="date-group" v-for="(group) in groupedRecords" :key="group.date">
+            <view class="date-header">
+              <view class="date-badge">
+                <text>{{ group.date }}</text>
+              </view>
+            </view>
+
+            <!-- 记录项 -->
+            <view
+              class="record-card"
+              v-for="(item) in group.records"
+              :key="item.id" <!-- 使用记录的唯一ID -->
+              @click="viewRecordDetail(item)"
+            >
+              <view class="record-left">
+                <!-- API返回的icon和bgColor可以直接用，或前端根据设备类型映射 -->
+                <view class="record-icon" :style="{backgroundColor: item.iconBg || getRandomColor(item.id)}">
+                  <u-icon :name="item.iconName || 'arrow-down'" color="#ffffff" size="24"></u-icon> <!-- 假设有iconName -->
+                </view>
+              </view>
+              <view class="record-content">
+                <view class="record-header">
+                  <text class="record-title">{{ item.deviceName }}</text>
+                  <text class="record-amount" :style="{color: parseFloat(item.amount) >= 0 ? '#10b981' : '#fa3534'}">
+                    {{ parseFloat(item.amount) >= 0 ? '+' : '-' }}¥{{ Math.abs(parseFloat(item.amount)).toFixed(2) }}
+                  </text>
+                </view>
+                <view class="record-details">
+                  <view class="record-detail-item">
+                    <u-icon name="clock" size="14" color="#909399"></u-icon>
+                    <text class="detail-text">{{ item.time }}</text>
+                  </view>
+                  <view class="record-detail-item">
+                    <u-icon name="map" size="14" color="#909399"></u-icon>
+                    <text class="detail-text">{{ item.location }}</text>
+                  </view>
+                </view>
+                <view class="record-footer">
+                  <view class="volume-badge">
+                    <text>{{ item.volume }}L</text>
+                  </view>
+                  <u-button
+                    type="info"
+                    size="mini"
+                    shape="circle"
+                    plain
+                    @click.stop="viewRecordDetail(item)"
+                  >详情</u-button>
+                </view>
+              </view>
             </view>
           </view>
-          
-          <!-- 记录项 -->
-          <view 
-            class="record-card" 
-            v-for="(item, index) in group.records" 
-            :key="index"
-            @click="viewRecordDetail(item)"
-          >
-            <view class="record-left">
-              <view class="record-icon" :style="{backgroundColor: getRandomColor(item.id)}">
-                <u-icon name="arrow-down" color="#ffffff" size="24"></u-icon>
-              </view>
-            </view>
-            <view class="record-content">
-              <view class="record-header">
-                <text class="record-title">{{ item.deviceName }}</text>
-                <text class="record-amount">-¥{{ item.amount }}</text>
-              </view>
-              <view class="record-details">
-                <view class="record-detail-item">
-                  <u-icon name="clock" size="14" color="#909399"></u-icon>
-                  <text class="detail-text">{{ item.time }}</text>
-                </view>
-                <view class="record-detail-item">
-                  <u-icon name="map" size="14" color="#909399"></u-icon>
-                  <text class="detail-text">{{ item.location }}</text>
-                </view>
-              </view>
-              <view class="record-footer">
-                <view class="volume-badge">
-                  <text>{{ item.volume }}L</text>
-                </view>
-                <u-button 
-                  type="info" 
-                  size="mini" 
-                  shape="circle"
-                  plain
-                  @click.stop="viewRecordDetail(item)"
-                >详情</u-button>
-              </view>
-            </view>
-          </view>
-        </view>
+        </template>
         
         <!-- 无记录提示 -->
-        <view v-if="groupedRecords.length === 0" class="empty-state">
-          <u-empty
-            mode="list"
-            icon="http://cdn.uviewui.com/uview/empty/list.png"
-            text="暂无使用记录"
-            textColor="#909399"
-            iconSize="240"
-          ></u-empty>
-        </view>
+        <u-empty
+          v-if="!isLoadingRecords && groupedRecords.length === 0 && loadMoreStatus !== 'loading'"
+          mode="list"
+          text="暂无使用记录"
+          textColor="#909399"
+          iconSize="240"
+          marginTop="50"
+        ></u-empty>
         
         <!-- 加载更多 -->
         <u-loadmore 
-          v-if="groupedRecords.length > 0"
+          v-if="groupedRecords.length > 0 || loadMoreStatus === 'loading'" <!-- 只有在有记录或正在加载时才显示loadmore -->
           :status="loadMoreStatus" 
+          @loadmore="loadMore"
           marginTop="20" 
           marginBottom="20" 
           bgColor="transparent"
+          nomoreText="没有更多记录了"
         />
       </view>
     </scroll-view>
@@ -201,206 +237,322 @@
 </template>
 
 <script>
+import { toast } from '@/utils/utils.js'; // 引入toast
+
 export default {
   data() {
     return {
-      title: '使用记录',
-      currentMonth: '2024年1月',
-      isRefreshing: false,
-      loadMoreStatus: 'nomore',
-      showDetail: false,
-      selectedRecord: null,
-      currentPeriod: 'week',
-      deviceFilter: 0,
-      dateFilter: 0,
-      sortFilter: 0,
-      mockChartData: [50, 80, 120, 90, 60, 100, 70],
-      statCards: [
-        {
-          content: `<view class="stat-card stat-card-blue">
-            <view class="stat-card-header">
-              <text class="stat-card-title">本月用水统计</text>
-              <text class="stat-card-subtitle">2024年1月</text>
-            </view>
-            <view class="stat-card-content">
-              <view class="stat-item">
-                <text class="stat-value">12次</text>
-                <text class="stat-label">用水次数</text>
-              </view>
-              <view class="stat-item">
-                <text class="stat-value">36L</text>
-                <text class="stat-label">用水量</text>
-              </view>
-              <view class="stat-item">
-                <text class="stat-value">¥10.00</text>
-                <text class="stat-label">消费金额</text>
-              </view>
-            </view>
-          </view>`
-        },
-        {
-          content: `<view class="stat-card stat-card-green">
-            <view class="stat-card-header">
-              <text class="stat-card-title">上月用水统计</text>
-              <text class="stat-card-subtitle">2023年12月</text>
-            </view>
-            <view class="stat-card-content">
-              <view class="stat-item">
-                <text class="stat-value">18次</text>
-                <text class="stat-label">用水次数</text>
-              </view>
-              <view class="stat-item">
-                <text class="stat-value">52L</text>
-                <text class="stat-label">用水量</text>
-              </view>
-              <view class="stat-item">
-                <text class="stat-value">¥15.60</text>
-                <text class="stat-label">消费金额</text>
-              </view>
-            </view>
-          </view>`
-        },
-        {
-          content: `<view class="stat-card stat-card-purple">
-            <view class="stat-card-header">
-              <text class="stat-card-title">年度用水统计</text>
-              <text class="stat-card-subtitle">2023年全年</text>
-            </view>
-            <view class="stat-card-content">
-              <view class="stat-item">
-                <text class="stat-value">156次</text>
-                <text class="stat-label">用水次数</text>
-              </view>
-              <view class="stat-item">
-                <text class="stat-value">468L</text>
-                <text class="stat-label">用水量</text>
-              </view>
-              <view class="stat-item">
-                <text class="stat-value">¥140.40</text>
-                <text class="stat-label">消费金额</text>
-              </view>
-            </view>
-          </view>`
-        }
-      ],
+      title: '使用记录', // 页面标题
+      searchKeyword: '', // 搜索关键词 (如果模板中有)
+
+      // 统计卡片数据 (将由API填充)
+      usageStatsData: { // 用于替换 statCards.content 的HTML字符串
+        currentMonth: { title: '本月用水统计', subtitle: '', count: 0, volume: 0, amount: 0 },
+        lastMonth: { title: '上月用水统计', subtitle: '', count: 0, volume: 0, amount: 0 },
+        // 可以根据API返回添加更多，例如年度统计
+      },
+      statCardsForSwiper: [], // 给u-swiper用的列表，将根据usageStatsData动态构建
+      isLoadingStats: false, // 统计数据加载状态
+
+      // 图表相关 (暂时保留静态或注释，待后端API)
+      currentPeriod: 'week', // 图表周期选择 (周、月、季、年)
       periodOptions: [
-        { label: '周', value: 'week' },
-        { label: '月', value: 'month' },
-        { label: '季', value: 'quarter' },
-        { label: '年', value: 'year' }
+        { label: '周', value: 'week' }, // 对应API的 date_type 参数可能需要映射
+        { label: '月', value: 'month' }, // 'current_month' / 'last_month' 或 YYYY-MM
+        // { label: '季', value: 'quarter' }, // API可能不支持，需要确认
+        // { label: '年', value: 'year' }    // API可能不支持，需要确认
       ],
-      deviceOptions: [
-        { label: '全部设备', value: 0 },
-        { label: '森泽净水器 A-001', value: 1 },
-        { label: '森泽净水器 B-002', value: 2 }
+      mockChartData: [50, 80, 120, 90, 60, 100, 70], // 模拟图表数据
+      // chartData: [], // 实际图表数据，将由API填充
+
+      // 筛选器模型
+      deviceFilter: 0, // 设备筛选，0为全部
+      dateFilter: 0,   // 日期筛选，0为全部时间 (需要映射到API的filter_type或date_from/to)
+      sortFilter: 0,   // 排序筛选 (需要映射到API的orderby和orderway)
+
+      // 筛选器选项 (设备选项可以从API动态获取，或保持静态)
+      deviceOptions: [{ label: '全部设备', value: 0 }], // 将从API获取或保持简单
+      dateOptions: [ // 这个可以保持静态，逻辑在fetchRecords中处理
+        { label: '全部时间', value: 0, filter_type: 'all' },
+        { label: '今天', value: 1, filter_type: 'today' }, // 假设API支持 'today'
+        { label: '昨天', value: 2, filter_type: 'yesterday' }, // 假设API支持 'yesterday'
+        { label: '本周', value: 3, filter_type: 'this_week' }, // 假设API支持 'this_week'
+        { label: '本月', value: 4, filter_type: 'current_month' }
       ],
-      dateOptions: [
-        { label: '全部时间', value: 0 },
-        { label: '今天', value: 1 },
-        { label: '昨天', value: 2 },
-        { label: '本周', value: 3 },
-        { label: '本月', value: 4 }
+      sortOptions: [ // 排序选项，需要映射到API的orderby和orderway
+        { label: '时间降序', value: 0, orderby: 'createtime', orderway: 'desc' },
+        { label: '时间升序', value: 1, orderby: 'createtime', orderway: 'asc' },
+        { label: '金额降序', value: 2, orderby: 'payamount', orderway: 'desc' },
+        { label: '金额升序', value: 3, orderby: 'payamount', orderway: 'asc' }
       ],
-      sortOptions: [
-        { label: '时间降序', value: 0 },
-        { label: '时间升序', value: 1 },
-        { label: '金额降序', value: 2 },
-        { label: '金额升序', value: 3 }
-      ],
-      recordsList: [
-        {
-          date: '今天',
-          records: [
-            {
-              id: 1,
-              deviceName: '森泽净水器 A-001',
-              time: '今天 08:30',
-              amount: '1.00',
-              volume: '3',
-              location: '北京市朝阳区建国路88号'
-            },
-            {
-              id: 2,
-              deviceName: '森泽净水器 A-001',
-              time: '今天 07:15',
-              amount: '0.50',
-              volume: '1.5',
-              location: '北京市朝阳区建国路88号'
-            }
-          ]
-        },
-        {
-          date: '昨天',
-          records: [
-            {
-              id: 3,
-              deviceName: '森泽净水器 A-001',
-              time: '昨天 18:45',
-              amount: '1.50',
-              volume: '4.5',
-              location: '北京市朝阳区建国路88号'
-            },
-            {
-              id: 4,
-              deviceName: '森泽净水器 B-002',
-              time: '昨天 12:30',
-              amount: '0.70',
-              volume: '2',
-              location: '北京市海淀区中关村大街1号'
-            }
-          ]
-        }
-      ]
-    }
+
+      // 记录列表
+      recordsList: [], // 扁平的记录列表，将从API获取
+      groupedRecords: [], // 按日期分组后的记录列表 (如果保持此结构)
+      isLoadingRecords: false, // 记录列表加载状态
+      isRefreshing: false, // 下拉刷新状态
+      page: 1,
+      limit: 10,
+      loadMoreStatus: 'loadmore', // 'loadmore', 'loading', 'nomore'
+
+      // 详情弹窗
+      showDetail: false,
+      selectedRecord: null, // 当前选中的记录详情
+    };
   },
-  computed: {
-    groupedRecords() {
-      // 根据筛选条件返回不同的记录列表
-      // 这里简化处理，实际应用中应该根据筛选条件进行过滤
-      return this.recordsList
-    }
+  onLoad() {
+    this.initializePage(); // 初始化页面数据
+    // TODO: 获取设备列表填充 deviceOptions (如果需要动态设备筛选)
   },
   methods: {
-    setPeriod(period) {
-      this.currentPeriod = period
+    // 初始化页面及首次加载数据
+    initializePage() {
+      this.fetchStatistics();
+      // this.fetchChartData(); // 图表数据获取 (待API)
+      this.fetchRecords(false); // 首次加载记录列表
     },
-    loadMore() {
-      // 模拟加载更多数据
-      this.loadMoreStatus = 'loading'
-      setTimeout(() => {
-        this.loadMoreStatus = 'nomore'
-      }, 1500)
-    },
+    // 下拉刷新
     onRefresh() {
-      this.isRefreshing = true
-      // 模拟刷新数据
-      setTimeout(() => {
-        this.isRefreshing = false
-        uni.showToast({
-          title: '刷新成功',
-          icon: 'none'
-        })
-      }, 1500)
+      if (this.isRefreshing) return;
+      this.isRefreshing = true;
+      // 重置筛选条件到默认值（如果需要）
+      // this.deviceFilter = 0;
+      // this.dateFilter = 0;
+      // this.sortFilter = 0;
+      Promise.all([
+        this.fetchStatistics(),
+        // this.fetchChartData(), // 图表数据获取
+        this.fetchRecords(false) // 重置并加载第一页记录
+      ]).finally(() => {
+        this.isRefreshing = false;
+        uni.stopPullDownRefresh(); // 停止uniapp的下拉刷新动画
+      });
+    },
+    // 加载更多记录
+    loadMore() {
+      if (this.loadMoreStatus === 'loadmore') {
+        this.fetchRecords(true);
+      }
+    },
+    // 获取统计数据
+    async fetchStatistics() {
+      this.isLoadingStats = true;
+      try {
+        // 获取本月统计 (后端API的date_type参数是current_month, last_month, 或 YYYY-MM)
+        const currentMonthRes = await this.$api.getUsageStatistics({ date_type: 'current_month' });
+        if (currentMonthRes.code === 1 && currentMonthRes.data) {
+          this.usageStatsData.currentMonth = {
+            title: '本月用水统计',
+            subtitle: this.$u.timeFormat(new Date(), 'yyyy年mm月'), // 当前年月
+            count: currentMonthRes.data.count || 0,
+            volume: parseFloat(currentMonthRes.data.volume || 0).toFixed(1), // 保留一位小数
+            amount: parseFloat(currentMonthRes.data.amount || 0).toFixed(2)
+          };
+        }
+        // 获取上月统计
+        const lastMonthRes = await this.$api.getUsageStatistics({ date_type: 'last_month' });
+        if (lastMonthRes.code === 1 && lastMonthRes.data) {
+           const lastMonthDate = new Date();
+           lastMonthDate.setMonth(lastMonthDate.getMonth() - 1);
+          this.usageStatsData.lastMonth = {
+            title: '上月用水统计',
+            subtitle: this.$u.timeFormat(lastMonthDate, 'yyyy年mm月'),
+            count: lastMonthRes.data.count || 0,
+            volume: parseFloat(lastMonthRes.data.volume || 0).toFixed(1),
+            amount: parseFloat(lastMonthRes.data.amount || 0).toFixed(2)
+          };
+        }
+        this.updateStatCardsForSwiper(); // 更新轮播卡片数据
+      } catch (error) {
+        console.error('fetchStatistics error:', error);
+        toast('获取统计数据失败');
+      } finally {
+        this.isLoadingStats = false;
+      }
+    },
+    // 更新轮播用的统计卡片数据 (将HTML字符串方式改为数据驱动)
+    updateStatCardsForSwiper() {
+        const cards = [];
+        const monthColors = ['blue', 'green', 'purple']; // 示例颜色
+
+        Object.entries(this.usageStatsData).forEach(([key, stat], index) => {
+            if(stat.title){ //确保有数据才添加
+                 cards.push({
+                    // 不再使用content HTML字符串，而是传递数据给swiper-item内部的组件
+                    title: stat.title,
+                    subtitle: stat.subtitle,
+                    count: stat.count,
+                    volume: stat.volume,
+                    amount: stat.amount,
+                    themeColor: monthColors[index % monthColors.length] // 循环使用颜色
+                });
+            }
+        });
+        this.statCardsForSwiper = cards;
+    },
+
+    // 获取记录列表 (支持分页和筛选)
+    async fetchRecords(isLoadMore = false) {
+      if (isLoadMore && (this.loadMoreStatus === 'loading' || this.loadMoreStatus === 'nomore')) {
+        return; // 防止重复加载
+      }
+      if (!isLoadMore) {
+        this.page = 1;
+        // this.recordsList = []; // 使用 groupedRecords 时，清空 groupedRecords
+        this.groupedRecords = [];
+        this.loadMoreStatus = 'loadmore';
+        this.isLoadingRecords = true; // 首次加载或刷新时显示列表区域的loading
+      } else {
+        this.loadMoreStatus = 'loading';
+      }
+
+      // 构建API请求参数
+      let apiParams = {
+        page: this.page,
+        limit: this.limit,
+      };
+
+      // 处理日期筛选 (dateFilter 的 value 对应 dateOptions 的 value)
+      const selectedDateFilter = this.dateOptions.find(opt => opt.value === this.dateFilter);
+      if (selectedDateFilter && selectedDateFilter.filter_type !== 'all') {
+        apiParams.filter_type = selectedDateFilter.filter_type; // 'today', 'current_month', etc.
+        // 如果后端支持 date_from, date_to, 则需要根据 filter_type 计算
+      }
+
+      // 处理设备筛选 (deviceFilter 的 value 对应 deviceOptions 的 value)
+      if (this.deviceFilter !== 0 && this.deviceOptions[this.deviceFilter]) {
+         // 假设 deviceOptions 的 value 直接是 goods_id 或其他设备标识
+        apiParams.goods_id = this.deviceOptions.find(opt => opt.value === this.deviceFilter).value;
+      }
+
+      // 处理排序 (sortFilter 的 value 对应 sortOptions 的 value)
+      const selectedSortFilter = this.sortOptions.find(opt => opt.value === this.sortFilter);
+      if (selectedSortFilter) {
+        apiParams.orderby = selectedSortFilter.orderby;
+        apiParams.orderway = selectedSortFilter.orderway;
+      }
+
+      try {
+        const res = await this.$api.getUsageRecordsList(apiParams);
+        if (res.code === 1 && res.data && res.data.data) {
+          const newRecords = res.data.data.map(record => {
+            // API数据适配 (确保与模板中使用的字段一致)
+            return {
+              id: record.record_id, // 订单ID，作为记录ID
+              order_sn: record.order_sn,
+              deviceName: record.device_name || '未知设备',
+              time: record.time, // 后端已格式化 'Y-m-d H:i:s'
+              amount: parseFloat(record.amount || 0).toFixed(2),
+              volume: parseFloat(record.volume || 0).toFixed(1), // 用水量，保留一位小数
+              location: record.location || '未知地点',
+              // 以下为弹窗详情可能需要的额外字段，确保API返回或在此处处理
+              pay_type_text: record.pay_type_text || (record.paytype ? this.getPayTypeText(record.paytype) : '未知'), // 支付方式
+              // ... 其他弹窗中需要的字段
+            };
+          });
+
+          if (isLoadMore) {
+            // this.recordsList = this.recordsList.concat(newRecords); // 如果使用扁平列表
+            this.groupAndSetRecords(this.recordsList.concat(newRecords)); // 追加后再分组
+          } else {
+            // this.recordsList = newRecords; // 如果使用扁平列表
+             this.groupAndSetRecords(newRecords); // 直接分组新数据
+          }
+          this.recordsList = this.recordsList.concat(newRecords); // 始终维护一个扁平列表用于下次追加
+
+          this.page++;
+          this.loadMoreStatus = newRecords.length < this.limit ? 'nomore' : 'loadmore';
+        } else {
+          if (!isLoadMore) this.groupAndSetRecords([]); // 清空分组
+          this.loadMoreStatus = isLoadMore ? 'loadmore' : 'nomore';
+          toast(res.msg || '获取使用记录失败');
+        }
+      } catch (error) {
+        console.error('fetchRecords error:', error);
+        if (!isLoadMore) this.groupAndSetRecords([]);
+        this.loadMoreStatus = 'loadmore';
+        toast('网络请求使用记录出错');
+      } finally {
+        this.isLoadingRecords = false;
+        if (!isLoadMore && this.loadMoreStatus !== 'nomore' && this.recordsList.length === 0){
+             // 如果首次加载后列表为空，但不是nomore状态（例如API错误），确保显示空提示而不是无限loading
+        }
+      }
+    },
+
+    // 将扁平记录列表按日期分组 (与模板中的 groupedRecords 对应)
+    groupAndSetRecords(records) {
+        const grouped = {};
+        records.forEach(record => {
+            // 从 record.time (YYYY-MM-DD HH:MM:SS) 中提取日期部分 (YYYY-MM-DD)
+            // 然后可以进一步格式化为 "今天", "昨天", 或 "MM月DD日"
+            const dateKey = this.formatDateForGrouping(record.time);
+            if (!grouped[dateKey]) {
+                grouped[dateKey] = { date: dateKey, records: [] };
+            }
+            grouped[dateKey].records.push(record);
+        });
+        this.groupedRecords = Object.values(grouped);
+    },
+
+    // 格式化日期用于分组的辅助函数
+    formatDateForGrouping(dateTimeStr) {
+        if (!dateTimeStr) return '未知日期';
+        const today = this.$u.timeFormat(new Date(), 'yyyy-mm-dd');
+        const yesterday = this.$u.timeFormat(new Date(Date.now() - 86400000), 'yyyy-mm-dd');
+        const recordDate = dateTimeStr.substring(0, 10);
+
+        if (recordDate === today) return '今天';
+        if (recordDate === yesterday) return '昨天';
+        // 对于更早的日期，可以显示 MM月DD日 或 YYYY年MM月DD日
+        return this.$u.timeFormat(recordDate, 'mm月dd日');
+    },
+
+    // (其他方法如 setPeriod, viewRecordDetail, closeDetail, getRandomColor, generateOrderNumber 保持或按需调整)
+    // 支付方式文本转换 (如果API不直接提供 pay_type_text)
+    getPayTypeText(payType) {
+        const payTypeMap = {
+            'wechat': '微信支付',
+            'alipay': '支付宝',
+            'money': '余额支付',
+            'system': '系统支付'
+            // ... 其他支付方式
+        };
+        return payTypeMap[payType] || payType || '未知';
+    },
+    // ...
+    // 示例: 筛选条件变化时重新加载数据
+    handleFilterChange() {
+        this.fetchRecords(false); // 重置并加载第一页
+    },
+    setPeriod(periodValue) {
+      this.currentPeriod = periodValue;
+      // TODO: 根据 currentPeriod 更新图表数据 (fetchChartData)
+      // 如果记录列表也受此周期影响，则也需要调用 this.fetchRecords(false)
+      // 但当前设计中，图表周期和列表的日期筛选是分开的
+      toast(`图表周期切换为: ${this.periodOptions.find(p=>p.value === periodValue).label} (图表功能待实现)`);
     },
     viewRecordDetail(record) {
-      this.selectedRecord = record
-      this.showDetail = true
+      this.selectedRecord = record; // API返回的记录直接赋值
+      // 确保 selectedRecord 包含弹窗所需的所有字段，如 pay_type_text, order_sn
+      // 如果API返回的item不直接包含，需要在这里或fetchRecords中做转换
+      this.showDetail = true;
     },
     closeDetail() {
-      this.showDetail = false
+      this.showDetail = false;
+      this.selectedRecord = null;
     },
+    // 模拟辅助函数，实际应从API获取或在fetchRecords中处理
     getRandomColor(id) {
-      // 根据ID生成固定的颜色，这样同一个设备的颜色是一致的
-      const colors = ['#3b82f6', '#10b981', '#f59e0b', '#f43f5e', '#8b5cf6']
-      return colors[id % colors.length]
+      const colors = ['#3b82f6', '#10b981', '#f59e0b', '#f43f5e', '#8b5cf6'];
+      return colors[id % colors.length];
     },
-    generateOrderNumber(id) {
-      // 生成一个模拟的订单号
-      const date = new Date()
+    generateOrderNumber(id) { // 这个应该从API获取 (order_sn)
+      const date = new Date();
       const dateStr = date.getFullYear().toString() +
                      (date.getMonth() + 1).toString().padStart(2, '0') +
-                     date.getDate().toString().padStart(2, '0')
-      return dateStr + id.toString().padStart(8, '0')
+                     date.getDate().toString().padStart(2, '0');
+      return dateStr + (id ? id.toString().padStart(8, '0') : Math.floor(Math.random()*100000000));
     }
   }
 }

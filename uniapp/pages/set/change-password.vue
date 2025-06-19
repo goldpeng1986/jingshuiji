@@ -55,9 +55,15 @@
           text="确认修改" 
           shape="circle"
           :customStyle="{width: '90%', marginTop: '40rpx'}"
+<<<<<<< feature/backend-apis-phase1
+          @click="submitForm"
+          :loading="isSubmitting"
+          :disabled="isSubmitting"
+=======
           @click="handleChangePassword"
           :loading="isLoading"
           :disabled="isLoading"
+>>>>>>> main
         ></u-button>
       </view>
       
@@ -78,11 +84,70 @@
 </template>
 
 <script>
+<<<<<<< feature/backend-apis-phase1
+import { toast, clearStorageSync } from '@/utils/utils.js'; // 引入toast和clearStorageSync
+=======
 import { changeUserPassword } from '../../api/api';
+>>>>>>> main
 
 export default {
   data() {
     return {
+<<<<<<< feature/backend-apis-phase1
+      title: '修改密码', // 页面标题
+      form: { // 表单数据
+        oldPassword: '',
+        newPassword: '',
+        confirmPassword: ''
+      },
+      isSubmitting: false, // 控制提交按钮的加载状态和禁用
+      rules: { // 表单验证规则
+        oldPassword: [{
+          required: true,
+          message: '请输入原密码',
+          trigger: ['blur', 'change']
+        }],
+        newPassword: [{
+          required: true,
+          message: '请输入新密码',
+          trigger: ['blur', 'change']
+        }, {
+          min: 6, // 根据后端 Auth->changepwd 的实际最小长度调整，通常是6或8
+          max: 20,
+          message: '密码长度为6-20个字符', // 提示信息也应对应调整
+          trigger: ['blur', 'change']
+        }, {
+          validator: (rule, value, callback) => {
+            // 示例：要求包含字母和数字 (可以根据实际安全策略调整)
+            // FastAdmin Auth类默认可能不强制此复杂度，但前端可加此校验
+            const hasLetter = /[a-zA-Z]/.test(value);
+            const hasNumber = /[0-9]/.test(value);
+            // return hasLetter && hasNumber; // uView validator 返回true或false
+            if (value && value.length >=6 && !(hasLetter && hasNumber)) {
+                 callback(new Error('密码必须包含字母和数字'));
+            } else {
+                 callback();
+            }
+          },
+        //   message: '密码必须包含字母和数字', // 此message在callback(new Error())中定义
+          trigger: ['blur', 'change']
+        }],
+        confirmPassword: [{
+          required: true,
+          message: '请再次输入新密码',
+          trigger: ['blur', 'change']
+        }, {
+          validator: (rule, value, callback) => {
+            if (value !== this.form.newPassword) {
+              callback(new Error('两次输入的密码不一致'));
+            } else {
+              callback();
+            }
+          },
+        //   message: '两次输入的密码不一致',
+          trigger: ['blur', 'change']
+        }]
+=======
       title: '修改密码',
       oldPassword: '',
       newPassword: '',
@@ -92,10 +157,60 @@ export default {
         oldPassword: '',
         newPassword: '',
         confirmPassword: ''
+>>>>>>> main
       }
       // uView 的表单规则已移除，改用自定义校验逻辑
     }
   },
+<<<<<<< feature/backend-apis-phase1
+  onReady() {
+    this.$refs.uForm.setRules(this.rules); // 设置表单验证规则
+  },
+  methods: {
+    // 提交表单事件处理
+    submitForm() {
+      this.$refs.uForm.validate(async valid => { // 将回调改为 async 以便使用 await
+        if (valid) {
+          this.isSubmitting = true; // 开始提交，设置加载状态
+          uni.showLoading({ title: '正在提交...' });
+
+          const params = {
+            oldpassword: this.form.oldPassword,
+            newpassword: this.form.newPassword,
+            // 后端 changePassword API 通常只需要 oldpassword 和 newpassword
+            // renewpassword 主要用于前端确认，但如果后端也需要可以传递
+            renewpassword: this.form.confirmPassword
+          };
+
+          try {
+            const res = await this.$api.changePassword(params); // 调用API
+            uni.hideLoading();
+            this.isSubmitting = false;
+
+            if (res.code === 1) { // 假设code为1表示成功
+              toast('密码修改成功，请重新登录', 'success');
+
+              // 清除本地存储的token和用户信息
+              clearStorageSync('token'); // 或 uni.removeStorageSync('token')
+              clearStorageSync('userInfo'); // 或 uni.removeStorageSync('userInfo')
+
+              // 延时后跳转到登录页
+              setTimeout(() => {
+                uni.reLaunch({ url: '/pages/me/login' }); // 使用reLaunch确保其他页面栈被清除
+              }, 1500);
+            } else {
+              toast(res.msg || '密码修改失败'); // 显示后端返回的错误信息
+            }
+          } catch (error) {
+            uni.hideLoading();
+            this.isSubmitting = false;
+            console.error('submitForm error:', error);
+            toast('请求失败，请稍后再试');
+          }
+        } else {
+          // 表单验证失败的提示已由uView的Form组件处理
+          // uni.showToast({ title: '请检查表单信息', icon: 'none' });
+=======
   // onReady() {
     // 如果使用 uView 的 rules 属性进行校验，则在此设置规则
     // this.$refs.uForm.setRules(this.rules);
@@ -200,6 +315,7 @@ export default {
         } else if (err.message) {
             // 其他类型的错误（如网络错误但通过catch捕获）
             uni.showToast({ title: err.message, icon: 'none', duration: 3000 });
+>>>>>>> main
         }
         else {
           // 未知错误或上述条件均不满足时的通用提示

@@ -271,12 +271,21 @@ class Order extends Model
      * @param int    $address_id
      * @param int    $user_id
      * @param mixed  $cart_ids
-     * @param string $memo
-     * @return Order|null
+     * @param string $memo 用户备注
+     * @param string $appointmentDate 预约安装日期 (可选)
+     * @param string $appointmentTimeSlot 预约安装时间段 (可选)
+     * @return Order|null 创建成功返回订单对象，否则抛出异常或返回null
+     * @throws \Exception
      */
-    public static function createOrder($address_id, $user_id, $cart_ids, $user_coupon_id, $memo)
-    {
-
+    public static function createOrder(
+        $address_id,
+        $user_id,
+        $cart_ids,
+        $user_coupon_id,
+        $memo,
+        $appointmentDate = null, // 新增参数：预约日期
+        $appointmentTimeSlot = null // 新增参数：预约时间段
+    ) {
         $address = Address::get($address_id);
         if (!$address || $address['user_id'] != $user_id) {
             throw new \Exception("地址未找到");
@@ -303,18 +312,47 @@ class Order extends Model
             'saleamount'  => 0,
             'memo'        => $memo,
             'expiretime'  => time() + $config['order_timeout'], //订单失效
-            'status'      => 'normal'
+            'status'      => 'normal',
+            // 假设数据库中已有这些字段，如果没有，需要先通过数据库迁移添加
+            // 'appointment_date' => $appointmentDate,
+            // 'appointment_timeslot' => $appointmentTimeSlot,
         ];
+
+        // 处理预约时间：如果数据库没有专用字段，则附加到备注中
+        // **重要提示**: 最佳实践是为预约日期和时间段在 `fa_shop_order` 表中创建专用字段。
+        // 以下代码作为一种临时措施，如果字段不存在，则将信息存入备注。
+        $appointmentInfoString = '';
+        if (!empty($appointmentDate)) {
+            $appointmentInfoString .= " 预约日期：" . trim($appointmentDate);
+        }
+        if (!empty($appointmentTimeSlot)) {
+            $appointmentInfoString .= " 时间段：" . trim($appointmentTimeSlot);
+        }
+
+        if (!empty($appointmentInfoString)) {
+            // 检查 fa_shop_order 表是否有 appointment_date 和 appointment_timeslot 字段
+            // 这里我们不能直接检查，所以按计划写入备注，并提醒用户。
+            // 更好的方式是检查 $orderInfo 模型（或其父模型）的字段列表，但为简化，直接附加到memo
+            $orderInfo['memo'] = trim($memo . $appointmentInfoString);
+            // 如果有专用字段，则应如下赋值:
+            // $orderInfo['appointment_date'] = $appointmentDate;
+            // $orderInfo['appointment_timeslot'] = $appointmentTimeSlot;
+            // 并在上方 $orderInfo 定义中取消注释相应行。
+            // **开发者注意**: 请检查 `fa_shop_order` 表结构。如果缺少 `appointment_date` (DATE) 和
+            // `appointment_timeslot` (VARCHAR) 字段，请添加它们以正确存储预约信息。
+            // 当前实现会将预约信息附加到订单备注中。
+        }
+
 
         //订单详细表
         list($orderItem, $goodsList, $userCoupon) = self::computeCarts($orderInfo, $cart_ids, $user_id, $address->area_id, $user_coupon_id);
-        if(count($orderItem)==1){
-           if($orderItem[0]['goods_type']==20){
-               $orderInfo['order_type']=20;
+        if(count($orderItem)==1){ // 如果订单只有一个商品
+           if($orderItem[0]['goods_type']==20){ // 且该商品类型为20 (假设为服务类或需要安装的商品)
+               $orderInfo['order_type']=20; // 则将订单类型也标记为20
            }
         }
         $order = null;
-        Db::startTrans();
+        Db::startTrans(); // 启动数据库事务
         try {
             //创建订单
             $order = Order::create($orderInfo, true);
@@ -681,5 +719,307 @@ class Order extends Model
     public function orderAction()
     {
         return $this->hasMany('OrderAction', 'order_sn', 'order_sn');
+    }
+
+    /**
+     * Get User's Today and Current Month Expenses
+     *
+     * @param int $userId
+     * @return array
+     */
+    public static function getUserExpenses($userId)
+    {
+        $today_start = strtotime('today');
+        $today_end = strtotime('today +1 day') - 1;
+
+        $month_start = strtotime(date('Y-m-01'));
+        $month_end = strtotime(date('Y-m-01', strtotime('+1 month'))) - 1;
+
+        $today_expense = Db::name('shop_order')
+            ->where('user_id', $userId)
+            ->where('paystate', 1) // Paid
+            ->where('createtime', '>=', $today_start)
+            ->where('createtime', '<=', $today_end)
+            ->sum('payamount');
+
+        $month_expense = Db::name('shop_order')
+            ->where('user_id', $userId)
+            ->where('paystate', 1) // Paid
+            ->where('createtime', '>=', $month_start)
+            ->where('createtime', '<=', $month_end)
+            ->sum('payamount');
+
+        return [
+            'today_expense' => $today_expense ? floatval($today_expense) : 0.00,
+            'month_expense' => $month_expense ? floatval($month_expense) : 0.00,
+        ];
+    }
+
+    /**
+     * 获取用户使用记录统计
+     * @param int $userId 用户ID
+     * @param string $dateType 日期类型: 'current_month', 'last_month', 'YYYY-MM'
+     * @param string|null $customMonth 自定义月份 (格式 'YYYY-MM'), 当 $dateType 为 'YYYY-MM' 或类似值时使用
+     * @return array 包含 count, amount, volume 的数组
+     */
+    public static function getUserUsageStatistics($userId, $dateType = 'current_month', $customMonth = null)
+    {
+        $query = Db::name('shop_order')
+            ->alias('o')
+            ->join('__SHOP_ORDER_GOODS__ og', 'o.order_sn = og.order_sn', 'LEFT') // LEFT JOIN 获取商品信息
+            ->where('o.user_id', $userId)
+            ->where('o.paystate', 1); // 已支付的订单
+
+        // 处理日期范围
+        $beginTime = null;
+        $endTime = null;
+
+        if ($customMonth && preg_match('/^\d{4}-\d{2}$/', $customMonth)) { // 直接使用 YYYY-MM 作为 dateType
+            $beginTime = strtotime($customMonth . '-01');
+            $endTime = strtotime('+1 month', $beginTime) - 1;
+        } elseif ($dateType === 'current_month') {
+            $beginTime = strtotime(date('Y-m-01'));
+            $endTime = strtotime(date('Y-m-01', strtotime('+1 month'))) - 1;
+        } elseif ($dateType === 'last_month') {
+            $beginTime = strtotime(date('Y-m-01', strtotime('-1 month')));
+            $endTime = strtotime(date('Y-m-01')) - 1;
+        }
+        // 如果 $dateType 是其他值且 $customMonth 未能解析，则可能不应用时间过滤或根据需求调整
+
+        if ($beginTime && $endTime) {
+            $query->whereBetween('o.createtime', [$beginTime, $endTime]);
+        }
+
+        // 计算统计数据
+        // 使用 distinct o.id 避免因 join shop_order_goods 导致订单重复计算总数和总金额
+        $count = $query->count('DISTINCT o.id');
+        // 总金额也需要基于去重后的订单
+        $amount = Db::name('shop_order') // 单独查询总金额以确保准确性
+            ->alias('o_sum')
+            ->where('o_sum.user_id', $userId)
+            ->where('o_sum.paystate', 1);
+        if ($beginTime && $endTime) {
+             $amount->whereBetween('o_sum.createtime', [$beginTime, $endTime]);
+        }
+        $totalAmount = $amount->sum('payamount');
+
+        // 计算 volume (所有订单商品数量总和)
+        // 这里的 $query 已经包含了 JOIN 和时间过滤
+        $totalVolume = (clone $query)->sum('og.nums');
+
+
+        return [
+            'count'  => $count ? intval($count) : 0, // 订单数量
+            'amount' => $totalAmount ? floatval($totalAmount) : 0.00, // 支付总金额
+            'volume' => $totalVolume ? intval($totalVolume) : 0, // 商品总件数 (作为 volume)
+        ];
+    }
+
+    /**
+     * 获取用户使用记录列表 (分页)
+     * @param int $userId 用户ID
+     * @param array $params 包含筛选和分页参数的数组
+     * @return \think\Paginator
+     */
+    public static function getUserUsageRecords($userId, $params)
+    {
+        $query = self::alias('o') // 使用 self::alias 可以在当前模型上操作
+            ->join('__SHOP_ORDER_GOODS__ og', 'o.order_sn = og.order_sn', 'LEFT')
+            ->join('__SHOP_GOODS__ g', 'og.goods_id = g.id', 'LEFT')
+            ->where('o.user_id', $userId)
+            ->where('o.paystate', 1); // 已支付
+
+        // 处理时间范围筛选
+        if (isset($params['filter_type'])) {
+            $beginTime = null;
+            $endTime = null;
+            switch ($params['filter_type']) {
+                case 'current_month':
+                    $beginTime = strtotime(date('Y-m-01'));
+                    $endTime = strtotime(date('Y-m-01', strtotime('+1 month'))) - 1;
+                    break;
+                case 'last_month':
+                    $beginTime = strtotime(date('Y-m-01', strtotime('-1 month')));
+                    $endTime = strtotime(date('Y-m-01')) - 1;
+                    break;
+                case 'custom_date_range':
+                    if (!empty($params['date_from'])) {
+                        $beginTime = strtotime($params['date_from']);
+                    }
+                    if (!empty($params['date_to'])) {
+                        $endTime = strtotime($params['date_to'] . ' 23:59:59'); // 包含当天
+                    }
+                    break;
+            }
+            if ($beginTime && $endTime) {
+                $query->whereBetween('o.createtime', [$beginTime, $endTime]);
+            } elseif ($beginTime) {
+                $query->where('o.createtime', '>=', $beginTime);
+            } elseif ($endTime) {
+                $query->where('o.createtime', '<=', $endTime);
+            }
+        }
+
+        // 按特定商品ID筛选
+        if (!empty($params['goods_id'])) {
+            $query->where('og.goods_id', $params['goods_id']);
+        }
+
+        // 排序
+        $orderby = isset($params['orderby']) && in_array($params['orderby'], ['createtime', 'payamount']) ? 'o.' . $params['orderby'] : 'o.createtime';
+        $orderway = isset($params['orderway']) && in_array(strtolower($params['orderway']), ['asc', 'desc']) ? $params['orderway'] : 'desc';
+        $query->order($orderby, $orderway);
+
+        // 选择需要的字段，注意处理可能的重复 (如果一个订单有多个商品，这里取第一个商品作为代表)
+        // 使用 group by o.id 确保每个订单只出现一次，同时获取其第一个商品的代表信息
+        // 注意：MySQL的GROUP BY默认行为可能不符合预期，最好明确聚合函数或使用子查询/窗口函数，但简单场景下可以
+        $query->group('o.id');
+        $query->field([
+            'o.id as record_id',
+            'o.order_sn',
+            'o.createtime as time',
+            'o.payamount as amount',
+            'o.address',
+            'MIN(og.title) as device_name', // 取第一个商品标题
+            'MIN(og.nums) as volume',       // 取第一个商品数量
+            'MIN(g.image) as image_raw'     // 取第一个商品图片（原始路径）
+        ]);
+
+
+        // 分页参数
+        $page = isset($params['page']) ? max(1, (int)$params['page']) : 1;
+        $limit = isset($params['limit']) ? max(1, (int)$params['limit']) : 10;
+
+        $list = $query->paginate($limit, false, ['page' => $page]);
+
+        // 数据后处理
+        foreach ($list as $item) {
+            $item->time = date('Y-m-d H:i:s', $item->time); // 格式化时间
+            $item->image = $item->image_raw ? cdnurl($item->image_raw, true) : ''; // 处理图片URL
+            unset($item->image_raw); // 移除原始图片路径字段
+
+            // 解析地址 (简单示例，可能需要更复杂的解析逻辑)
+            if ($item->address) {
+                $addressParts = explode(',', $item->address);
+                // 假设地址格式是 "姓名,电话,省市区,详细地址"
+                // 或者 "省市区 详细地址" (如果o.address直接是这样存的)
+                // 这里仅作一个简单展示，实际可能需要根据存储格式调整
+                $item->location = isset($addressParts[2]) ? str_replace(' ', '', $addressParts[2]) : $item->address;
+            } else {
+                $item->location = '未知';
+            }
+        }
+        return $list;
+    }
+
+    /**
+     * 获取单条用户使用记录详情
+     * @param int $userId 用户ID
+     * @param int $orderId 订单ID
+     * @return array|null 订单详情数组，或null（如果未找到或无权访问）
+     */
+    public static function getUsageRecordDetail($userId, $orderId)
+    {
+        // 查询主订单信息
+        $order = self::alias('o')
+            ->where('o.id', $orderId)
+            ->where('o.user_id', $userId)
+            ->where('o.paystate', 1) // 确保是已支付的订单
+            ->field([ // 选择订单表中的核心字段
+                'o.id as record_id',
+                'o.order_sn',
+                'o.createtime', // 将作为 'time' 字段
+                'o.payamount as amount',
+                'o.paytype',
+                'o.address', // 原始地址字符串
+                'o.memo',    // 备注，可能包含预约信息
+                'o.orderstate', // 用于获取订单状态文本
+                'o.shippingstate', // 用于获取订单状态文本 (如果适用)
+            ])
+            ->find();
+
+        if (!$order) {
+            return null; // 订单不存在或不属于该用户或未支付
+        }
+
+        // 查询订单关联的商品详情
+        $goodsDetails = Db::name('shop_order_goods')
+            ->alias('og')
+            ->join('__SHOP_GOODS__ g', 'og.goods_id = g.id', 'LEFT')
+            ->where('og.order_sn', $order['order_sn'])
+            ->field([
+                'og.title as product_name', // 商品在订单中的标题
+                'og.nums as quantity',
+                'og.price as price_per_item', // 商品在订单中的单价
+                'g.image as product_image_raw' // 商品主图原始路径
+            ])
+            ->select();
+
+        $totalVolume = 0;
+        $processedGoodsDetails = [];
+        foreach ($goodsDetails as $good) {
+            $totalVolume += $good['quantity'];
+            $processedGoodsDetails[] = [
+                'product_name'     => $good['product_name'],
+                'quantity'         => $good['quantity'],
+                'price_per_item'   => floatval($good['price_per_item']),
+                'product_image'    => $good['product_image_raw'] ? cdnurl($good['product_image_raw'], true) : '',
+            ];
+        }
+
+        // 准备返回的数据结构
+        $result = $order->toArray(); // 将主订单信息转为数组
+        $result['time'] = date('Y-m-d H:i:s', $order['createtime']); // 格式化时间
+        $result['pay_type_text'] = self::getPayTypeText($order['paytype']); // 获取支付方式文本
+
+        // 订单状态文本 (复用模型中已有的 getStatusTextAttr 逻辑，但需要模拟数据结构)
+        $statusData = [
+            'orderstate'    => $order['orderstate'],
+            'paystate'      => 1, // 因为我们查询时已限定 paystate = 1
+            'shippingstate' => $order['shippingstate']
+        ];
+        $result['status_text'] = (new self())->getStatusTextAttr(null, $statusData);
+
+
+        // 解析地址
+        if ($result['address']) {
+            $addressParts = explode(',', $result['address']);
+            // 假设地址格式 "姓名,电话,省市区,详细地址"
+            $result['location'] = isset($addressParts[2]) ? trim($addressParts[2]) . (isset($addressParts[3]) ? ' ' . trim($addressParts[3]) : '') : $result['address'];
+        } else {
+            $result['location'] = '未知';
+        }
+
+        // device_name: 可以用第一个商品名作为代表，或根据业务逻辑调整
+        $result['device_name'] = !empty($processedGoodsDetails) ? $processedGoodsDetails[0]['product_name'] : '未知设备';
+
+        // volume: 订单中所有商品的总数量
+        $result['volume'] = $totalVolume;
+
+        $result['goods_details'] = $processedGoodsDetails; // 包含处理后的商品列表
+
+        // 移除不再需要的原始字段
+        unset($result['createtime'], $result['orderstate'], $result['shippingstate']);
+
+        return $result;
+    }
+
+    /**
+     * 获取支付方式文本 (辅助方法)
+     * @param string $payType 支付类型标识 (e.g., 'wechat', 'alipay', 'money')
+     * @return string 支付方式的文本描述
+     */
+    private static function getPayTypeText($payType)
+    {
+        // 这里可以根据实际的支付类型标识返回对应的中文名称
+        // 例如，在配置文件或语言包中定义这些映射
+        $payTypeMap = [
+            'wechat' => __('Wechat'), // 微信支付
+            'alipay' => __('Alipay'), // 支付宝支付
+            'money'  => __('Balance'), // 余额支付
+            'system' => __('System Pay'), // 系统支付 (例如金额为0时)
+            // 添加其他支付方式...
+        ];
+        return isset($payTypeMap[$payType]) ? $payTypeMap[$payType] : __('Unknown'); // 未知
     }
 }

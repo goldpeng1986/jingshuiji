@@ -41,6 +41,7 @@ export const sendSms = data => request.post('/addons/shop/api.sms/send', data)
 //商品详情 - 获取商品详细信息
 export const getHomeProduct = data => request.get('/addons/shop/api.goods/detail', data)
 //提交订单 - 创建新订单
+// @param data {Object} 订单数据，可包含 cart_ids, address_id, user_coupon_id, memo, date (预约日期), time_slot (预约时间段)
 export const addOrder = data => request.post('/addons/shop/api.order/add', data)
 
 
@@ -55,6 +56,9 @@ export const getUserProfile = data => request.post('/addons/shop/api.user/profil
 export const goUserLogout = data => request.get('/addons/shop/api.user/logout', data) // 用户退出登录
 export const goUserAvatar = data => request.post('/addons/shop/api.user/avatar', data) // 更新用户头像
 export const getSigned = data => request.post('/addons/shop/api.user/getSigned', data) // 获取用户签到状态
+// 修改用户密码
+// @param data {Object} 包含 oldpassword, newpassword, renewpassword
+export const changePassword = data => request.post('/addons/shop/api.user/changepassword', data)
 
 //登录相关接口
 export const getEmsSend = data => request.post('/addons/shop/api.ems/send', data) // 发送邮箱验证码
@@ -139,7 +143,9 @@ export const myExchange = data => request.get('/addons/shop/api.score/myExchange
 export const couponList = data => request.get('/addons/shop/api.coupon/couponList', data) // 获取优惠券列表
 export const couponDetail = data => request.get('/addons/shop/api.coupon/couponDetail', data) // 获取优惠券详情
 export const drawCoupon = data => request.post('/addons/shop/api.coupon/drawCoupon', data) // 领取优惠券
-export const myCouponList = data => request.get('/addons/shop/api.coupon/myCouponList', data) // 获取我的优惠券列表
+// 获取我的优惠券列表
+// @param data {Object} 可选参数，例如 { status: 'available' | 'used' | 'expired' }
+export const myCouponList = data => request.get('/addons/shop/api.coupon/myCouponList', data)
 
 //页面相关接口
 export const pageIndex = data => request.get('/addons/shop/api.page/index', data) // 获取页面配置
@@ -172,3 +178,24 @@ export const orderServiceInfo = data => request.get('/addons/shop/api.service.or
 //余额充值相关接口
 export const confirmMoney = data => request.post('/addons/shop/api.user/userMoney', data) // 用户余额充值
 export const userMoneyLog = data => request.get('/addons/shop/api.user/getList', data) // 获取用户余额记录
+
+// --- 新增API函数 ---
+
+// Banner/区块
+// 根据类型获取区块/Banner列表; @param data {Object} 例如 { type: 'uniapp_index_banner' }
+export const getBlockListByType = data => request.get('/addons/shop/api.block/getListByType', data)
+
+// 设备相关
+// 获取用户设备列表; @param data {Object} 可为空
+export const getDeviceList = data => request.get('/addons/shop/api.device/list', data)
+// 获取设备详情
+// @param data {Object} 请求参数，例如 { order_id: orderId } // 明确参数为order_id
+export const getDeviceDetail = data => request.get('/addons/shop/api.device/detail', data)
+
+// 使用记录
+// 获取用户使用记录统计数据; @param data {Object} 例如 { date_type: 'current_month' }
+export const getUsageStatistics = data => request.get('/addons/shop/api.record/getStatistics', data)
+// 获取用户使用记录列表 (分页); @param data {Object} 包含分页和筛选参数
+export const getUsageRecordsList = data => request.get('/addons/shop/api.record/list', data)
+// 获取单条使用记录详情; @param data {Object} 例如 { id: recordId } (recordId 即 order_id)
+export const getUsageRecordDetail = data => request.get('/addons/shop/api.record/detail', data)
