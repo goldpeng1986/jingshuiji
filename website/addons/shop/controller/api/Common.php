@@ -15,7 +15,8 @@ use addons\shop\model\SearchLog;
  */
 class Common extends Base
 {
-    protected $noNeedLogin = ['init', 'area'];
+    // 将 aboutus 添加到 noNeedLogin 数组
+    protected $noNeedLogin = ['init', 'area', 'aboutus'];
 
     /**
      * 初始化
@@ -110,5 +111,49 @@ class Common extends Base
         }
         $provincelist = Area::where($where)->field('id as value,name as label')->where('status', 'normal')->select();
         $this->success('', $provincelist);
+    }
+
+    /**
+     * 关于我们
+     * @ApiMethod (GET)
+     */
+    public function aboutus()
+    {
+        // 实际项目中，这些数据可能来自数据库的配置表或特定表
+        // 例如: $config = 	hink\Config::get('shop_about_us');
+        // 或者: $aboutModel = new ddons\shop\model\AboutUs(); $info = $aboutModel->find();
+
+        // 模拟数据
+        $siteConfig = Config::get('site'); // 尝试从全局站点配置获取信息
+        $shopConfig = Config::get('shop'); // 尝试从插件配置获取信息
+
+        $appName = isset($shopConfig['name']) && !empty($shopConfig['name']) ? $shopConfig['name'] : (isset($siteConfig['name']) ? $siteConfig['name'] : '森泽共享净水机');
+        $defaultLogo = '/assets/addons/shop/img/logo.png'; // 假设的默认logo路径
+        // cdnurl 需要确保在没有上下文时也能正确生成URL，或者提供一个完整的URL
+        $logoUrl = isset($shopConfig['logo']) && !empty($shopConfig['logo']) ? cdnurl($shopConfig['logo'], true) : cdnurl($defaultLogo, true);
+
+
+        $aboutData = [
+            'appName'        => $appName,
+            'version'        => isset($shopConfig['version']) ? $shopConfig['version'] : '1.0.1', // 示例版本号
+            'logoUrl'        => $logoUrl,
+            'description'    => isset($shopConfig['description']) && !empty($shopConfig['description']) ? $shopConfig['description'] : '森泽共享净水机致力于提供便捷、高效、经济的共享净水服务，让每个人都能轻松享受健康饮水。我们采用先进的物联网技术和多级过滤系统，确保水质安全纯净。',
+            'features'       => [ // 功能特点 - 示例
+                '便捷扫码，即开即用',
+                '多重过滤，水质纯净',
+                '智能监控，安全可靠',
+                '多种套餐，经济实惠',
+                '在线充值，方便快捷'
+            ],
+            'companyName'    => isset($shopConfig['company_name']) && !empty($shopConfig['company_name']) ? $shopConfig['company_name'] : '森泽科技有限公司',
+            'websiteUrl'     => isset($shopConfig['website_url']) && !empty($shopConfig['website_url']) ? $shopConfig['website_url'] : 'www.senzejingshui.com',
+            'contactPhone'   => isset($shopConfig['contact_phone']) && !empty($shopConfig['contact_phone']) ? $shopConfig['contact_phone'] : '400-000-0001',
+            'contactEmail'   => isset($shopConfig['contact_email']) && !empty($shopConfig['contact_email']) ? $shopConfig['contact_email'] : 'service@senzejingshui.com',
+            'companyAddress' => isset($shopConfig['company_address']) && !empty($shopConfig['company_address']) ? $shopConfig['company_address'] : '中国北京市朝阳区建国路88号SOHO现代城A座1201室',
+            'copyright'      => isset($shopConfig['copyright']) && !empty($shopConfig['copyright']) ? $shopConfig['copyright'] : ('© ' . date('Y') . ' ' . $appName . ' 版权所有')
+        ];
+
+        // 兼容前端可能期望数据在 'info' 或 'data' 键下
+        $this->success('获取成功', ['info' => $aboutData, 'data' => $aboutData]);
     }
 }

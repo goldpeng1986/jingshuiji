@@ -6,14 +6,14 @@ use addons\shop\model\Order;
 use app\common\model\MoneyLog;
 use app\common\model\UserMoneyOrder;
 use think\Config;
-
+use think\Validate; // 引入 Validate 类
 
 /**
  * 会员
  */
 class User extends Base
 {
-    protected $noNeedLogin = ['getSigned'];
+    protected $noNeedLogin = ['getSigned']; // 确保 changepassword 不在此列
 
     public function _initialize()
     {
@@ -131,5 +131,67 @@ class User extends Base
         $list =  $model->getList($this->auth->id,$param['page'],$param['limit']);
         $count = $model->getlistCount($this->auth->id);
         $this->success('查询成功',compact('list','count'));
+    }
+
+    /**
+     * 修改密码
+     * @ApiMethod (POST)
+     * @param string $old_password 旧密码
+     * @param string $new_password 新密码
+     * @param string $confirm_password 确认新密码
+     */
+    public function changepassword()
+    {
+        if (!$this->request->isPost()) {
+            $this->error('请求方式错误');
+        }
+
+        $old_password = $this->request->post('old_password');
+        $new_password = $this->request->post('new_password');
+        $confirm_password = $this->request->post('confirm_password');
+
+        if (!$old_password || !$new_password || !$confirm_password) {
+            $this->error(__('参数不能为空'));
+        }
+
+        if ($new_password !== $confirm_password) {
+            $this->error(__('新密码两次输入不一致'));
+        }
+
+        // 密码规则校验 (示例：长度至少8，包含字母和数字)
+        // 前端uniapp/pages/set/change-password.vue中提示 "密码长度为8-20个字符", "必须包含字母和数字"
+        // 此处后端也应做类似或更严格的校验
+        $validate = new Validate([
+            'new_password' => 'require|length:8,20|regex:/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,20}$/'
+        ], [
+            'new_password.require' => '新密码不能为空',
+            'new_password.length'  => '新密码长度必须在8到20个字符之间',
+            'new_password.regex'   => '新密码必须包含字母和数字'
+        ]);
+
+        if (!$validate->check(['new_password' => $new_password])) {
+            $this->error($validate->getError());
+        }
+
+        if ($new_password == $old_password) {
+            $this->error(__('新密码不能与旧密码相同'));
+        }
+
+        $user = $this->auth->getUser();
+        // 验证旧密码
+        // 注意：$this->auth->changepwd 方法通常内部会处理旧密码的验证
+        // 如果 changepwd 第一个参数是新密码，第二个是旧密码，它会先验证旧密码
+        // 此处假设 changepwd(新密码, 旧密码) 的行为
+        $result = $this->auth->changepwd($new_password, $old_password);
+
+        if ($result) {
+            // 密码修改成功后，可能需要让当前token失效，强制用户重新登录
+            // $this->auth->logout(); // 可选：如果希望修改密码后立即登出
+            $this->success(__('密码修改成功'));
+        } else {
+            // 获取具体的错误信息，这可能来自Auth类
+            $error_msg = $this->auth->getError();
+            $this->error(empty($error_msg) ? __('旧密码不正确或操作失败') : $error_msg);
+        }
     }
 }
