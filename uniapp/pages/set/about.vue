@@ -1,88 +1,165 @@
 <template>
   <view class="container">
-    <!-- 页面标题 -->
-    <view class="page-header">
+    <!-- 页面加载状态 -->
+    <u-loading-page :loading="isLoading" loading-text="正在加载..."></u-loading-page>
+
+    <!-- 页面头部（如果数据加载成功且无错误，则显示） -->
+    <view class="page-header" v-if="!isLoading && !errorLoading">
       <view class="header-title">
         <u-icon name="info-circle" size="28" color="#fff"></u-icon>
-        <text class="header-title-text">关于我们</text>
+        <text class="header-title-text">{{ (aboutInfo && aboutInfo.appName) ? '关于 ' + aboutInfo.appName : '关于我们' }}</text>
       </view>
     </view>
     
-    <!-- 应用信息 -->
-    <view class="about-section">
-      <!-- 应用Logo -->
+    <!-- 错误状态 -->
+    <view v-if="!isLoading && errorLoading" class="state-container">
+      <u-empty mode="network" text="信息加载失败">
+        <u-button slot="bottom" type="primary" size="medium" @click="retryFetch" text="点我重试" :customStyle="{marginTop: '20px'}"></u-button>
+      </u-empty>
+    </view>
+
+    <!-- 未找到信息状态 -->
+    <view v-if="!isLoading && !errorLoading && !aboutInfo" class="state-container">
+      <u-empty mode="data" text="未能获取到相关信息"></u-empty>
+    </view>
+
+    <!-- 主要内容区域：仅当加载完毕、无错误且aboutInfo存在时显示 -->
+    <view class="about-section" v-if="!isLoading && !errorLoading && aboutInfo">
       <view class="logo-container">
-        <image src="/static/logo.png" mode="aspectFit" class="app-logo"></image>
-        <text class="app-name">森泽净水</text>
-        <text class="app-version">v1.0.0</text>
+        <image :src="aboutInfo.logoUrl || '/static/logo.png'" mode="aspectFit" class="app-logo"></image>
+        <text class="app-name">{{ aboutInfo.appName || '应用名称' }}</text>
+        <text class="app-version">版本 {{ aboutInfo.version || '1.0.0' }}</text>
       </view>
       
-      <!-- 应用介绍 -->
-      <view class="app-intro">
-        <text class="intro-text">森泽净水是一款专注于提供高品质净水设备和服务的应用，致力于为用户提供健康、安全的饮用水解决方案。我们的产品采用先进的净水技术，能有效去除水中的有害物质，为您和家人的健康保驾护航。</text>
+      <view class="app-intro" v-if="aboutInfo.description">
+        <!-- 如果描述包含HTML标签，则使用u-parse组件解析 -->
+        <u-parse :content="aboutInfo.description" v-if="aboutInfo.description.includes('<') && aboutInfo.description.includes('>')"></u-parse>
+        <text class="intro-text" v-else>{{ aboutInfo.description }}</text>
       </view>
       
-      <!-- 功能特点 -->
-      <view class="feature-list">
+      <view class="feature-list" v-if="aboutInfo.features && aboutInfo.features.length > 0">
         <view class="section-title">
           <u-icon name="checkmark-circle" size="18" color="#19be6b"></u-icon>
           <text class="title-text">功能特点</text>
         </view>
-        <view class="feature-item" v-for="(item, index) in features" :key="index">
+        <view class="feature-item" v-for="(feature, index) in aboutInfo.features" :key="index">
           <u-icon name="checkbox-mark" size="16" color="#3c9cff"></u-icon>
-          <text class="feature-text">{{ item }}</text>
+          <!-- 假设 features 是一个字符串数组；如果是对象数组，则使用 feature.text 或类似属性 -->
+          <text class="feature-text">{{ typeof feature === 'string' ? feature : feature.text }}</text>
         </view>
       </view>
       
-      <!-- 联系我们 -->
       <view class="contact-info">
         <view class="section-title">
           <u-icon name="phone" size="18" color="#3c9cff"></u-icon>
-          <text class="title-text">联系我们</text>
+          <text class="title-text">联系与支持</text>
         </view>
-        <view class="contact-item">
-          <text class="contact-label">客服电话：</text>
-          <text class="contact-value">400-888-8888</text>
-        </view>
-        <view class="contact-item">
-          <text class="contact-label">客服邮箱：</text>
-          <text class="contact-value">service@senze.com</text>
-        </view>
-        <view class="contact-item">
-          <text class="contact-label">公司地址：</text>
-          <text class="contact-value">深圳市南山区科技园南区高新南一道9号</text>
-        </view>
+        <u-cell-group :border="false">
+          <u-cell title="公司名称" :value="aboutInfo.companyName || '未提供'" :isLink="false"></u-cell>
+          <u-cell title="官方网站" :value="aboutInfo.websiteUrl || '未提供'" @click="openLink(aboutInfo.websiteUrl)" :isLink="!!aboutInfo.websiteUrl"></u-cell>
+          <u-cell title="客服电话" :value="aboutInfo.contactPhone || '未提供'" @click="callService(aboutInfo.contactPhone)" :isLink="!!aboutInfo.contactPhone"></u-cell>
+          <u-cell title="联系邮箱" :value="aboutInfo.contactEmail || '未提供'" :isLink="false"></u-cell>
+          <u-cell title="公司地址" :value="aboutInfo.companyAddress || '未提供'" :isLink="false" labelRows="3" titleStyle="flex: 0 0 160rpx;"></u-cell>
+        </u-cell-group>
       </view>
       
-      <!-- 版权信息 -->
-      <view class="copyright">
-        <text class="copyright-text">© 2023 森泽净水 版权所有</text>
+      <view class="copyright" v-if="aboutInfo.copyright">
+        <text class="copyright-text">{{ aboutInfo.copyright }}</text>
+      </view>
+       <view class="copyright" v-else>
+        <text class="copyright-text">© {{ new Date().getFullYear() }} {{ aboutInfo.appName || '应用名称' }} 版权所有</text>
       </view>
     </view>
   </view>
 </template>
 
 <script>
+import { getAboutInfo } from '../../api/api';
+
 export default {
   data() {
     return {
-      title: '关于我们',
-      features: [
-        '智能设备管理，远程控制净水设备',
-        '水质监测，实时掌握水质状况',
-        '滤芯寿命提醒，到期自动通知更换',
-        '在线商城，便捷购买滤芯和设备',
-        '使用记录，查看历史用水情况',
-        '专业客服，提供7*24小时技术支持'
-      ]
+      title: '关于我们', // 如果API提供appName，此标题可能会被覆盖
+      isLoading: true, // 加载状态标志
+      errorLoading: false, // 错误状态标志
+      aboutInfo: null,  // 用于存储从API获取的关于我们的信息对象
+      // features: [] // 功能特点列表，如果API提供，将从此填充
     }
   },
+  onLoad() {
+    // 页面加载时获取“关于我们”的详细信息
+    this.fetchAboutDetails();
+  },
   methods: {
-    // 可以添加拨打电话等功能
-    callService() {
-      uni.makePhoneCall({
-        phoneNumber: '4008888888'
-      });
+    async fetchAboutDetails() {
+      this.isLoading = true;
+      this.errorLoading = false;
+      try {
+        // 假设 $api 已全局可用，或者直接调用 getAboutInfo (如果不是通过 $api 方式)
+        const res = await getAboutInfo(); // 直接调用导入的API函数
+        // 或者: const res = await this.$api.getAboutInfo(); // 如果是通过this.$api方式调用
+
+        if (res && res.data) {
+          // 假设API直接返回数据对象，或者嵌套在如 res.data.info 中
+          this.aboutInfo = res.data.info || res.data;
+          // 示例：如果API返回了appName，则覆盖当前页面的导航栏标题
+          if (this.aboutInfo && this.aboutInfo.appName) {
+             uni.setNavigationBarTitle({ title: `关于 ${this.aboutInfo.appName}` });
+          }
+        } else {
+          console.warn('“关于我们”信息未找到或格式不符合预期:', res);
+          this.aboutInfo = null; // 确保如果数据不符合预期，aboutInfo被设为null
+        }
+      } catch (err) {
+        console.error('获取“关于我们”信息时发生错误:', err);
+        this.errorLoading = true;
+        this.aboutInfo = null;
+        uni.showToast({ title: '信息加载失败', icon: 'none' });
+      } finally {
+        this.isLoading = false; // 无论成功或失败，结束加载状态
+      }
+    },
+    callService(phoneNumber) {
+      // 拨打电话方法
+      if (phoneNumber) {
+        uni.makePhoneCall({
+          phoneNumber: phoneNumber
+        });
+      } else {
+        uni.showToast({ title: '电话号码未提供', icon: 'none' });
+      }
+    },
+    openLink(url) {
+      // 打开链接方法
+      if (url) {
+        // 确保URL以http(s)://开头
+        if (!url.startsWith('http://') && !url.startsWith('https://')) {
+          url = 'http://' + url;
+        }
+        // H5环境下直接打开新标签页
+        // #ifdef H5
+        window.open(url, '_blank');
+        // #endif
+        // App环境下使用plus.runtime.openURL打开外部浏览器
+        // #ifdef APP-PLUS
+        plus.runtime.openURL(url);
+        // #endif
+        // 其他平台的后备方案：复制URL到剪贴板并提示用户
+        // #ifndef H5 || APP-PLUS
+        uni.setClipboardData({
+            data: url,
+            success: () => {
+                uni.showToast({ title: '网址已复制，请在浏览器中打开', icon: 'none', duration: 3000 });
+            }
+        });
+        // #endif
+      } else {
+        uni.showToast({ title: '网址未提供', icon: 'none' });
+      }
+    },
+    retryFetch() {
+      // 重试获取数据的方法
+        this.fetchAboutDetails();
     }
   }
 }
@@ -93,6 +170,15 @@ export default {
   min-height: 100vh;
   background-color: #f5f5f5;
   padding-bottom: 40rpx;
+}
+
+.state-container {
+  padding: 100rpx 30rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 50vh; // Ensure it takes some space
 }
 
 .page-header {

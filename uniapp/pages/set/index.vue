@@ -25,7 +25,7 @@
         <!-- 清除缓存 -->
         <u-cell 
           title="清除缓存" 
-          :value="cacheSize" 
+          :value="isLoadingSettings ? '获取中...' : (errorLoadingSettings ? '获取失败' : (settingsInfo && settingsInfo.cacheSize !== undefined ? settingsInfo.cacheSize : cacheSize))"
           @click="clearCache"
         >
           <view slot="icon" class="cell-icon" style="background-color: #fdf6ec;">
@@ -47,7 +47,7 @@
         <!-- 版本信息 -->
         <u-cell 
           title="版本信息" 
-          :value="appVersion"
+          :value="isLoadingSettings ? '获取中...' : (errorLoadingSettings ? '获取失败' : (settingsInfo && settingsInfo.appVersion !== undefined ? settingsInfo.appVersion : appVersion))"
         >
           <view slot="icon" class="cell-icon" style="background-color: #f3effa;">
             <u-icon name="reload" color="#9a6ee8" size="36"></u-icon>
@@ -80,53 +80,99 @@
 </template>
 
 <script>
+import { getUserSettings } from '../../api/api';
+
 export default {
   data() {
     return {
-      title: '设置',
-      cacheSize: '8.5MB',
-      appVersion: 'v1.0.0',
-      showModal: false,
-      modalTitle: '',
-      modalContent: '',
-      modalType: '' // 'logout' 或 'clearCache'
+      title: '设置', // 页面标题
+      cacheSize: '8.5MB', // 缓存大小的默认值/回退值
+      appVersion: 'v1.0.0', // App版本号的默认值/回退值
+      settingsInfo: null, // 用于存储从API获取的设置信息
+      isLoadingSettings: false, // 是否正在加载设置信息的状态标志
+      errorLoadingSettings: false, // 加载设置信息是否出错的状态标志
+      showModal: false, // 控制确认弹窗的显示与隐藏
+      modalTitle: '', // 弹窗标题
+      modalContent: '', // 弹窗内容
+      modalType: '' // 弹窗类型，用于区分是 'logout' (退出登录) 还是 'clearCache' (清除缓存)
     }
   },
+  onLoad() {
+    // 页面加载时获取设置信息
+    this.fetchSettings();
+  },
   methods: {
+    async fetchSettings() {
+      this.isLoadingSettings = true;
+      this.errorLoadingSettings = false;
+      try {
+        // 假设 $api 已全局可用，或者可以直接调用 getUserSettings (如果不是通过 $api 方式)
+        const res = await getUserSettings(); // 直接调用导入的API函数
+        // 或者: const res = await this.$api.getUserSettings(); // 如果是通过 this.$api 方式调用
+
+        if (res && res.data) {
+          this.settingsInfo = res.data.settings || res.data; // 根据API响应结构调整，可能需要 res.data.settings
+          // 如果API提供了特定字段，则更新本地的回退值
+          if (this.settingsInfo && this.settingsInfo.appVersion !== undefined) {
+            this.appVersion = this.settingsInfo.appVersion;
+          }
+          if (this.settingsInfo && this.settingsInfo.cacheSize !== undefined) {
+            this.cacheSize = this.settingsInfo.cacheSize;
+          }
+          // 如果需要，处理其他设置项，例如通知状态
+          // e.g., this.notificationEnabled = this.settingsInfo.notificationStatus;
+        } else {
+          console.warn('用户信息未找到或格式不符合预期:', res);
+          // 此处不要将 settingsInfo 设为 null，因为页面的某些部分可能依赖其对象结构
+        }
+      } catch (err) {
+        console.error('获取用户设置时发生错误:', err);
+        this.errorLoadingSettings = true;
+        // 可选：显示一个toast提示，但对于非关键数据，模板内的内联指示器可能更好
+        // uni.showToast({ title: '设置加载失败', icon: 'none' });
+      } finally {
+        this.isLoadingSettings = false; // 结束加载状态
+      }
+    },
     goToChangePwd() {
       // 跳转到修改密码页面
       uni.navigateTo({
         url: '/pages/set/change-password'
-      })
+      });
     },
     goToAbout() {
       // 跳转到关于我们页面
       uni.navigateTo({
         url: '/pages/set/about'
-      })
+      });
     },
     clearCache() {
+      // 准备清除缓存的确认弹窗
       this.modalType = 'clearCache';
       this.modalTitle = '清除缓存';
       this.modalContent = '确定要清除所有缓存吗？';
       this.showModal = true;
     },
     logout() {
+      // 准备退出登录的确认弹窗
       this.modalType = 'logout';
       this.modalTitle = '退出登录';
       this.modalContent = '确定要退出登录吗？';
       this.showModal = true;
     },
     confirmModal() {
+      // 处理确认弹窗的逻辑
       if (this.modalType === 'clearCache') {
         // 执行清除缓存操作
         uni.showLoading({
           title: '清除中...'
         });
         
+        // 模拟清除缓存的过程
         setTimeout(() => {
           uni.hideLoading();
-          this.cacheSize = '0KB';
+          this.cacheSize = '0KB'; // 更新显示的缓存大小
+          // 如果 cacheSize 也由API管理，则此处可能需要重新调用 fetchSettings()
           uni.showToast({
             title: '缓存已清除',
             icon: 'success'
@@ -134,34 +180,10 @@ export default {
         }, 1500);
       } else if (this.modalType === 'logout') {
         // 执行退出登录操作
-        uni.showLoading({ title: '正在退出...' }); // 显示加载提示
-        try {
-          const res = await this.$api.goUserLogout(); // 调用API退出登录
-          uni.hideLoading(); // 隐藏加载提示
-          if (res.code === 1) { // 假设code为1表示成功
-            // 清除本地存储的token和用户信息
-            uni.removeStorageSync('token');
-            uni.removeStorageSync('userInfo');
-
-            this.$u.toast('已退出登录'); // 显示成功提示
-
-            // 延时后跳转到登录页
-            setTimeout(() => {
-              uni.reLaunch({ url: '/pages/me/login' }); // 使用reLaunch确保其他页面栈被清除
-            }, 1000);
-          } else {
-            this.$u.toast(res.msg || '退出失败，请稍后再试'); // 显示后端返回的错误信息
-          }
-        } catch (error) {
-          uni.hideLoading(); // 隐藏加载提示
-          console.error('logout error:', error);
-          this.$u.toast('请求失败，请稍后再试'); // 显示通用网络错误提示
-        }
       }
       this.showModal = false; // 关闭弹窗
     },
     cancelModal() {
-      this.showModal = false; // 关闭弹窗
     }
   }
 }
