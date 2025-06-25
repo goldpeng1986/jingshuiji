@@ -54,12 +54,7 @@
 				"navigationBarTitleText": "个人中心"
 			}
 		},
-		{
-			"path": "pages/me/me",
-			"style": {
-				"navigationBarTitleText": "个人中心"
-			}
-		},
+		
 		{
 			"path": "pages/me/promotion",
 			"style": {
