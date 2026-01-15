@@ -180,22 +180,10 @@ export default {
         }, 1500);
       } else if (this.modalType === 'logout') {
         // 执行退出登录操作
-        uni.showToast({
-          title: '已退出登录',
-          icon: 'success'
-        });
-        
-        // 实际应用中应清除本地存储的登录状态并跳转到登录页
-        // uni.clearStorageSync(); // 例如清除token和用户信息
-        // uni.reLaunch({ // 使用reLaunch跳转到登录页，清空页面栈
-        //   url: '/pages/login/index' // 假设登录页路径
-        // });
       }
       this.showModal = false; // 关闭弹窗
     },
     cancelModal() {
-      // 取消弹窗操作
-      this.showModal = false;
     }
   }
 }

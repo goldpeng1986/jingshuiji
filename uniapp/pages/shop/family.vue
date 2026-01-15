@@ -2,57 +2,68 @@
   <view class="container">
     <!-- 产品图片轮播 -->
     <view class="swiper-section">
+      <u-loading-icon v-if="isLoading && productImages.length === 0" mode="circle" size="30"></u-loading-icon>
       <u-swiper
+        v-if="productImages.length > 0"
         :list="productImages"
-        :height="300"
+        keyName="image" <!-- 确保productImages数组中每个对象都有image属性 -->
+        :height="uni.upx2px(750)" <!-- 设置高度为屏幕宽度，使其成为正方形 -->
         :interval="3000"
         :autoplay="true"
+        indicator
         indicatorMode="dot"
+        circular
       ></u-swiper>
+      <u-empty mode="picture" text="暂无图片" v-if="!isLoading && productImages.length === 0"></u-empty>
     </view>
     
     <!-- 产品标题和价格 -->
     <view class="product-header">
       <view class="product-title-section">
         <text class="product-title">{{ product.title }}</text>
-        <u-tag :text="product.flag" :type="product.flag === 'hot' ? 'error' : 'primary'" size="mini" shape="circle"></u-tag>
+        <u-tag v-if="product.flag" :text="product.flag" :type="product.flag === '热销' ? 'error' : 'primary'" size="mini" shape="circle"></u-tag>
       </view>
       <view class="price-section">
-        <text class="price">¥{{ product.price }}</text>
-        <text class="original-price">¥{{ product.marketprice }}</text>
-        <text class="discount">{{ Math.floor((product.price/product.marketprice)*10) }}折</text>
+        <text class="price">¥{{ currentPrice }}</text> <!-- 显示计算后的当前价格 -->
+        <text class="original-price" v-if="parseFloat(product.marketprice) > 0">¥{{ product.marketprice }}</text>
+        <!-- 动态计算折扣，仅当原价大于现价时显示 -->
+        <text class="discount" v-if="parseFloat(product.marketprice) > parseFloat(currentPrice)">
+          {{ ((parseFloat(currentPrice) / parseFloat(product.marketprice)) * 10).toFixed(1) }}折
+        </text>
       </view>
       <view class="sales-info">
-        <text>月销 {{ product.monthlySales }}+</text>
+        <text>月销 {{ product.monthlySales || 0 }}+</text>
         <text class="divider">|</text>
-        <text>好评率 {{ product.goodRating }}%</text>
+        <text>好评率 {{ product.goodRating || 0 }}%</text>
       </view>
     </view>
     
     <!-- 产品规格选择 -->
-    <view class="specs-section">
+    <view class="specs-section" v-if="product.specs && product.specs.length > 0">
       <view class="section-title">
         <u-icon name="tags" size="18" color="#3c9cff"></u-icon>
-        <text class="title-text">规格选择</text>
+        <text class="title-text">规格选择</text> <!-- 假设一级规格是主要规格 -->
       </view>
       <view class="specs-options">
         <view 
           v-for="(item, index) in product.specs" 
-          :key="index"
+          :key="item.id || index" <!-- 使用规格ID作为key -->
           :class="['spec-item', selectedSpec === index ? 'spec-selected' : '']"
           @click="selectSpec(index)"
         >
           {{ item.name }}
         </view>
       </view>
+    </view>
+    <view class="specs-section" v-if="product.specs1 && product.specs1.length > 0"> <!-- 假设specs1是二级规格 -->
 	  <view class="section-title">
 	    <u-icon name="tags" size="18" color="#3c9cff"></u-icon>
-	    <text class="title-text">房屋类型</text>
+	    <text class="title-text">房屋类型</text> <!-- 或其他二级规格名称 -->
 	  </view>
 	  <view class="specs-options">
 	    <view 
 	      v-for="(item, index) in product.specs1" 
-	      :key="index"
+	      :key="item.id || index" <!-- 使用规格ID作为key -->
 	      :class="['spec-item', selectedSpec1 === index ? 'spec-selected' : '']"
 	      @click="selectSpec1(index)"
 	    >
@@ -73,7 +84,7 @@
     </view>
     
     <!-- 产品详情 -->
-    <view class="detail-section">
+    <view class="detail-section" v-if="product.description">
       <view class="section-header">
         <view class="header-left">
           <u-icon name="file-text" size="24" color="#3c9cff"></u-icon>
@@ -82,32 +93,20 @@
       </view>
       <u-line color="#f3f4f6" margin="15rpx 0"></u-line>
       
-     <!-- 产品特点 -->
-      <!-- <view class="feature-list">
-        <view class="feature-item" v-for="(item, index) in product.features" :key="index">
-          <u-icon :name="item.icon" size="16" color="#3c9cff"></u-icon>
-          <text class="ml-2">{{ item.text }}</text>
-        </view>
-      </view> -->
-      
-      <!-- 产品参数 -->
-      <!-- <view class="params-list">
-        <view class="param-item" v-for="(item, index) in product.params" :key="index">
-          <text class="param-label">{{ item.label }}</text>
-          <text class="param-value">{{ item.value }}</text>
-        </view>
-      </view> -->
-     
-      <!-- 产品描述 -->
+      <!-- 产品描述，使用u-parse解析HTML内容 -->
       <view class="description">
-        <text class="desc-text">{{ product.description }}</text>
+        <u-parse :content="product.description"></u-parse>
       </view>
     </view>
 	
 	<!-- 底部购买栏 -->
-	<view class="footer">
+	<view class="footer" v-if="!isLoading"> <!-- 数据加载完成后显示 -->
+	  <view class="footer-left">
+	      <text class="current-total-price-label">合计：</text>
+	      <text class="current-total-price">¥{{ (currentPrice * quantity).toFixed(2) }}</text>
+	  </view>
 	  <view class="footer-right">
-	    <u-button type="primary" text="下一步" size="medium" @click="buyNow"></u-button>
+	    <u-button type="primary" text="下一步" size="medium" @click="buyNow" :disabled="isLoading"></u-button>
 	  </view>
 	</view>
   </view>
@@ -116,106 +115,195 @@
 </template>
 
 <script>
-import { forEach } from 'core-js/stable/array';
+import { toast } from '@/utils/utils.js'; // 引入toast
 
 export default {
   data() {
     return {
-      title: '家用净水机详情',
-      selectedSpec: 0,
-      selectedSpec1: 0,
-      quantity: 1,
-      product: {
-        id: 1,
-        title: '高端家用净水机 A8',
-        flagName: '热销',
-        flag: 'hot',
-        price: '1999',
-        marketprice: '2599',
-        discount: '7.7',
-        monthlySales: 328,
-        goodRating: 98,
-        specs: [
-          { name: '标准版', price: '1999' },
-          { name: '豪华版', price: '2499' },
-          { name: '智能版', price: '2999' }
-        ],
-		specs1: [
-		  { name: '自有房', price: '1999' },
-		  { name: '出租房', price: '2499' },
-		],
-        /* features: [
-          { icon: 'checkbox-mark', text: '五级过滤系统，深度净化水质' },
-          { icon: 'checkbox-mark', text: '智能控制，一键操作简单方便' },
-          { icon: 'checkbox-mark', text: '超静音设计，运行噪音低至45分贝' },
-          { icon: 'checkbox-mark', text: '智能水质监测，实时掌握水质状况' },
-          { icon: 'checkbox-mark', text: '滤芯寿命提醒，到期自动通知更换' }
-        ],
-        params: [
-          { label: '产品型号', value: 'SZ-A8' },
-          { label: '额定功率', value: '25W' },
-          { label: '过滤精度', value: '0.01微米' },
-          { label: '适用水压', value: '0.1-0.4MPa' },
-          { label: '水流量', value: '1.5L/min' },
-          { label: '使用寿命', value: '3-5年' },
-          { label: '滤芯寿命', value: '6-12个月' },
-          { label: '产品尺寸', value: '25×15×40cm' }
-        ], */
-        description: '森泽高端家用净水机A8采用先进的RO反渗透技术，能有效去除水中的重金属、细菌、病毒等有害物质，为您家人提供健康安全的饮用水。智能化操作系统，一键启动，简单方便。超静音设计，不打扰您的生活。配备智能水质监测系统，实时掌握水质状况。'
+      title: '商品详情', // 页面标题
+      productId: null,     // 商品ID
+      selectedSpec: 0,   // 当前选中的一级规格索引
+      selectedSpec1: 0,  // 当前选中的二级规格索引 (例如房屋类型)
+      quantity: 1,       // 当前选中的购买数量
+      product: {         // 商品详情对象，将由API填充
+        id: null,
+        title: '加载中...',
+        flag: '', // 例如 'hot', 'new'
+        price: '0.00', // 商品基础价格
+        marketprice: '0.00',
+        monthlySales: 0,
+        goodRating: 0,
+        specs: [],       // 一级规格定义列表 e.g., [{id: 1, name: '颜色'}, {id:2, name:'尺寸'}]
+        specs1: [],      // 二级规格定义列表 (如果有多层规格)
+        sku: [],         // SKU列表， e.g., [{id:101, goods_id:1, sku_id:'1_blue,2_xl', price:'100', stock:10}, ...]
+        description: '', // 商品详情描述 (HTML或富文本)
+        content: ''      // 兼容后端可能用 content 字段存储详情
       },
-      productImages: [
-       /* { image: 'https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600', title: '高端家用净水机' },
-        { image: 'https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600', title: '产品细节展示' },
-        { image: 'https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600', title: '使用场景' }
-     */ ]
-    }
+      productImages: [], // 商品图片轮播列表，格式: [{image: 'url1'}, {image: 'url2'}]
+      isLoading: true,   // 加载状态
+      currentPrice: '0.00', // 当前选中规格组合的最终价格
+      selectedSkuItem: null // 当前选中的完整SKU对象
+    };
   },
-  onLoad() {
-  	// 获取商品数据
-  	this.getShopData();
+  onLoad(options) {
+    if (options.id) {
+      this.productId = options.id;
+      this.getShopData(this.productId); // 获取商品数据
+    } else {
+      toast('商品ID不存在');
+      this.isLoading = false;
+      // 可以考虑返回上一页
+      // uni.navigateBack();
+    }
   },
   methods: {
-	getShopData(id){
-		  this.$api.getHomeProduct({id:1}).then(res => {
-		  	// console.log(res)
-		  	if (res.code == 1) {
-		  		this.product=res.data;
-				
-				this.productImages=res.data.images;
-				
-		  	}else{
-		  		this.$refs.paging.complete(false);
-		  	}
-		  })
-	},
-    selectSpec(index) {
-      this.selectedSpec = index;
-      this.product.price = this.product.specs[index].price;
+    // 从API获取商品数据
+    async getShopData(id) {
+      this.isLoading = true;
+      try {
+        const res = await this.$api.getHomeProduct({ id: id }); // 或 getGoodsInfo
+        if (res.code == 1 && res.data) {
+          this.product = { // 对product对象进行更安全的赋值
+            id: res.data.id,
+            title: res.data.title || '商品名称',
+            flag: res.data.flag_text || '', // 后端若有flag_text则使用
+            price: parseFloat(res.data.price || 0).toFixed(2), // 基础价格
+            marketprice: parseFloat(res.data.marketprice || 0).toFixed(2),
+            monthlySales: res.data.sales || 0, // 假设月销字段是 sales
+            goodRating: res.data.comments_good_count || 0, // 假设好评数字段
+            specs: res.data.spec_list || [], // 后端返回的规格定义列表，例如 [{id:1, name:'颜色', list:[{id:10,name:'红'},{id:11,name:'蓝'}]}]
+            // specs1: res.data.specs1 || [], // 如果有多层独立规格，否则规格应在spec_list中嵌套或通过sku处理
+            sku: res.data.sku_list || [],    // 后端返回的SKU列表，包含价格、库存、及构成该SKU的规格值ID组合
+            description: res.data.description || res.data.content || '', // 兼容 description 和 content
+            // 其他需要的字段...
+          };
+
+          // 初始化选中的规格索引 (默认为每个规格类型的第一个)
+          // 这里需要根据后端返回的 spec_list 结构来正确初始化 selectedSpec 和 selectedSpec1
+          // 假设 spec_list[0] 是一级规格， spec_list[1] 是二级规格 (如果存在)
+          this.selectedSpec = 0; // 默认选中一级规格的第一个选项
+          // if (this.product.specs.length > 1 && this.product.specs[1] && this.product.specs[1].list.length > 0) { // 这段逻辑先注释，因为specs1的获取方式不确定
+          //    this.selectedSpec1 = 0; // 默认选中二级规格的第一个选项
+          // }
+
+          // 处理图片列表，确保是 {image: 'url'} 格式
+          if (Array.isArray(res.data.images_list) && res.data.images_list.length > 0) {
+             this.productImages = res.data.images_list.map(imgUrl => ({ image: imgUrl }));
+          } else if (res.data.image) { // 如果只有单张主图
+             this.productImages = [{ image: res.data.image }];
+          } else {
+             this.productImages = [];
+          }
+
+          this.updateCurrentPriceAndSku(); // 初始化或更新当前价格和选中的SKU
+        } else {
+          toast(res.msg || '获取商品信息失败');
+        }
+      } catch (error) {
+        console.error("getShopData error:", error);
+        toast('网络请求商品数据出错');
+      } finally {
+        this.isLoading = false;
+      }
     },
+    // 选择一级规格
+    selectSpec(index) { // 此方法需要重构以适应新的规格数据结构
+      // 假设 this.product.specs 是 [{id:1, name:'颜色', list:[{id:10,name:'红'},{id:11,name:'蓝'}]}, ...]
+      // 并且 selectedSpec 是一个对象，如 {1: 0, 2: 0} (规格组ID: 选中项在list中的索引)
+      // 或者，如果 specs 是扁平的，则旧逻辑可能部分适用
+      // 为简化，我们假设 selectSpec(index) 对应旧的 this.product.specs (一级规格)
+      // selectSpec1(index) 对应旧的 this.product.specs1 (二级规格)
+      // **实际项目中，规格选择逻辑会更复杂，需要正确地更新已选规格值，然后调用 updateCurrentPriceAndSku**
+      this.selectedSpec = index; // 这是选中一级规格的 *索引*
+      this.updateCurrentPriceAndSku();
+    },
+    // 选择二级规格 (如果存在)
 	selectSpec1(index) {
-	  this.selectedSpec1 = index;
+	  this.selectedSpec1 = index; // 这是选中二级规格的 *索引*
+      this.updateCurrentPriceAndSku();
 	},
-    addToCart() {
-      uni.showToast({
-        title: `已添加${this.quantity}台${this.product.specs[this.selectedSpec].name}到购物车`,
-        icon: 'none'
-      });
+    // 更新当前显示的价格和选中的SKU (基于选中的规格)
+    updateCurrentPriceAndSku() {
+        let price = parseFloat(this.product.price); // 默认使用商品基础价格
+        this.selectedSkuItem = null; // 重置选中的SKU
+
+        // 获取当前选中的规格值ID们
+        // 这一步非常关键，需要根据 this.product.specs 的实际结构来获取
+        // 假设 this.product.specs (来自后端的spec_list) 是这样的结构：
+        // [
+        //   {id: 1, name: '颜色', list: [{id:10, name:'红'}, {id:11, name:'蓝'}]},  // 一级规格 (selectedSpec 对应此list的索引)
+        //   {id: 2, name: '尺寸', list: [{id:20, name:'S'}, {id:21, name:'M'}]}  // 二级规格 (selectedSpec1 对应此list的索引)
+        // ]
+        let selectedSpecValueIds = [];
+        if (this.product.specs && this.product.specs[0] && this.product.specs[0].list && this.product.specs[0].list[this.selectedSpec]) {
+            selectedSpecValueIds.push(this.product.specs[0].list[this.selectedSpec].id);
+        }
+        // 注意：如果specs1是独立的第二层规格，而不是specs数组的第二个元素，这里的逻辑需要调整
+        // 假设specs1是独立的，或者 specs 数组包含多个规格组
+        // if (this.product.specs1 && this.product.specs1[this.selectedSpec1]) { // 旧的specs1逻辑
+        //    selectedSpecValueIds.push(this.product.specs1[this.selectedSpec1].id);
+        // }
+        // 对应新的 this.product.specs 结构 (假设第二组规格在 specs[1])
+         if (this.product.specs && this.product.specs.length > 1 && this.product.specs[1] && this.product.specs[1].list && this.product.specs[1].list[this.selectedSpec1]) {
+             selectedSpecValueIds.push(this.product.specs[1].list[this.selectedSpec1].id);
+         }
+
+
+        if (selectedSpecValueIds.length > 0 && this.product.sku && this.product.sku.length > 0) {
+            selectedSpecValueIds.sort((a,b) => a - b); // 将规格值ID排序，以匹配后端生成的 goods_sku_id (通常是 "ID小,ID大")
+            const currentSelectedSkuKey = selectedSpecValueIds.join(','); // 例如 "10,20"
+
+            const matchedSku = this.product.sku.find(s => {
+                // s.sku_id 应该是后端组合好的规格值ID字符串，例如 "10,20"
+                return s.sku_id === currentSelectedSkuKey;
+            });
+
+            if (matchedSku) {
+                price = parseFloat(matchedSku.price);
+                this.selectedSkuItem = matchedSku; // 存储当前选中的SKU对象
+            } else {
+                // 没有匹配的SKU，可能该组合不可用，或价格就是基础价
+                // console.warn('No matching SKU for selected spec values: ' + currentSelectedSkuKey);
+                // 此时 selectedSkuItem 保持 null，购买时可能需要提示用户选择有效规格组合
+            }
+        }
+        // 如果没有SKU逻辑（例如商品无规格或规格不影响价格），价格将保持为product.price
+        this.currentPrice = price.toFixed(2);
     },
+    // 立即购买
     buyNow() {
-      uni.showToast({
-        title: `正在购买${this.quantity}台${this.product.specs[this.selectedSpec].name}`,
-        icon: 'none'
-      });
-      // 这里可以跳转到订单确认页面
+      // 获取选中的规格名称用于显示，如果 product.specs 是分组的
+      let specName = '';
+      if (this.product.specs && this.product.specs[0] && this.product.specs[0].list && this.product.specs[0].list[this.selectedSpec]){
+          specName = this.product.specs[0].list[this.selectedSpec].name;
+      }
+      let spec1Name = ''; // 二级规格名
+       if (this.product.specs && this.product.specs.length > 1 && this.product.specs[1] && this.product.specs[1].list && this.product.specs[1].list[this.selectedSpec1]){
+          spec1Name = this.product.specs[1].list[this.selectedSpec1].name;
+      }
+
+      // 准备传递给addinfo页面的参数
+      const params = {
+        productId: this.product.id,
+        productName: this.product.title,
+        goods_sku_id: this.selectedSkuItem ? this.selectedSkuItem.id : null, // 传递SKU ID (fa_shop_goods_sku.id)
+        selectedSpecName: specName,
+        selectedSpec1Name: spec1Name, // 如果有二级规格，则传递
+        quantity: this.quantity,
+        price: this.currentPrice,
+        image: this.productImages.length > 0 ? this.productImages[0].image : '' // 商品主图
+      };
+
+      // 跳转到订单信息填写页面
       uni.navigateTo({
-        url: '/pages/shop/addinfo'
+        url: `/pages/shop/addinfo?${this.$u.queryParams(params)}`
       });
     },
-    goToHome() {
-      uni.switchTab({
-        url: '/pages/index/index'
-      });
-    }
+    // goToHome() { // 如果需要返回首页的按钮
+    //   uni.switchTab({
+    //     url: '/pages/index/index'
+    //   });
+    // }
   }
 }
 </script>

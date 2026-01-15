@@ -18,13 +18,13 @@
       <view class="section-header">
         <text class="section-title">快速入口</text>
       </view>
-      <view class="quick-entry-grid">
+      <u-loading-icon v-if="isLoadingQuickEntries" mode="circle" size="28"></u-loading-icon>
+      <view class="quick-entry-grid" v-if="!isLoadingQuickEntries && quickEntries.length > 0">
         <view 
           class="entry-card" 
-          v-for="(item, index) in quickEntries" 
-          :key="index"
+          v-for="(item) in quickEntries"
+          :key="item.id" <!-- 使用 item.id 或 item.diyname 作为key -->
           @click="handleEntryClick(item)"
-          :class="{'entry-card-last': (index + 1) % 4 === 0}"
         >
           <view class="entry-icon" :style="{backgroundColor: item.bgColor}">
             <u-icon :name="item.icon" :color="item.iconColor" size="28"></u-icon>
@@ -32,6 +32,7 @@
           <text class="entry-name">{{ item.name }}</text>
         </view>
       </view>
+      <u-empty mode="data" text="快速入口加载失败" v-if="!isLoadingQuickEntries && quickEntries.length === 0"></u-empty>
     </view>
 
     <!-- 常见问题 -->
@@ -40,11 +41,12 @@
         <text class="section-title">常见问题</text>
         <text class="section-more" @click="viewAllFaqs">查看全部</text>
       </view>
-      <view class="faq-container">
+      <u-loading-icon v-if="isLoadingFaqs" mode="circle" size="28"></u-loading-icon>
+      <view class="faq-container" v-if="!isLoadingFaqs && faqList.length > 0">
         <view 
           class="faq-card" 
           v-for="(item, index) in faqList" 
-          :key="index"
+          :key="item.id" <!-- 使用 item.id 作为key -->
           :class="{expanded: activeIndex === index}"
           @click="toggleFaq(index)"
         >
@@ -62,11 +64,13 @@
               :class="{rotate: activeIndex === index}"
             ></u-icon>
           </view>
-          <view class="faq-answer" :style="{height: activeIndex === index ? 'auto' : '0'}">
-            <text class="answer-text">{{ item.answer }}</text>
+          <view class="faq-answer" :style="{height: activeIndex === index && item.answer !== '点击查看详情' ? 'auto' : '0'}">
+             <!-- 只有当答案不是“点击查看详情”时才显示内容，否则点击会跳转 -->
+            <text class="answer-text" v-if="item.answer !== '点击查看详情'">{{ item.answer }}</text>
           </view>
         </view>
       </view>
+      <u-empty mode="message" text="暂无常见问题" v-if="!isLoadingFaqs && faqList.length === 0"></u-empty>
     </view>
 
     <!-- 联系客服 -->
@@ -100,87 +104,129 @@
 </template>
 
 <script>
+import { toast } from '@/utils/utils.js'; // 引入toast
+
 export default {
   data() {
     return {
-      title: '帮助中心',
-      searchKeyword: '',
-      activeIndex: -1,
-      quickEntries: [
-        {
-          name: '使用指南',
-          icon: 'file-text-fill',
-          bgColor: '#e7f1ff',
-          iconColor: '#3b82f6',
-          url: '/pages/help/guide'
-        },
-        {
-          name: '故障排除',
-          icon: 'account-fill',
-          bgColor: '#e5f7ef',
-          iconColor: '#10b981',
-          url: '/pages/help/troubleshoot'
-        },
-        {
-          name: '服务条款',
-          icon: 'file-text',
-          bgColor: '#fdf6ec',
-          iconColor: '#f59e0b',
-          url: '/pages/help/terms'
-        },
-        {
-          name: '联系客服',
-          icon: 'server-man',
-          bgColor: '#fef0f0',
-          iconColor: '#f43f5e',
-          action: 'contact'
-        }
-      ],
-      faqList: [
-        {
-          question: '如何使用净水机？',
-          answer: '使用森泽共享净水机非常简单，只需按照以下步骤操作：\n1. 打开APP，选择您要使用的净水机\n2. 点击"开始用水"按钮\n3. 将水杯放在出水口下方\n4. 选择所需水量或直接按下出水按钮\n5. 等待出水完成即可\n\n如果您在使用过程中遇到任何问题，可以联系我们的客服人员获取帮助。'
-        },
-        {
-          question: '如何充值账户？',
-          answer: '您可以通过以下方式为账户充值：\n1. 在"我的"页面点击"充值"按钮\n2. 选择充值金额或输入自定义金额\n3. 选择支付方式（微信支付或支付宝）\n4. 完成支付流程\n\n充值成功后，金额将立即添加到您的账户余额中。我们目前支持微信支付和支付宝两种支付方式。'
-        },
-        {
-          question: '净水机的水质如何保证？',
-          answer: '森泽共享净水机采用多级过滤系统，确保水质安全可靠：\n1. PP棉滤芯：过滤水中的铁锈、泥沙等大颗粒杂质\n2. 活性炭滤芯：吸附水中的余氯、异味等\n3. RO反渗透膜：过滤水中的重金属、细菌等微小颗粒\n4. 后置活性炭：进一步改善水的口感\n\n我们的净水机会实时监测水质TDS值，确保出水水质达到国家饮用水标准。同时，我们的维护团队会定期对设备进行检查和滤芯更换，保证水质安全。'
-        },
-        {
-          question: '如何绑定新设备？',
-          answer: '绑定新设备的步骤如下：\n1. 在"我的"页面点击"我的设备"\n2. 在设备页面底部点击"添加新设备"\n3. 点击"扫码绑定"，使用相机扫描设备上的二维码\n4. 扫描成功后，按照提示完成设备绑定\n\n如果您无法扫描二维码，也可以手动输入设备ID进行绑定。设备ID通常印在设备背面或底部的标签上。'
-        }
-      ]
-    }
+      title: '帮助中心', // 页面标题
+      searchKeyword: '', // 搜索关键词
+      activeIndex: -1,   // 当前展开的FAQ项索引
+      quickEntries: [],  // 快速入口列表，将从API获取
+      faqList: [],       // 常见问题列表，将从API获取
+      isLoadingQuickEntries: false, // 快速入口加载状态
+      isLoadingFaqs: false,         // FAQ加载状态
+      // 保留原有的静态图标和颜色配置，API返回的数据主要用于标题和跳转逻辑
+      staticQuickEntryStyles: {
+        '使用指南': { icon: 'file-text-fill', bgColor: '#e7f1ff', iconColor: '#3b82f6' },
+        '故障排除': { icon: 'tool-fill', bgColor: '#e5f7ef', iconColor: '#10b981' }, // 修改图标为tool-fill
+        '服务条款': { icon: 'file-text', bgColor: '#fdf6ec', iconColor: '#f59e0b' },
+        '联系客服': { icon: 'server-man', bgColor: '#fef0f0', iconColor: '#f43f5e', action: 'contact' }
+      }
+    };
+  },
+  onShow() {
+    // 页面显示时加载数据
+    this.fetchQuickEntries();
+    this.fetchFaqs();
   },
   methods: {
-    goBack() {
-      uni.navigateBack();
+    // 获取快速入口数据
+    async fetchQuickEntries() {
+      this.isLoadingQuickEntries = true;
+      try {
+        const res = await this.$api.pageList({ type: 'help_quick_entry' }); // API调用
+        if (res.code === 1 && res.data && res.data.data) {
+          this.quickEntries = res.data.data.map(item => {
+            const style = this.staticQuickEntryStyles[item.title] ||
+                          this.staticQuickEntryStyles[item.name] || // 兼容name字段
+                          { icon: 'question-circle-fill', bgColor: '#f0f0f0', iconColor: '#909399' }; // 默认样式
+            return {
+              id: item.id, // API返回的ID
+              name: item.title, // API返回的标题作为name
+              diyname: item.diyname, // API返回的diyname
+              icon: style.icon,
+              bgColor: style.bgColor,
+              iconColor: style.iconColor,
+              action: style.action // 如果是联系客服等特殊操作
+            };
+          });
+        } else {
+          toast(res.msg || '获取快速入口失败');
+          this.quickEntries = Object.entries(this.staticQuickEntryStyles).map(([name, style]) => ({ // API失败则使用静态数据作为回退
+             id: name, name: name, diyname: name.toLowerCase().replace(/\s+/g, '-'), ...style
+          }));
+        }
+      } catch (error) {
+        console.error('fetchQuickEntries error:', error);
+        toast('网络请求快速入口出错');
+         this.quickEntries = Object.entries(this.staticQuickEntryStyles).map(([name, style]) => ({
+             id: name, name: name, diyname: name.toLowerCase().replace(/\s+/g, '-'), ...style
+         }));
+      } finally {
+        this.isLoadingQuickEntries = false;
+      }
     },
+    // 获取常见问题数据
+    async fetchFaqs() {
+      this.isLoadingFaqs = true;
+      try {
+        const res = await this.$api.pageList({ type: 'faq_item', limit: 5 }); // 假设每页获取5条，或者根据后端调整limit
+        if (res.code === 1 && res.data && res.data.data) {
+          this.faqList = res.data.data.map(item => ({
+            id: item.id, // API返回的ID
+            question: item.title, // API返回的标题作为question
+            answer: item.description || '点击查看详情', // API返回的description作为answer预览，或者提示点击查看
+            diyname: item.diyname // 用于跳转详情
+          }));
+        } else {
+          toast(res.msg || '获取常见问题失败');
+          this.faqList = []; // 清空
+        }
+      } catch (error) {
+        console.error('fetchFaqs error:', error);
+        toast('网络请求常见问题出错');
+        this.faqList = [];
+      } finally {
+        this.isLoadingFaqs = false;
+      }
+    },
+    // goBack() { // uni-app通常有默认返回机制
+    //   uni.navigateBack();
+    // },
     toggleFaq(index) {
       this.activeIndex = this.activeIndex === index ? -1 : index;
+      // 如果答案是“点击查看详情”，则跳转
+      const faqItem = this.faqList[index];
+      if (faqItem && faqItem.answer === '点击查看详情' && (faqItem.id || faqItem.diyname)) {
+         uni.navigateTo({
+            url: `/pages/help/info?${faqItem.diyname ? 'diyname=' + faqItem.diyname : 'id=' + faqItem.id}`
+         });
+      }
     },
     handleEntryClick(item) {
       if (item.action === 'contact') {
         this.contactCustomerService();
-      } else if (item.url) {
+      } else if (item.diyname || item.id) { // 优先使用diyname
         uni.navigateTo({
-          url: item.url
+          url: `/pages/help/info?${item.diyname ? 'diyname=' + item.diyname : 'id=' + item.id}`
         });
+      } else if (item.url) { // 兼容旧的静态url跳转
+         uni.navigateTo({ url: item.url });
       }
     },
     contactCustomerService() {
       uni.makePhoneCall({
-        phoneNumber: '400-123-4567'
+        phoneNumber: '400-123-4567' // 客服电话号码，应来自配置或API
       });
     },
     viewAllFaqs() {
-      uni.navigateTo({
-        url: '/pages/help/all-faqs'
-      });
+      // TODO: 实现跳转到所有FAQ列表页的逻辑，如果FAQ很多需要分页展示
+      // 目前API是一次性获取部分FAQ，此按钮可能需要调整或指向一个新页面
+      toast('查看全部FAQ功能待开发');
+      // uni.navigateTo({
+      //   url: '/pages/help/all-faqs' // 假设有这样一个页面
+      // });
     }
   }
 }

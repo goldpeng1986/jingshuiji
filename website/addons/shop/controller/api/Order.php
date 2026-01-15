@@ -71,29 +71,43 @@ class Order extends Base
     //提交订单
     public function add()
     {
-        $cart_ids = $this->request->post('ids');
-        $address_id = $this->request->post('address_id/d'); //地址id
-        $user_coupon_id = $this->request->post('user_coupon_id/d'); //地址id
-        $memo = $this->request->post('memo');
+        $cart_ids = $this->request->post('ids'); // 购物车商品ID集合
+        $address_id = $this->request->post('address_id/d'); // 地址ID
+        $user_coupon_id = $this->request->post('user_coupon_id/d'); // 用户优惠券ID
+        $memo = $this->request->post('memo', ''); // 用户备注
+
+        // 新增：获取预约安装日期和时间段
+        $appointmentDate = $this->request->post('date', ''); // 预约日期，例如 '2023-12-25'
+        $appointmentTimeSlot = $this->request->post('time_slot', ''); // 预约时间段，例如 '09:00-12:00'
+
         if (empty($address_id)) {
-            $this->error('请选择地址');
+            $this->error('请选择地址'); //错误：请选择地址
         }
         if (empty($cart_ids)) {
-            $this->error('请选择商品');
+            $this->error('请选择商品'); //错误：请选择商品
         }
-        //为购物车id
-        //校验购物车id 合法
+        // 校验购物车ID的合法性，确保它们属于当前用户
         $row = (new Carts)->where('id', 'IN', $cart_ids)->where('user_id', '<>', $this->auth->id)->find();
         if ($row) {
-            $this->error('存在不合法购物车数据');
+            $this->error('存在不合法购物车数据'); //错误：存在不合法的购物车数据
         }
+
         $order = null;
         try {
-            $order = OrderModel::createOrder($address_id, $this->auth->id, $cart_ids, $user_coupon_id, $memo);
+            // 调用模型创建订单，并传递新增的预约时间和日期参数
+            $order = OrderModel::createOrder(
+                $address_id,
+                $this->auth->id,
+                $cart_ids,
+                $user_coupon_id,
+                $memo,
+                $appointmentDate,      // 新增参数
+                $appointmentTimeSlot   // 新增参数
+            );
         } catch (\Exception $e) {
-            $this->error($e->getMessage());
+            $this->error($e->getMessage()); // 返回模型中抛出的具体错误信息
         }
-        $this->success('下单成功！', $order);
+        $this->success('下单成功！', $order); //成功：下单成功！
     }
 
     //订单详情

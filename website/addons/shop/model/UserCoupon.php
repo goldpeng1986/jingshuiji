@@ -139,4 +139,35 @@ class UserCoupon extends Model
     {
         return $this->hasOne('Coupon', 'id', 'coupon_id');
     }
+
+    public static function getCategorizedUserCoupons($param, $status = 'all')
+    {
+        $pageNum = isset($param['num']) && !empty($param['num']) ? $param['num'] : 10;
+        $query = self::field('id,coupon_id,user_id,is_used,expire_time,begin_time,createtime')
+            ->with(['Coupon' => function ($query) {
+                $query->field('id,name,result,result_data,allow_num,begintime,endtime,mode,use_times');
+            }])
+            ->where('user_id', $param['user_id']);
+
+        $time = time();
+        switch ($status) {
+            case 'available':
+                $query->where('is_used', 1)
+                    ->where('expire_time', '>=', $time)
+                    ->where('begin_time', '<=', $time);
+                break;
+            case 'used':
+                $query->where('is_used', 2);
+                break;
+            case 'expired':
+                $query->where('is_used', 1)
+                    ->where('expire_time', '<', $time);
+                break;
+            case 'all':
+                // No additional status filter
+                break;
+        }
+
+        return $query->order('createtime desc')->paginate($pageNum);
+    }
 }
